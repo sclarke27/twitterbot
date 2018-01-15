@@ -2,8 +2,8 @@ const TwitterBot = require('./twitterBot');
 
 class DogBot extends TwitterBot {
 
-    constructor(botConfig, showDebug = false) {
-        super(botConfig, showDebug);
+    constructor(botConfig, db, showDebug = false) {
+        super(botConfig, db, showDebug);
         if (this.showDebug) {
             console.info(`[DogBot] constructor`);
         }

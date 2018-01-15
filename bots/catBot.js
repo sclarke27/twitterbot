@@ -3,8 +3,8 @@ const Utils = require('../modules/utils');
 
 class CatBot extends TwitterBot {
 
-    constructor(botConfig, showDebug = false) {
-        super(botConfig, showDebug);
+    constructor(botConfig, db, showDebug = false) {
+        super(botConfig, db, showDebug);
         if (this.showDebug) {
             console.info(`[CatBot] constructor`);
         }

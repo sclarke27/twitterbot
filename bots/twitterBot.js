@@ -3,10 +3,11 @@ const Utils = require('../modules/utils');
 
 class TwitterBot {
 
-    constructor(botConfig, showDebug = false) {
+    constructor(botConfig, db, showDebug = false) {
         this.showDebug = showDebug;
         this.config = botConfig;
         this.twitterApi = null;
+        this.db = db;
 
         // placeholders for future setIntervals
         this.tweetInterval = null;
@@ -79,10 +80,21 @@ class TwitterBot {
             console.info(`[TwitterBot] tweet`, message);
         }
 
-        // Tell TWITTER to tweet message
+        // tweet message
         this.twitterApi.post('statuses/update', {
             status: message
-        }, function (err, response) {
+        }, (err, response) => {
+            // log to DB
+            if (this.db) {
+                this.db.tweets.insert({
+                    timestamp: new Date(),
+                    botName: this.config.botName,
+                    hadError: (err) ? true : false,
+                    serverResponse: response,
+                    serverError: err
+                })
+            }
+
             if (response) {
                 console.info(`[TwitterBot] message sent:`);
             }
@@ -104,9 +116,22 @@ class TwitterBot {
             console.info(`[TwitterBot] retweet ${messageId}`);
         }
 
+
         this.twitterApi.post('statuses/retweet/:id', {
             id: messageId
         }, (err, response) => {
+            // log results to DB
+            if (this.db) {
+                this.db.retweets.insert({
+                    timestamp: new Date(),
+                    botName: this.config.botName,
+                    tweetId: messageId,
+                    hadError: (err) ? true : false,
+                    serverResponse: response,
+                    serverError: err
+                })
+            }
+
             // if response then retweet was successful
             if (response && !err) {
                 if (this.showDebug) {
@@ -128,7 +153,19 @@ class TwitterBot {
 
         this.twitterApi.post('favorites/create', {
             id: messageId
-        }, function (err, response) {
+        }, (err, response) => {
+            // log results to DB
+            if (this.db) {
+                this.db.favorites.insert({
+                    timestamp: new Date(),
+                    botName: this.config.botName,
+                    tweetId: messageId,
+                    hadError: (err) ? true : false,
+                    serverResponse: response,
+                    serverError: err
+                })
+            }
+
             // if there was an error while 'favorite'
             if (err) {
                 console.info(`[TwitterBot] error adding favorite id:${messageId} msg:${err.message}`);

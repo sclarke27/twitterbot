@@ -3,8 +3,8 @@ const WikiQuote = require('../modules/wikiQuote');
 
 class QuoteBot extends TwitterBot {
 
-    constructor(botConfig, showDebug = false) {
-        super(botConfig, showDebug);
+    constructor(botConfig, db, showDebug = false) {
+        super(botConfig, db, showDebug);
 
         this.wikiQuote = new WikiQuote(this.config.wikiApiUrl, this.config.authorList, this.showDebug);
         if (this.showDebug) {
