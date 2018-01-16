@@ -86,16 +86,93 @@ class HttpServer {
     createHomeRoute() {
         this.webApp.get('/', (request, response) => {
 
-            response.render('home', {
+            response.render('homePage', {
                 data: 'test data',
             })
         })
+
+    }
+
+    /**
+     * Route to handle list of tweets
+     */
+    createListBotRoute() {
+        this.webApp.get('/bot/:botName', (request, response) => {
+            const reqParams = request.params;
+            const selectedBotName = reqParams.botName;
+            console.info(selectedBotName);
+            response.render('botPage', {
+                botName: selectedBotName,
+            })
+        })
+        this.webApp.route('/listBots')
+            .post((request, response) => {
+                this.db.bots.find().sort({
+                    botName: -1
+                }).toArray((err, docs) => {
+                    response.json({
+                        data: docs,
+                        dbErrors: err
+                    })
+                });
+            })
+    }
+
+    /**
+     * Route to handle list of tweets
+     */
+    createListFollowersRoute() {
+        this.webApp.route('/followers')
+            .post((request, response) => {
+                this.db.retweets.find().sort({
+                    followerCount: -1
+                }).toArray((err, docs) => {
+                    response.json({
+                        data: docs,
+                        dbErrors: err
+                    })
+                });
+            })
+
+        this.webApp.route('/followers/:botName')
+            .post((request, response) => {
+                const reqParams = request.params;
+                const selectedBotName = reqParams.botName;
+
+                this.db.followers.find({
+                    botName: selectedBotName
+                }).sort({
+                    followerCount: -1
+                }).toArray((err, docs) => {
+                    response.json({
+                        data: docs,
+                        dbErrors: err
+                    })
+                });
+            })
+
     }
 
     /**
      * Route to handle list of tweets
      */
     createListTweetRoute() {
+        this.webApp.route('/listTweets/:botName')
+            .post((request, response) => {
+                const reqParams = request.params;
+                const selectedBotName = reqParams.botName;
+
+                this.db.tweets.find({
+                    botName: selectedBotName
+                }).sort({
+                    timestamp: -1
+                }).toArray((err, docs) => {
+                    response.json({
+                        data: docs,
+                        dbErrors: err
+                    })
+                });
+            })
         this.webApp.route('/listTweets')
             .post((request, response) => {
                 this.db.tweets.find().sort({
@@ -113,6 +190,23 @@ class HttpServer {
      * Route to handle list of tweets
      */
     createListRetweetRoute() {
+        this.webApp.route('/listRetweets/:botName')
+            .post((request, response) => {
+                const reqParams = request.params;
+                const selectedBotName = reqParams.botName;
+
+                this.db.retweets.find({
+                    botName: selectedBotName
+                }).sort({
+                    timestamp: -1
+                }).toArray((err, docs) => {
+                    response.json({
+                        data: docs,
+                        dbErrors: err
+                    })
+                });
+            })
+
         this.webApp.route('/listRetweets')
             .post((request, response) => {
                 this.db.retweets.find().sort({
@@ -130,6 +224,23 @@ class HttpServer {
      * Route to handle list of tweets
      */
     createListFavoritesRoute() {
+
+        this.webApp.route('/listFavorites/:botName')
+            .post((request, response) => {
+                const reqParams = request.params;
+                const selectedBotName = reqParams.botName;
+
+                this.db.favorites.find({
+                    botName: selectedBotName
+                }).sort({
+                    timestamp: -1
+                }).toArray((err, docs) => {
+                    response.json({
+                        data: docs,
+                        dbErrors: err
+                    })
+                });
+            })
         this.webApp.route('/listFavorites')
             .post((request, response) => {
                 this.db.favorites.find().sort({
@@ -151,6 +262,8 @@ class HttpServer {
         this.createListTweetRoute();
         this.createListRetweetRoute();
         this.createListFavoritesRoute();
+        this.createListFollowersRoute();
+        this.createListBotRoute();
         this.createHomeRoute();
 
         this.server.listen(this.port, this.onServerStarted.bind(this));

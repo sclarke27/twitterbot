@@ -4,6 +4,7 @@ const DogBotConfig = require('./config/dogConfig');
 const DogBot = require('./bots/dogBot');
 const QuoteBotConfig = require('./config/quoteConfig');
 const QuoteBot = require('./bots/quoteBot');
+const Sclarke27Config = require('./config/sclarke27Config');
 const TwitterBot = require('./bots/twitterBot');
 const httpConfig = require('./httpServer/config/httpConfig');
 const httpServer = require('./httpServer/server');
@@ -38,18 +39,6 @@ class Main {
             this.db.on('error', (err) => {
                 console.error('[main] database error', err)
             })
-
-            for (const collectionName of dbConfig.collections) {
-                console.info(this.db[collectionName])
-                if (!this.db[collectionName]) {
-                    this.db.createCollection(collectionName, {});
-                    if (this.showDebug) {
-                        console.info(`[main] collection created ${dbConfig.dbName}:${collectionName}`);
-                    }
-                }
-
-            }
-
         }
 
         if (httpConfig.enabled) {
@@ -59,11 +48,36 @@ class Main {
 
         // create the bots and push to this.botList
         for (const startingBot of botList) {
-            const botName = startingBot[0];
-            const botClass = startingBot[1];
-            const botConfig = startingBot[2];
-            botConfig.botName = botName;
+            const botClass = startingBot[0];
+            const botConfig = startingBot[1];
             this.botList.push(new botClass(botConfig, this.db, this.showDebug));
+            if (dbConfig.enabled) {
+                this.db.bots.findAndModify({
+                    query: {
+                        name: botConfig.botName
+                    },
+                    update: {
+                        name: botConfig.botName,
+                        startupTimestamp: new Date(),
+                        isEnabled: botConfig.enabled ? true : false,
+                        isTweeting: (botConfig.randomTweet && botConfig.randomTweet.enabled) ? true : false,
+                        isRetweeting: (botConfig.randomRetweet && botConfig.randomRetweet.enabled) ? true : false,
+                        isFavoriting: (botConfig.randomFavorite && botConfig.randomFavorite.enabled) ? true : false,
+                        isTrackingFollowers: (botConfig.trackFollowers && botConfig.trackFollowers.enabled) ? true : false,
+                        tweetInterval: (botConfig.randomTweet && botConfig.randomTweet.enabled) ? botConfig.randomTweet.intervalTimeout : 0,
+                        retweetInterval: (botConfig.randomRetweet && botConfig.randomRetweet.enabled) ? botConfig.randomRetweet.intervalTimeout : 0,
+                        favoriteInterval: (botConfig.randomFavorite && botConfig.randomFavorite.enabled) ? botConfig.randomFavorite.intervalTimeout : 0,
+                        followerTrackingInterval: (botConfig.trackFollowers && botConfig.trackFollowers.enabled) ? botConfig.trackFollowers.intervalTimeout : 0,
+                    },
+                    new: true,
+                    upsert: true
+                }, (err, doc, lastErr) => {
+                    // console.info(err, doc, lastErr);
+                    if (err) {
+                        console.error('[main]', err);
+                    }
+                })
+            }
         }
 
         if (this.showDebug) {
@@ -98,9 +112,10 @@ const showDebug = true;
 const main = new Main(true);
 
 const botList = [
-    ['CatBot', CatBot, CatBotConfig],
-    ['DogBot', TwitterBot, DogBotConfig],
-    ['QuoteBot', QuoteBot, QuoteBotConfig]
+    [CatBot, CatBotConfig],
+    [TwitterBot, DogBotConfig],
+    [QuoteBot, QuoteBotConfig],
+    [TwitterBot, Sclarke27Config]
 ]
 
 main.initialize(botList);

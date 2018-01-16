@@ -25,38 +25,49 @@ class TwitterBot {
     }
 
     start() {
-        if (this.showDebug) {
-            console.info(`[TwitterBot] start`);
-        }
-
-        // initialize twitter api with config info
-        this.twitterApi = new twit(this.config);
-
-        // setup random retweet interval if timeout is defined in config and enabled
-        if (this.config.randomRetweet && this.config.randomRetweet.intervalTimeout && this.config.randomRetweet.enabled) {
+        if (this.config.enabled) {
             if (this.showDebug) {
-                console.info(`[TwitterBot] create random retweet interval`);
+                console.info(`[TwitterBot] start`);
             }
-            this.randomRetweet();
-            this.retweetInterval = setInterval(this.randomRetweet.bind(this), this.config.randomRetweet.intervalTimeout);
-        }
 
-        // setup random favorite interval if timeout is defined in config and enabled
-        if (this.config.randomFavorite && this.config.randomFavorite.intervalTimeout && this.config.randomFavorite.enabled) {
-            if (this.showDebug) {
-                console.info(`[TwitterBot] create random favorite interval`);
-            }
-            this.randomFavorite();
-            this.favoriteInterval = setInterval(this.randomFavorite.bind(this), this.config.randomFavorite.intervalTimeout);
-        }
+            // initialize twitter api with config info
+            this.twitterApi = new twit(this.config);
 
-        // setup random tweet interval if timeout is defined in config and enabled
-        if (this.config.randomTweet && this.config.randomTweet.intervalTimeout && this.config.randomTweet.enabled) {
-            if (this.showDebug) {
-                console.info(`[TwitterBot] create random favorite interval`);
+            // setup random retweet interval if timeout is defined in config and enabled
+            if (this.config.randomRetweet && this.config.randomRetweet.intervalTimeout && this.config.randomRetweet.enabled) {
+                if (this.showDebug) {
+                    console.info(`[TwitterBot] create random retweet interval`);
+                }
+                this.randomRetweet();
+                this.retweetInterval = setInterval(this.randomRetweet.bind(this), this.config.randomRetweet.intervalTimeout);
             }
-            this.randomTweet();
-            this.favoriteInterval = setInterval(this.randomTweet.bind(this), this.config.randomTweet.intervalTimeout);
+
+            // setup random favorite interval if timeout is defined in config and enabled
+            if (this.config.randomFavorite && this.config.randomFavorite.intervalTimeout && this.config.randomFavorite.enabled) {
+                if (this.showDebug) {
+                    console.info(`[TwitterBot] create random favorite interval`);
+                }
+                this.randomFavorite();
+                this.favoriteInterval = setInterval(this.randomFavorite.bind(this), this.config.randomFavorite.intervalTimeout);
+            }
+
+            // setup random tweet interval if timeout is defined in config and enabled
+            if (this.config.randomTweet && this.config.randomTweet.intervalTimeout && this.config.randomTweet.enabled) {
+                if (this.showDebug) {
+                    console.info(`[TwitterBot] create random tweet interval`);
+                }
+                this.randomTweet();
+                this.favoriteInterval = setInterval(this.randomTweet.bind(this), this.config.randomTweet.intervalTimeout);
+            }
+
+            // setup random tweet interval if timeout is defined in config and enabled
+            if (this.config.trackFollowers && this.config.trackFollowers.intervalTimeout && this.config.trackFollowers.enabled) {
+                if (this.showDebug) {
+                    console.info(`[TwitterBot] create track followers interval`);
+                }
+                this.trackFollowers();
+                this.followersInterval = setInterval(this.trackFollowers.bind(this), this.config.trackFollowers.intervalTimeout);
+            }
         }
 
     }
@@ -75,7 +86,122 @@ class TwitterBot {
         }
     }
 
+    trackFollowers() {
+        if (!this.config.enabled) {
+            return false;
+        }
+        if (this.showDebug) {
+            console.info(`[TwitterBot] trackFollowers`);
+        }
+
+        this.getCurrentFollowers();
+    }
+
+    getCurrentFollowers() {
+        if (!this.config.enabled) {
+            return false;
+        }
+        if (this.showDebug) {
+            console.info(`[TwitterBot] getCurrentFollowers`);
+        }
+        this.twitterApi.get('followers/ids', {}, (err, response) => {
+            // log to DB
+            const currTimestamp = new Date();
+            for (const followerId of response.ids) {
+                this.twitterApi.get('users/lookup', {
+                        user_id: followerId.toString()
+                    },
+                    (err, response) => {
+                        const follower = response[0];
+                        if (err) {
+                            // console.info(err.message, followerId);
+                        }
+
+                        if (this.db && follower) {
+                            this.db.followers.findAndModify({
+                                query: {
+                                    followerId: follower.id_str
+                                },
+                                update: {
+                                    botName: this.config.botName,
+                                    lastUpdate: currTimestamp,
+                                    followerUsername: follower.screen_name,
+                                    followerId: follower.id_str,
+                                    followerAdded: follower.created_at,
+                                    tweetCount: follower.statuses_count,
+                                    favoriteCount: follower.favourites_count,
+                                    followerCount: follower.followers_count,
+                                    listedCount: follower.listed_count,
+                                    friendsCount: follower.friends_count,
+                                    retweetCount: follower.retweet_count,
+                                    verified: follower.verified,
+                                    rawData: follower
+                                },
+                                new: true,
+                                upsert: true
+                            }, (err, doc, lastErr) => {
+                                // console.info(err, doc, lastErr);
+                                if (err) {
+                                    console.error('[main]', err);
+                                }
+                            })
+                        }
+
+                        if (err) {
+                            // this.twitterApi.get('followers/list', {
+                            //         user_id: followerId.toString()
+                            //     },
+                            //     (err, response) => {
+                            //         console.info('erz', response);
+                            //     });
+                            // this.db.followers.findAndModify({
+                            //     query: {
+                            //         followerId: follower.id_str
+                            //     },
+                            //     update: {
+                            //         botName: this.config.botName,
+                            //         lastUpdate: currTimestamp,
+                            //         followerUsername: 'NOT',
+                            //         followerId: follower.id_str,
+                            //         followerAdded: follower.created_at,
+                            //         tweetCount: follower.statuses_count,
+                            //         favoriteCount: follower.favourites_count,
+                            //         followerCount: follower.followers_count,
+                            //         listedCount: follower.listed_count,
+                            //         friendsCount: follower.friends_count,
+                            //         retweetCount: follower.retweet_count,
+                            //         verified: follower.verified,
+                            //         rawData: follower
+                            //     },
+                            //     new: true,
+                            //     upsert: true
+                            // }, (err, doc, lastErr) => {
+                            //     // console.info(err, doc, lastErr);
+                            //     if (err) {
+                            //         console.error('[main]', err);
+                            //     }
+                            // })
+                        }
+
+                    })
+            }
+
+
+
+            if (response) {
+                console.info(`[TwitterBot] followers loaded:`);
+            }
+            // if there was an error while tweeting
+            if (err) {
+                console.log(`[TwitterBot] error getting followers: ${err.message}`);
+            }
+        });
+    }
+
     tweet(message) {
+        if (!this.config.enabled) {
+            return false;
+        }
         if (this.showDebug) {
             console.info(`[TwitterBot] tweet`, message);
         }
@@ -89,6 +215,7 @@ class TwitterBot {
                 this.db.tweets.insert({
                     timestamp: new Date(),
                     botName: this.config.botName,
+                    tweetId: response.id_str,
                     hadError: (err) ? true : false,
                     serverResponse: response,
                     serverError: err
@@ -106,6 +233,10 @@ class TwitterBot {
     }
 
     retweet(messageId) {
+        if (!this.config.enabled) {
+            return false;
+        }
+
         if (!messageId) {
             if (this.showDebug) {
                 console.error(`[TwitterBot] retweet error: invalid message ID ${messageId}`);
@@ -147,6 +278,10 @@ class TwitterBot {
     }
 
     favorite(messageId) {
+        if (!this.config.enabled) {
+            return false;
+        }
+
         if (this.showDebug) {
             console.info(`[TwitterBot] favorite ${messageId}`);
         }
@@ -177,6 +312,10 @@ class TwitterBot {
     }
 
     randomTweet() {
+        if (!this.config.enabled) {
+            return false;
+        }
+
         if (this.showDebug) {
             console.info(`[TwitterBot] randomTweet`);
         }
@@ -184,6 +323,10 @@ class TwitterBot {
     }
 
     randomRetweet() {
+        if (!this.config.enabled) {
+            return false;
+        }
+
         if (this.showDebug) {
             console.info(`[TwitterBot] randomRetweet`);
         }
@@ -222,6 +365,10 @@ class TwitterBot {
     }
 
     randomFavorite() {
+        if (!this.config.enabled) {
+            return false;
+        }
+
         if (this.showDebug) {
             console.info(`[TwitterBot] randomFavorite`);
         }

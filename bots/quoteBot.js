@@ -7,6 +7,9 @@ class QuoteBot extends TwitterBot {
         super(botConfig, db, showDebug);
 
         this.wikiQuote = new WikiQuote(this.config.wikiApiUrl, this.config.authorList, this.showDebug);
+
+        this.quoteDbCollection = null;
+
         if (this.showDebug) {
             console.info(`[QuoteBot] constructor`);
         }
@@ -16,6 +19,9 @@ class QuoteBot extends TwitterBot {
         if (this.showDebug) {
             console.info(`[QuoteBot] randomTweet`);
         }
+        this.quoteDbCollection = this.db.collection('quotes');
+
+        console.info('[QuoteBot]', this.quoteDbCollection);
 
         this.wikiQuote.getRandomQuote()
             .then((result) => {
