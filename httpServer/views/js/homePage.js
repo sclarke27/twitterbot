@@ -1,6 +1,6 @@
 class HomePage extends BasePage {
-    constructor(parentDiv) {
-        super(parentDiv);
+    constructor(parentDiv, routeName, botName) {
+        super(parentDiv, routeName, botName);
 
         this.botsList = [];
         this.tweetList = [];
@@ -20,33 +20,52 @@ class HomePage extends BasePage {
         this.botsDiv = document.createElement('div');
         this.botsDiv.id = 'botsContainer';
         this.botsDiv.className = 'container';
-        this.botsDiv.innerText = 'loading...';
+        this.botsDiv.innerHTML = this.loadingText('Bots');
         this.parentDiv.appendChild(this.botsDiv);
 
         this.tweetsDiv = document.createElement('div');
         this.tweetsDiv.id = 'tweetsContainer';
         this.tweetsDiv.className = 'container';
-        this.tweetsDiv.innerText = 'loading...';
+        this.tweetsDiv.innerHTML = this.loadingText('Tweets');
         this.parentDiv.appendChild(this.tweetsDiv);
 
         this.retweetsDiv = document.createElement('div');
         this.retweetsDiv.id = 'retweetsContainer';
         this.retweetsDiv.className = 'container';
-        this.retweetsDiv.innerText = 'loading...';
+        this.retweetsDiv.innerHTML = this.loadingText('Retweets');
         this.parentDiv.appendChild(this.retweetsDiv);
 
         this.favoritesDiv = document.createElement('div');
         this.favoritesDiv.id = 'favoritesContainer';
         this.favoritesDiv.className = 'container';
-        this.favoritesDiv.innerText = 'loading...';
+        this.favoritesDiv.innerHTML = this.loadingText('Favorites');
         this.parentDiv.appendChild(this.favoritesDiv);
 
+        super.start();
+    }
+
+    refreshPageData() {
         this.fetchBotsListData()
             .then((results) => {
                 console.info('[home] - bots -', results);
                 if (results.data) {
                     this.botsList = results.data;
-                    this.refreshList('Bots', this.botsDiv, this.botsList);
+
+                    this.botsList = results.data;
+                    const filteredList = [];
+                    for (const listItem of this.botsList) {
+                        filteredList.push({
+                            'Bot Name': listItem.name,
+                            'startupTimestamp': listItem.startupTimestamp,
+                            'isEnabled': listItem.isEnabled,
+                            'isTweeting': listItem.isTweeting,
+                            'isRetweeting': listItem.isRetweeting,
+                            'isFavoriting': listItem.isFavoriting,
+                            'isTrackingFollowers': listItem.isTrackingFollowers
+                        })
+                    }
+
+                    this.refreshList('Bots', this.botsDiv, filteredList);
                 }
             });
         this.fetchTweetListData()
@@ -74,7 +93,7 @@ class HomePage extends BasePage {
                 }
             })
 
-
+        super.refreshPageData();
     }
 
 }

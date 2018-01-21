@@ -1,0 +1,61 @@
+<script type="text/javascript" src="/js/quotesPage.js"></script>
+<style>
+    #quotesContainer {
+        height: 60%;
+    }
+
+    input,
+    textarea {
+        margin: 5px;
+        padding: 5px;
+    }
+
+    textarea {
+        height: 250px;
+    }
+
+    .formRow {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .row {
+        height: 55px;
+    }
+
+    .formRow div {
+        width: 50%;
+        align-items: center;
+    }
+
+    .formRow div:first-child {
+        text-align: right;
+    }
+
+    .addQuoteButton {
+        background-image: url('/assets/edit.svg');
+        height: 24px;
+        width: 24px;
+        cursor: pointer;
+        transition: all 0.15s ease-in-out;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-color: rgba(255, 255, 255, 1);
+        border-radius: 50%;
+        float: left;
+        padding: 0px !important;
+        margin-right: 5px;
+    }
+
+    #addQuoteHeaderButton {
+        position: absolute;
+        right: 10px;
+        height: 100%;
+    }
+</style>
+<div id="main"></div>
+
+<script>
+    const page = new QuotesPage(document.getElementById('main'), '{{routeName}}', '{{botName}}');
+    page.start();
+</script>

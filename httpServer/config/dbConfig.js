@@ -6,7 +6,8 @@ const DbConfig = {
         'retweets',
         'favorites',
         'followers',
-        'bots'
+        'bots',
+        'quotes'
     ]
 }
 

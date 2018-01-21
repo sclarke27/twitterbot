@@ -1,18 +1,32 @@
 class BasePage {
-    constructor(parentDiv) {
+    constructor(parentDiv, routeName, botName) {
         this.parentDiv = parentDiv;
+        this.routeName = routeName;
+        this.botName = botName;
 
+        console.info('base', parentDiv, routeName, botName)
     }
 
     start() {
         console.info('start base page');
+        this.refreshPageData();
+        setInterval(this.refreshPageData.bind(this), 1000 * 60 * 60);
+    }
+
+    loadingText(dataName) {
+        return `<h3 class="loadingText">Loading ${dataName} Data...<h3>`
+    }
+
+    refreshPageData() {
+
     }
 
     refreshList(listName, targetDiv, dataList) {
         targetDiv.innerText = "";
 
         const header = document.createElement('div');
-        header.innerHTML = `<h3>${listName}</h3>`;
+        header.innerHTML = `${listName}: ${dataList.length}`;
+        header.className = 'containerHeader';
         targetDiv.appendChild(header);
 
         const headerDiv = document.createElement('div');
@@ -21,11 +35,14 @@ class BasePage {
             if (dataItem !== 'serverError' && dataItem !== 'serverResponse' && dataItem !== '_id') {
                 const dataDiv = document.createElement('div');
                 dataDiv.innerText = dataItem;
-                dataDiv.className = "dataItem";
+                dataDiv.className = `dataItem ${dataItem}`;
                 headerDiv.appendChild(dataDiv);
             }
         }
         targetDiv.appendChild(headerDiv)
+
+        const scrollerDiv = document.createElement('div');
+        scrollerDiv.className = 'scroller';
 
         for (const listIndex in dataList) {
             const rowData = dataList[listIndex];
@@ -39,7 +56,7 @@ class BasePage {
                     } else {
                         dataDiv.innerText = rowData[dataItem];
                     }
-                    dataDiv.className = "dataItem";
+                    dataDiv.className = `dataItem ${dataItem}`;
                     if (dataItem.indexOf('is') === 0) {
                         dataDiv.style.backgroundColor = (rowData[dataItem] === true) ? 'rgba(0,200,0,0.5)' : 'rgba(200,0,0,0.5)';
                     }
@@ -48,21 +65,34 @@ class BasePage {
                     }
 
                     if (dataItem === 'tweetId' && rowData['tweetId']) {
-                        dataDiv.className = `${dataDiv.className} clickable`;
+                        dataDiv.className = `dataItem ${dataItem} ${dataDiv.className} clickable`;
                         dataDiv.onclick = () => {
                             window.open(`https://twitter.com/statuses/${rowData['tweetId']}`);
                         }
                     }
 
                     if (dataItem === 'followerId') {
-                        dataDiv.className = `${dataDiv.className} clickable`;
+                        dataDiv.className = `dataItem ${dataItem} ${dataDiv.className} clickable`;
                         dataDiv.onclick = () => {
                             window.open(`https://twitter.com/intent/user?user_id=${rowData[dataItem]}`);
                         }
                     }
 
-                    if (dataItem === 'botName' || dataItem === 'name') {
-                        dataDiv.className = `${dataDiv.className} clickable`;
+                    if (dataItem.toLocaleLowerCase() === 'edit' || dataItem.toLocaleLowerCase() === 'delete') {
+                        dataDiv.className = `dataItem ${dataItem} ${dataDiv.className} clickable ${dataItem.toLocaleLowerCase()}Button`;
+                        dataDiv.onclick = () => {
+                            rowData[dataItem](rowData['_id']);
+                        }
+                        if (dataItem.toLocaleLowerCase() === 'edit') {
+                            dataDiv.innerHTML = '<img src="/assets/document.svg" width="100%" height="100%">';
+                        }
+                        if (dataItem.toLocaleLowerCase() === 'delete') {
+                            dataDiv.innerHTML = '<img src="/assets/icons8-delete-button.png" width="100%" height="100%">';
+                        }
+                    }
+
+                    if (dataItem === 'botName' || dataItem === 'name' || dataItem === 'Bot Name') {
+                        dataDiv.className = `dataItem ${dataItem} ${dataDiv.className} clickable`;
                         dataDiv.onclick = () => {
                             window.location.href = `/bot/${rowData[dataItem]}`;
                         }
@@ -72,9 +102,9 @@ class BasePage {
                 }
             }
 
-            targetDiv.appendChild(rowDiv)
+            scrollerDiv.appendChild(rowDiv)
         }
-
+        targetDiv.appendChild(scrollerDiv);
 
     }
 

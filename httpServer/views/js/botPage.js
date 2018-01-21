@@ -1,8 +1,6 @@
 class BotPage extends BasePage {
-    constructor(parentDiv, botName) {
-        super(parentDiv);
-
-        this.botName = botName;
+    constructor(parentDiv, routeName, botName) {
+        super(parentDiv, routeName, botName);
 
         this.followersList = [];
         this.tweetList = [];
@@ -22,33 +20,47 @@ class BotPage extends BasePage {
         this.followersDiv = document.createElement('div');
         this.followersDiv.id = 'followersContainer';
         this.followersDiv.className = 'container';
-        this.followersDiv.innerText = 'loading...';
+        this.followersDiv.innerHTML = this.loadingText('Follower');
         this.parentDiv.appendChild(this.followersDiv);
 
         this.tweetsDiv = document.createElement('div');
         this.tweetsDiv.id = 'tweetsContainer';
         this.tweetsDiv.className = 'container';
-        this.tweetsDiv.innerText = 'loading...';
+        this.tweetsDiv.innerHTML = this.loadingText('Tweets');
         this.parentDiv.appendChild(this.tweetsDiv);
 
         this.retweetsDiv = document.createElement('div');
         this.retweetsDiv.id = 'retweetsContainer';
         this.retweetsDiv.className = 'container';
-        this.retweetsDiv.innerText = 'loading...';
+        this.retweetsDiv.innerHTML = this.loadingText('Retweets');
         this.parentDiv.appendChild(this.retweetsDiv);
 
         this.favoritesDiv = document.createElement('div');
         this.favoritesDiv.id = 'favoritesContainer';
         this.favoritesDiv.className = 'container';
-        this.favoritesDiv.innerText = 'loading...';
+        this.favoritesDiv.innerHTML = this.loadingText('Favorites');
         this.parentDiv.appendChild(this.favoritesDiv);
 
+        super.start();
+    }
+
+    refreshPageData() {
         this.fetchBotsFollowersData(this.botName)
             .then((results) => {
                 console.info('[home] - followers -', results);
                 if (results.data) {
                     this.followersList = results.data;
-                    this.refreshList('Followers', this.followersDiv, this.followersList);
+                    const filteredList = [];
+                    for (const listItem of this.followersList) {
+                        filteredList.push({
+                            'User Name': listItem.followerUsername,
+                            followerId: listItem.followerId,
+                            'Tweets': listItem.tweetCount,
+                            'Favorites': listItem.favoriteCount,
+                            'Followers': listItem.followerCount
+                        })
+                    }
+                    this.refreshList('Followers', this.followersDiv, filteredList);
                 }
             });
         this.fetchTweetListData(this.botName)
@@ -76,7 +88,7 @@ class BotPage extends BasePage {
                 }
             })
 
-
+        super.refreshPageData();
     }
 
 }

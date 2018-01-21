@@ -1,9 +1,18 @@
 const express = require('express');
 const http = require('http').Server(express);
 const path = require('path');
-const handlebars = require('express-handlebars');
+const expressHandlebars = require('express-handlebars');
 const mongojs = require('mongojs');
 const dbConfig = require('./config/dbConfig');
+const startingQuoteDb = require('./config/startingQuoteDb');
+
+// expressHandlebars.prototype.handlebars.registerHelper('if_eq', function (a, b, opts) {
+//     if (a == b) {
+//         return opts.fn(this);
+//     } else {
+//         return opts.inverse(this);
+//     }
+// });
 
 class HttpServer {
     constructor(httpConfig, db, showDebug = false) {
@@ -14,6 +23,7 @@ class HttpServer {
         this.io = null;
         this.db = db;
         this.showDebug = showDebug;
+        this.hbsHelpers = null;
     }
 
     /**
@@ -22,7 +32,7 @@ class HttpServer {
     setUpEngine() {
 
         this.webApp = express();
-        this.webApp.engine('.hbs', handlebars({
+        this.webApp.engine('.hbs', expressHandlebars({
             defaultLayout: 'main',
             extname: '.hbs',
             layoutsDir: path.join(__dirname, 'views/layouts')
@@ -57,6 +67,25 @@ class HttpServer {
                 }
             });
         })
+
+        this.hbsHelpers = {
+            'if_eq': (a, b, opts) => {
+                if (a == b) {
+                    return opts.fn(this);
+                } else {
+                    return opts.inverse(this);
+                }
+            },
+            'if_not_eq': (a, b, opts) => {
+                if (a != b) {
+                    return opts.fn(this);
+                } else {
+                    return opts.inverse(this);
+                }
+            },
+        };
+
+
     }
 
     /**
@@ -85,9 +114,14 @@ class HttpServer {
      */
     createHomeRoute() {
         this.webApp.get('/', (request, response) => {
-
-            response.render('homePage', {
-                data: 'test data',
+            this.db.bots.find().sort({
+                botName: -1
+            }).toArray((err, docs) => {
+                response.render('homePage', {
+                    routeName: 'home',
+                    botList: docs,
+                    helpers: this.hbsHelpers
+                })
             })
         })
 
@@ -100,10 +134,18 @@ class HttpServer {
         this.webApp.get('/bot/:botName', (request, response) => {
             const reqParams = request.params;
             const selectedBotName = reqParams.botName;
-            console.info(selectedBotName);
-            response.render('botPage', {
-                botName: selectedBotName,
-            })
+            this.db.bots.find().sort({
+                botName: -1
+            }).toArray((err, docs) => {
+
+                response.render('botPage', {
+                    routeName: 'bot',
+                    botName: selectedBotName,
+                    botList: docs,
+                    helpers: this.hbsHelpers
+                })
+
+            });
         })
         this.webApp.route('/listBots')
             .post((request, response) => {
@@ -254,6 +296,115 @@ class HttpServer {
             })
     }
 
+    createQuotesRoute() {
+        this.webApp.route('/quotes')
+            .get((request, response) => {
+                this.db.bots.find().sort({
+                    _id: -1
+                }).toArray((err, docs) => {
+
+                    response.render('quotesPage', {
+                        routeName: 'quotesList',
+                        botList: docs,
+                        helpers: this.hbsHelpers
+                    })
+                })
+            })
+            .post((request, response) => {
+                this.db.quotes.find().sort({
+                    author: 1
+                }).toArray((err, docs) => {
+                    response.json({
+                        data: docs,
+                        dbErrors: err
+                    })
+                })
+            })
+
+        this.webApp.route('/quote/:quoteId')
+            .post((request, response) => {
+                const reqParams = request.params;
+                const quoteId = reqParams.quoteId;
+                this.db.quotes.find({
+                    '_id': mongojs.ObjectId(quoteId)
+                }).toArray((err, docs) => {
+                    response.json({
+                        quoteData: docs,
+                        error: err
+                    })
+                })
+            })
+
+        this.webApp.route('/quote/delete/:quoteId')
+            .post((request, response) => {
+                const reqParams = request.params;
+                const reqQuery = request.query;
+                const quoteId = reqParams.quoteId;
+                this.db.quotes.remove({
+                    '_id': mongojs.ObjectId(quoteId)
+                }, (err, doc, lastErr) => {
+                    if (err) {
+                        console.error('[main]', err);
+                    }
+                })
+            })
+
+        this.webApp.route('/quote/update/:quoteId')
+            .post((request, response) => {
+                const reqParams = request.params;
+                const reqQuery = request.query;
+                const quoteId = reqParams.quoteId;
+                console.info(quoteId, reqQuery);
+                if (quoteId == 0) {
+                    const newDataObj = {
+                        author: (reqQuery.author == "") ? "Anonymous" : reqQuery.author,
+                        content: reqQuery.content,
+                        canUse: (reqQuery.canUse) ? true : false,
+                        lastUsed: null
+                    }
+                    this.db.quotes.insert(newDataObj);
+                } else {
+                    this.db.quotes.findAndModify({
+                        query: {
+                            '_id': mongojs.ObjectId(quoteId)
+                        },
+                        update: {
+                            author: reqQuery.author,
+                            content: reqQuery.content,
+                            canUse: Boolean(reqQuery.canUse === "true")
+                        },
+                        new: true
+                    }, (err, doc, lastErr) => {
+                        if (err) {
+                            console.error('[main]', err);
+                        }
+                    })
+                }
+            })
+
+
+        this.webApp.route('/quotes/reset')
+            .get((request, response) => {
+                if (this.db.quotes) {
+                    this.db.quotes.drop();
+                }
+                for (const quoteIndex in startingQuoteDb) {
+                    const quote = startingQuoteDb[quoteIndex];
+                    const newDataObj = {
+                        author: (quote.quoteAuthor == "") ? "Anonymous" : quote.quoteAuthor,
+                        content: quote.quoteText,
+                        canUse: true,
+                        lastUsed: null
+                    }
+                    this.db.quotes.insert(newDataObj);
+                }
+                response.json({
+                    data: startingQuoteDb
+                })
+
+            })
+    }
+
     /**
      * startup http server
      */
@@ -264,6 +415,7 @@ class HttpServer {
         this.createListFavoritesRoute();
         this.createListFollowersRoute();
         this.createListBotRoute();
+        this.createQuotesRoute();
         this.createHomeRoute();
 
         this.server.listen(this.port, this.onServerStarted.bind(this));

@@ -1,3 +1,5 @@
+console.info('Loading...');
+
 const CatBotConfig = require('./config/catConfig');
 const CatBot = require('./bots/catBot');
 const DogBotConfig = require('./config/dogConfig');
@@ -10,6 +12,8 @@ const httpConfig = require('./httpServer/config/httpConfig');
 const httpServer = require('./httpServer/server');
 const mongojs = require('mongojs');
 const dbConfig = require('./httpServer/config/dbConfig');
+
+console.info('Libs loaded');
 
 class Main {
     constructor(showDebug = true) {
@@ -111,6 +115,7 @@ class Main {
 const showDebug = true;
 const main = new Main(true);
 
+console.info('Main constructed');
 const botList = [
     [CatBot, CatBotConfig],
     [TwitterBot, DogBotConfig],
@@ -118,5 +123,6 @@ const botList = [
     [TwitterBot, Sclarke27Config]
 ]
 
+console.info('Start');
 main.initialize(botList);
 main.start();
