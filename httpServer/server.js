@@ -5,6 +5,7 @@ const expressHandlebars = require('express-handlebars');
 const mongojs = require('mongojs');
 const dbConfig = require('./config/dbConfig');
 const startingQuoteDb = require('./config/startingQuoteDb');
+const WikiQuote = require('../modules/wikiQuote');
 
 // expressHandlebars.prototype.handlebars.registerHelper('if_eq', function (a, b, opts) {
 //     if (a == b) {
@@ -24,12 +25,17 @@ class HttpServer {
         this.db = db;
         this.showDebug = showDebug;
         this.hbsHelpers = null;
+        this.wikiQuote = null;
+
+        this.botList = [];
     }
 
     /**
      * start up http server and setup express
      */
     setUpEngine() {
+
+        this.wikiQuote = new WikiQuote(this.config.wikiApiUrl, this.config.authorList, this.showDebug);
 
         this.webApp = express();
         this.webApp.engine('.hbs', expressHandlebars({
@@ -84,6 +90,12 @@ class HttpServer {
                 }
             },
         };
+
+        this.db.bots.find().sort({
+            botName: -1
+        }).toArray((err, docs) => {
+            this.botList = docs;
+        });
 
 
     }
@@ -296,6 +308,48 @@ class HttpServer {
             })
     }
 
+    /**
+     * Route to handle list of tweets
+     */
+    createPlantsRoute() {
+
+        this.webApp.route('/plants/history/:plantId')
+            .post((request, response) => {
+                const reqParams = request.params;
+                const plantId = reqParams.plantId;
+
+                this.db.plants.find({
+                    plantId: plantId
+                }).limit(5000).sort({
+                    timestamp: -1
+                }).toArray((err, docs) => {
+                    response.json({
+                        data: docs,
+                        dbErrors: err
+                    })
+                });
+            })
+        this.webApp.route('/plants/:plantId')
+            .get((request, response) => {
+                const reqParams = request.params;
+                const plantId = reqParams.plantId;
+
+                // this.db.plants.find({
+                //     plantId: plantId
+                // }).sort({
+                //     timestamp: -1
+                // }).toArray((err, docs) => {
+                response.render('plantsPage', {
+                    routeName: 'plant',
+                    plantId: plantId,
+                    // plantHistory: docs,
+                    botList: this.botList,
+                    helpers: this.hbsHelpers
+                })
+                // })
+            })
+    }
+
     createQuotesRoute() {
         this.webApp.route('/quotes')
             .get((request, response) => {
@@ -313,6 +367,20 @@ class HttpServer {
             .post((request, response) => {
                 this.db.quotes.find().sort({
                     author: 1
+                }).toArray((err, docs) => {
+                    response.json({
+                        data: docs,
+                        dbErrors: err
+                    })
+                })
+            })
+
+        this.webApp.route('/quotes/used')
+            .post((request, response) => {
+                this.db.quotes.find({
+                    canUse: false
+                }).sort({
+                    lastUsed: -1
                 }).toArray((err, docs) => {
                     response.json({
                         data: docs,
@@ -403,6 +471,25 @@ class HttpServer {
                 })
 
             })
+
+        this.webApp.route('/quotes/randomWikiQuote')
+            .post((request, response) => {
+                this.wikiQuote.getRandomQuote()
+                    .then((result) => {
+                        if (result) {
+                            console.info(`[QuoteBot] use : ${result}`);
+                            response.json({
+                                data: result
+                            })
+
+                        } else {
+                            response.json({
+                                data: null
+                            })
+                        }
+
+                    })
+            })
     }
 
     /**
@@ -416,6 +503,7 @@ class HttpServer {
         this.createListFollowersRoute();
         this.createListBotRoute();
         this.createQuotesRoute();
+        this.createPlantsRoute();
         this.createHomeRoute();
 
         this.server.listen(this.port, this.onServerStarted.bind(this));

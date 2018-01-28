@@ -73,7 +73,27 @@ class QuoteBot extends TwitterBot {
                 .then((result) => {
                     if (result) {
                         console.info(`[QuoteBot] use : ${result}`);
-                        this.tweet(result);
+                        // const spaceRegex = new RegExp("[ ]+", "g");
+                        // const dotRegex = new RegExp("[.]+", "g")
+                        // const signature = `\n#${title.replace(spaceRegex,'').replace(dotRegex,'')}`;
+                        // parsedQuote = `${parsedQuote}${signature}`;
+                        // if (parsedQuote.length < 280 && parsedQuote.length > (15 + signature.length)) {
+                        //     if (this.showDebug) {
+                        //         console.info('[wikiQuote]', parsedQuote.length);
+                        //         console.info('[wikiQuote]', parsedQuote);
+                        //     }
+                        //     this.tweet(parsedQuote);
+                        //     return parsedQuote;
+                        // } else {
+                        //     if (this.showDebug) {
+                        //         console.error('[wikiQuote] bad format');
+                        //         // console.info('[wikiQuote]', parsedQuote);
+                        //         // console.error('[wikiQuote] raw');
+                        //         // console.info('[wikiQuote]', rawText);
+                        //     }
+                        //     return false;
+                        // }
+
                     }
                 })
         }

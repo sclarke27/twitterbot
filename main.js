@@ -1,25 +1,37 @@
-console.info('Loading...');
+console.info('Loading libraries ...');
 
 const CatBotConfig = require('./config/catConfig');
-const CatBot = require('./bots/catBot');
 const DogBotConfig = require('./config/dogConfig');
-const DogBot = require('./bots/dogBot');
 const QuoteBotConfig = require('./config/quoteConfig');
-const QuoteBot = require('./bots/quoteBot');
 const Sclarke27Config = require('./config/sclarke27Config');
-const TwitterBot = require('./bots/twitterBot');
 const httpConfig = require('./httpServer/config/httpConfig');
+const dbConfig = require('./httpServer/config/dbConfig');
+const plantBotConfig = require('./config/plantBotConfig');
+const plantServiceConfig = require('./config/plantServiceConfig');
+
+// servers
 const httpServer = require('./httpServer/server');
 const mongojs = require('mongojs');
-const dbConfig = require('./httpServer/config/dbConfig');
 
-console.info('Libs loaded');
+// services
+const PlantMonService = require('./services/plantMonService');
+
+// bot classes
+const TwitterBot = require('./bots/twitterBot');
+const CatBot = require('./bots/catBot');
+const DogBot = require('./bots/dogBot');
+const QuoteBot = require('./bots/quoteBot');
+const PlantBot = require('./bots/plantBot');
+
+
+console.info('Libraries loaded');
 
 class Main {
     constructor(showDebug = true) {
         this.showDebug = showDebug;
         this.wikiQuote = null;
         this.botList = [];
+        this.servicesList = [];
         this.db = null;
         this.httpServer = null;
 
@@ -30,8 +42,9 @@ class Main {
         }
     }
 
-    initialize(botList) {
+    initialize(botList, servicesList) {
 
+        // start db connection if enabled
         if (dbConfig.enabled) {
             if (this.showDebug) {
                 console.info(`[main] connect to db ${dbConfig.dbName}`);
@@ -45,9 +58,18 @@ class Main {
             })
         }
 
+        // start http server
         if (httpConfig.enabled) {
             this._httpServer = new httpServer(httpConfig, this.db, this.showDebug);
             this._httpServer.startHttpServer();
+        }
+
+        if (servicesList) {
+            for (const service of servicesList) {
+                const serviceClass = service[0];
+                const serviceConfig = service[1];
+                this.servicesList.push(new serviceClass(serviceConfig, this.db, this._httpServer, this.showDebug));
+            }
         }
 
         // create the bots and push to this.botList
@@ -94,6 +116,10 @@ class Main {
         if (this.showDebug) {
             console.info('[main] start');
         }
+        for (const service of this.servicesList) {
+            // console.info(bot);
+            service.start();
+        }
         for (const bot of this.botList) {
             // console.info(bot);
             bot.start();
@@ -120,9 +146,13 @@ const botList = [
     [CatBot, CatBotConfig],
     [TwitterBot, DogBotConfig],
     [QuoteBot, QuoteBotConfig],
-    [TwitterBot, Sclarke27Config]
+    [TwitterBot, Sclarke27Config],
+    [PlantBot, plantBotConfig]
 ]
 
+const servicesList = [
+    [PlantMonService, plantServiceConfig]
+];
 console.info('Start');
-main.initialize(botList);
+main.initialize(botList, servicesList);
 main.start();

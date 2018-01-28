@@ -22,6 +22,12 @@ class QuotesPage extends BasePage {
         this.quotesDiv.innerHTML = this.loadingText('Quotes');
         this.parentDiv.appendChild(this.quotesDiv);
 
+        this.usedQuotesDiv = document.createElement('div');
+        this.usedQuotesDiv.id = 'usedQuotesContainer';
+        this.usedQuotesDiv.className = 'container';
+        this.usedQuotesDiv.innerHTML = this.loadingText('Used Quotes');
+        this.parentDiv.appendChild(this.usedQuotesDiv);
+
         this.formDiv = document.createElement('div');
         this.formDiv.id = 'quoteFormContainer';
         this.formDiv.className = 'container modalContainer';
@@ -124,6 +130,25 @@ class QuotesPage extends BasePage {
 
     }
 
+    newFromWikiQuote() {
+        console.info('new wikiquote')
+
+        return this.fetchData('/quotes/randomWikiQuote')
+            .then((results) => {
+                if (results.data.content.indexOf(0) == "\r\n") {
+                    return this.newFromWikiQuote();
+                } else {
+                    console.info(results);
+                    this.showForm();
+                    const quoteData = results.data;
+                    this.authorInput.value = quoteData.author;
+                    this.contentInput.value = quoteData.content;
+                    this.canUseCheckbox.checked = false;
+                    return true;
+                }
+            })
+    }
+
     refreshPageData() {
         this.fetchQuotesListData(this.botName)
             .then((results) => {
@@ -141,6 +166,24 @@ class QuotesPage extends BasePage {
                         })
                     }
                     this.refreshList('Quotes', this.quotesDiv, filteredList);
+                }
+            });
+        this.fetchData('/quotes/used')
+            .then((results) => {
+                console.info('[home] - used quotes -', results);
+                if (results.data) {
+                    this.quotesList = results.data;
+                    const filteredList = [];
+                    for (const listItem of this.quotesList) {
+                        filteredList.push({
+                            '_id': listItem['_id'],
+                            'Author': listItem.author,
+                            'Quote': listItem.content,
+                            'Used Timestamp': listItem.lastUsed,
+                            'Edit': this.showForm.bind(this)
+                        })
+                    }
+                    this.refreshList('Used Quotes', this.usedQuotesDiv, filteredList);
                 }
             });
         super.refreshPageData();

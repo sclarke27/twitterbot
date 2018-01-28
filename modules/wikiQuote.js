@@ -117,25 +117,29 @@ class WikiQuote {
                 if (parsedQuote.indexOf('\n') > 0) {
                     parsedQuote = parsedQuote.substring(0, parsedQuote.indexOf('\n'));
                 }
-                const spaceRegex = new RegExp("[ ]+", "g");
-                const dotRegex = new RegExp("[.]+", "g")
-                const signature = `\n#${title.replace(spaceRegex,'').replace(dotRegex,'')}`;
-                parsedQuote = `${parsedQuote}${signature}`;
-                if (parsedQuote.length < 280 && parsedQuote.length > (15 + signature.length)) {
-                    if (this.showDebug) {
-                        console.info('[wikiQuote]', parsedQuote.length);
-                        console.info('[wikiQuote]', parsedQuote);
-                    }
-                    return parsedQuote;
-                } else {
-                    if (this.showDebug) {
-                        console.error('[wikiQuote] bad format');
-                        // console.info('[wikiQuote]', parsedQuote);
-                        // console.error('[wikiQuote] raw');
-                        // console.info('[wikiQuote]', rawText);
-                    }
-                    return '';
+                return {
+                    author: title,
+                    content: parsedQuote
                 }
+                // const spaceRegex = new RegExp("[ ]+", "g");
+                // const dotRegex = new RegExp("[.]+", "g")
+                // const signature = `\n#${title.replace(spaceRegex,'').replace(dotRegex,'')}`;
+                // parsedQuote = `${parsedQuote}${signature}`;
+                // if (parsedQuote.length < 280 && parsedQuote.length > (15 + signature.length)) {
+                //     if (this.showDebug) {
+                //         console.info('[wikiQuote]', parsedQuote.length);
+                //         console.info('[wikiQuote]', parsedQuote);
+                //     }
+                //     return parsedQuote;
+                // } else {
+                //     if (this.showDebug) {
+                //         console.error('[wikiQuote] bad format');
+                //         // console.info('[wikiQuote]', parsedQuote);
+                //         // console.error('[wikiQuote] raw');
+                //         // console.info('[wikiQuote]', rawText);
+                //     }
+                //     return '';
+                // }
             })
             .catch((error) => {
                 console.error('[wikiQuote][FETCH ERROR]', error);

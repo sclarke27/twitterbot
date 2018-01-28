@@ -2,11 +2,17 @@
 
     <head>
         <title>Twitter Mon :: {{botName}}</title>
+
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="/js/controls/InstrumentPanel.js"></script>
+        <script type="text/javascript" src="/js/controls/CompassControl.js"></script>
+        <script type="text/javascript" src="/js/controls/ThermometerControl.js"></script>
+        <script type="text/javascript" src="/js/controls/VideoFeed.js"></script>
         <script type="text/javascript" src="/js/basePage.js"></script>
 
         <link href="https://fonts.googleapis.com/css?family=Assistant" rel="stylesheet">
+        <link rel="stylesheet" href="/css/controls.css" type="text/css">
         <link rel="stylesheet" href="/css/main.css" type="text/css">
         <script>
             const routeName = '{{routeName}}';
@@ -45,15 +51,24 @@
                     </div>
                 </div>
                 {{#if_eq routeName 'quotesList'}}
+                <div class="quotesMenu menu" id="addWikiQuoteHeaderButton" onclick="page.newFromWikiQuote()">
+                    <div class="headerLabel">
+                        <div class="addQuoteButton"></div>New From WikiQuote
+                    </div>
+                </div>
                 <div class="quotesMenu menu" id="addQuoteHeaderButton" onclick="page.showForm()">
                     <div class="headerLabel">
-                        <div class="addQuoteButton"></div>New Quote</div>
+                        <div class="addQuoteButton"></div>New Quote
+                    </div>
                 </div>
                 {{else}}
                 <div class="quotesMenu menu" onclick="window.location.href='/quotes'">
                     <div class="headerLabel">Quotes</div>
                 </div>
                 {{/if_eq}}
+                <div class="plantsMenu menu" onclick="window.location.href='/plants/plant1'">
+                    <div class="headerLabel">Plant</div>
+                </div>
             </div>
 
         </div>

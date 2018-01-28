@@ -32,7 +32,7 @@ class BasePage {
         const headerDiv = document.createElement('div');
         headerDiv.className = 'row header';
         for (const dataItem in dataList[0]) {
-            if (dataItem !== 'serverError' && dataItem !== 'serverResponse' && dataItem !== '_id') {
+            if (dataItem !== 'serverError' && dataItem !== 'serverResponse' && dataItem !== '_id' && dataItem !== 'plantId') {
                 const dataDiv = document.createElement('div');
                 dataDiv.innerText = dataItem;
                 dataDiv.className = `dataItem ${dataItem}`;
@@ -49,7 +49,7 @@ class BasePage {
             const rowDiv = document.createElement('div');
             rowDiv.className = "row"
             for (const dataItem in rowData) {
-                if (dataItem !== 'serverError' && dataItem !== 'serverResponse' && dataItem !== '_id' && dataItem !== 'rawData') {
+                if (dataItem !== 'serverError' && dataItem !== 'serverResponse' && dataItem !== '_id' && dataItem !== 'rawData' && dataItem !== 'plantId') {
                     const dataDiv = document.createElement('div');
                     if (dataItem.indexOf('imestamp') >= 0) {
                         dataDiv.innerText = moment(rowData[dataItem]).fromNow();

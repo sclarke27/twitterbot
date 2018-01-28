@@ -1,0 +1,55 @@
+<script type="text/javascript" src="/js/plantsPage.js"></script>
+
+<style>
+    .main {
+        display: flex;
+        flex-direction: column;
+        height: calc(100% - 50px);
+    }
+
+    .topRow,
+    .bottomRow {
+        display: flex;
+        flex-direction: row;
+        height: 50%;
+    }
+
+    #plantImage,
+    #plantHistory {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #plantImage {
+        background-image: url('/assets/plant1Latest.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+</style>
+
+<div class="main">
+    <div class="topRow">
+        <div id="plantImage">
+
+        </div>
+        <div id="plantHistory">
+
+        </div>
+    </div>
+    <div class="bottomRow">
+        <div id="plantDash">
+
+        </div>
+        <div>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript"> 
+    const page = new PlantsPage(document.getElementById('main'), '{{routeName}}', 'plantBot', '{{plantId}}');
+    page.start();
+</script>
