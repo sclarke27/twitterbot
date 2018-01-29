@@ -170,7 +170,7 @@ class PlantsPage extends BasePage {
         super.refreshPageData();
 
         this.fetchPlantHistory();
-        setInterval(this.fetchPlantHistory.bind(this), 60000);
+        setInterval(this.fetchPlantHistory.bind(this), 240000);
 
     }
 
