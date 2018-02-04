@@ -91,6 +91,7 @@
 }
 
 .instPanel {
+    height: 100%;
     margin: 0px;
     display: flex;
     flex-direction: column;

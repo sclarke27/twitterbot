@@ -14,7 +14,7 @@ class PlantsPage extends BasePage {
             dataItems: [
                 // {
                 //     title: 'Air Temperature',
-                //     sensorKey: 'tempurature',
+                //     sensorKey: 'temperature',
                 //     controlClass: ThermometerControl
                 // },
                 {
@@ -50,8 +50,8 @@ class PlantsPage extends BasePage {
         const instData = {
             plant1: {
                 moisture: {
-                    min: 300,
-                    max: 900,
+                    min: 450,
+                    max: 850,
                     current: 0
                 },
                 light: {
@@ -155,12 +155,42 @@ class PlantsPage extends BasePage {
                             }
                         }
                     }
-                    console.info(results.data);
+                    // console.info(JSON.stringify(results.data));
                     this.dataPanel.update(sensorData['plant1']);
 
 
                     this.plantHistoryData = results.data;
                     this.refreshList('Sensor History', this.plantHistoryDataDiv, this.plantHistoryData);
+
+                    // var chart = new tauCharts.Chart({
+                    //     data: this.plantHistoryData,
+                    //     type: 'line',
+                    //     x: 'timestamp',
+                    //     y: 'light',
+                    //     dimensions: {
+                    //         light: {
+                    //             type: 'measure'
+                    //         },
+                    //         timestamp: {
+                    //             type: 'order'
+                    //         }
+                    //     },
+                    //     guide: {
+                    //         interpolate: 'smooth-keep-extremum',
+                    //         showGridLines: 'xy',
+                    //         x: {
+                    //             label: 'Time'
+                    //         },
+                    //         y: {
+                    //             label: 'Light Levels',
+                    //             nice: true
+                    //         }
+                    //     },
+                    //     plugins: [
+                    //         tauCharts.api.plugins.get('tooltip')()
+                    //     ]
+                    // });
+                    // chart.renderTo('#plantCharts');
                 }
             })
     }
