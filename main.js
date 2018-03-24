@@ -61,7 +61,7 @@ class Main {
         // start http server
         if (httpConfig.enabled) {
             this._httpServer = new httpServer(httpConfig, this.db, this.showDebug);
-            this._httpServer.startHttpServer();
+            this._httpServer.startHttpServer(this);
         }
 
         if (servicesList) {
@@ -110,6 +110,55 @@ class Main {
             console.info(`[main] initialize and started ${this.botList.length} bots`);
         }
 
+    }
+
+    findService(botName) {
+        for (const service of this.servicesList) {
+            if (service.config.botName === botName) {
+                return service
+            }
+        }
+        return null;
+    }
+
+    findBot(botName) {
+        for (const bot of this.botList) {
+            if (bot.config.botName === botName) {
+                return bot
+            }
+        }
+        return null;
+    }
+
+    startBot(botName) {
+        const bot = this.findBot(botName);
+        const service = this.findService(botName);
+        this.toggleBot(bot, service, true);
+    }
+
+    stopBot(botName) {
+        const bot = this.findBot(botName);
+        const service = this.findService(botName);
+        this.toggleBot(bot, service, false);
+    }
+
+    toggleBot(bot, service, isEnabled) {
+        if (bot) {
+            bot.config.enabled = isEnabled;
+            if (isEnabled) {
+                bot.start();
+            } else {
+                bot.end();
+            }
+        }
+        if (service) {
+            service.config.enabled = isEnabled;
+            if (isEnabled) {
+                service.start();
+            } else {
+                service.stop();
+            }
+        }
     }
 
     start() {

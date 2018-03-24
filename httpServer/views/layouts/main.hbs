@@ -1,7 +1,7 @@
 <html>
 
     <head>
-        <title>Twitter Mon :: {{botName}}</title>
+        <title>Twitter Mon :: {{routeName}} {{botName}}</title>
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script type="text/javascript" src="/socket.io/socket.io.js"></script>
@@ -11,8 +11,9 @@
         <script type="text/javascript" src="/js/controls/VideoFeed.js"></script>
         <script type="text/javascript" src="/js/basePage.js"></script>
 
-        <link href="https://fonts.googleapis.com/css?family=Assistant" rel="stylesheet">
-        <link rel="shortcut icon" href="/assets/favicon.ico">
+        <link href="https://fonts.googleapis.com/css?family=Assistant" rel="stylesheet"> {{#if_eq routeName 'plant'}}
+        <link rel="shortcut icon" href="/assets/plant-leaf.ico"> {{else}}
+        <link rel="shortcut icon" href="/assets/favicon.ico"> {{/if_eq}}
         <link rel="stylesheet" href="/css/controls.css" type="text/css">
         <link rel="stylesheet" href="/css/main.css" type="text/css">
         <script>

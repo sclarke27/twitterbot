@@ -1,7 +1,4 @@
 <script type="text/javascript" src="/js/plantsPage.js"></script>
-<script src="http://cdn.jsdelivr.net/d3js/3.5.17/d3.min.js" charset="utf-8"></script>
-<script src="http://cdn.jsdelivr.net/npm/taucharts@1/build/production/tauCharts.min.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/npm/taucharts@1/build/production/tauCharts.min.css">
 <style>
     .main {
         display: flex;
@@ -37,7 +34,7 @@
         background-image: url('/assets/plant1Latest.jpg');
         background-position: center center;
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: cover;
     }
 
     #plantCharts {
@@ -64,12 +61,9 @@
         <div id="plantDash">
 
         </div>
-        <div class="topRowCell" id="plantHistory">
-
-        </div>
     </div>
-    <div class="bottomRow">
-        <div id="plantCharts">
+    <div class="bottomRow" style="display: none;">
+        <div id="plantHistory">
 
         </div>
     </div>

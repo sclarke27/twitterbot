@@ -44,7 +44,7 @@ class HomePage extends BasePage {
         super.start();
     }
 
-    refreshPageData() {
+    refreshBotData() {
         this.fetchBotsListData()
             .then((results) => {
                 console.info('[home] - bots -', results);
@@ -68,6 +68,10 @@ class HomePage extends BasePage {
                     this.refreshList('Bots', this.botsDiv, filteredList);
                 }
             });
+    }
+
+    refreshPageData() {
+        this.refreshBotData();
         this.fetchTweetListData()
             .then((results) => {
                 console.info('[home] - tweets -', results);

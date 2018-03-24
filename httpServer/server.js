@@ -26,6 +26,7 @@ class HttpServer {
         this.showDebug = showDebug;
         this.hbsHelpers = null;
         this.wikiQuote = null;
+        this.main = null;
 
         this.botList = [];
     }
@@ -170,6 +171,44 @@ class HttpServer {
                     })
                 });
             })
+
+        this.webApp.route('/toggleBot/:botName/:enableBot')
+            .post((request, response) => {
+                const reqParams = request.params;
+                const selectedBotName = reqParams.botName;
+                const newBotState = reqParams.enableBot == 'false';
+
+                this.db.bots.update({
+                    name: selectedBotName
+                }, {
+                    $set: {
+                        startupTimestamp: new Date(),
+                        isEnabled: newBotState,
+                    }
+                }, (err, doc, lastErr) => {
+                    // console.info(err, doc, lastErr);
+                    if (err) {
+                        console.error('[main]', err);
+                    } else {
+                        if (newBotState) {
+                            this.main.startBot(selectedBotName);
+                            console.info(`start ${selectedBotName}`);
+                        } else {
+                            this.main.stopBot(selectedBotName);
+                            console.info(`stop ${selectedBotName}`);
+                        }
+
+
+                    }
+                    response.json({
+                        data: doc,
+                        dbErrors: err
+                    })
+                })
+
+            })
+
+
     }
 
     /**
@@ -178,7 +217,7 @@ class HttpServer {
     createListFollowersRoute() {
         this.webApp.route('/followers')
             .post((request, response) => {
-                this.db.retweets.find().sort({
+                this.db.retweets.find().limit(25).sort({
                     followerCount: -1
                 }).toArray((err, docs) => {
                     response.json({
@@ -229,7 +268,7 @@ class HttpServer {
             })
         this.webApp.route('/listTweets')
             .post((request, response) => {
-                this.db.tweets.find().sort({
+                this.db.tweets.find().limit(25).sort({
                     timestamp: -1
                 }).toArray((err, docs) => {
                     response.json({
@@ -263,7 +302,7 @@ class HttpServer {
 
         this.webApp.route('/listRetweets')
             .post((request, response) => {
-                this.db.retweets.find().sort({
+                this.db.retweets.find().limit(25).sort({
                     timestamp: -1
                 }).toArray((err, docs) => {
                     response.json({
@@ -297,7 +336,7 @@ class HttpServer {
             })
         this.webApp.route('/listFavorites')
             .post((request, response) => {
-                this.db.favorites.find().sort({
+                this.db.favorites.find().limit(25).sort({
                     timestamp: -1
                 }).toArray((err, docs) => {
                     response.json({
@@ -495,7 +534,8 @@ class HttpServer {
     /**
      * startup http server
      */
-    startHttpServer() {
+    startHttpServer(mainThread) {
+        this.main = mainThread;
         this.setUpEngine();
         this.createListTweetRoute();
         this.createListRetweetRoute();

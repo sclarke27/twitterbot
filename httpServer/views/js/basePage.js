@@ -60,6 +60,16 @@ class BasePage {
                     if (dataItem.indexOf('is') === 0) {
                         dataDiv.style.backgroundColor = (rowData[dataItem] === true) ? 'rgba(0,200,0,0.5)' : 'rgba(200,0,0,0.5)';
                     }
+                    if (dataItem.indexOf('isEnabled') === 0) {
+                        dataDiv.onclick = () => {
+                            this.fetchData(`/toggleBot/${rowData['Bot Name']}/${rowData['isEnabled']}`)
+                                .then(() => {
+
+                                })
+                            this.refreshBotData();
+                            console.info(rowData['Bot Name']);
+                        }
+                    }
                     if (dataItem === 'hadError') {
                         dataDiv.style.backgroundColor = (rowData[dataItem] === false) ? 'rgba(0,200,0,0.5)' : 'rgba(200,0,0,0.5)';
                     }

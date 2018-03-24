@@ -1,3 +1,3 @@
 gphoto2=model=Canon EOS 1000D
-gphoto2=port=usb:001,004
+gphoto2=port=usb:001,009
 libgphoto=cached-images=2

@@ -46,7 +46,7 @@ class PlantsPage extends BasePage {
         console.info(`start plant page ${this.plantId}`);
 
         this.plantHistoryDataDiv = document.getElementById('plantHistory')
-        this.plantHistoryDataDiv.innerHTML = "Loading data"
+        this.plantHistoryDataDiv.innerHTML = "<h3>Loading data</h3>"
         const instData = {
             plant1: {
                 moisture: {

@@ -19,13 +19,13 @@ class PlantMonService extends BaseService {
     onSerialData(newData) {
         try {
             const sensorData = JSON.parse(newData);
-            console.info('[PlantMonService]', sensorData.moisture, sensorData.light);
+            // console.info('[PlantMonService]', sensorData.temperature, sensorData.tmp36, ((sensorData.temperature + sensorData.tmp36) / 2));
             const updateData = {
                 plantId: 'plant1',
                 moisture: sensorData.moisture,
                 light: sensorData.light,
                 pressure: sensorData.pressure,
-                temperature: sensorData.temperature,
+                temperature: Math.round((sensorData.temperature + sensorData.tmp36ch0 + sensorData.tmp36ch1) / 3),
                 timestamp: new Date()
             };
             this.db.plants.insert(updateData);
