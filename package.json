@@ -8,15 +8,18 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "twit": "^2.2.9",
-    "node-fetch": "^1.7.3",
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.10",
-    "socket.io": "^2.0.3",
     "mongodb": "^2.2.31",
-    "mongojs": "^2.4.1"
-
+    "mongojs": "^2.4.1",
+    "node-fetch": "^1.7.3",
+    "serialport": "^6.1.1",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.4",
+    "swim-client-js": "^0.6.0",
+    "twit": "^2.2.9",
+    "ws": "^5.1.0"
   },
   "description": ""
 }

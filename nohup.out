@@ -1,0 +1,115 @@
+[main] Loading libraries ...
+[main] Libraries loaded
+[main] constructed
+[main] Start
+[swim] open socket to swim service
+[BaseService] constructed
+[TwitterBot] constructed
+[PlantBot] constructor
+[main] initialize and started 1 bots
+[main] start
+[PlantMonService] start baud9600
+[TwitterBot] start
+[httpServer] express server listening on 8080
+Arduino connection opened. undefined
+SyntaxError: Unexpected token l in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at PlantMonService.onSerialData (/home/pi/twitterbot/services/plantMonService.js:21:37)
+    at ArduinoBoard.onData (/home/pi/twitterbot/modules/ArduinoBoard.js:42:18)
+    at emitOne (events.js:116:13)
+    at ReadLineParser.emit (events.js:211:7)
+    at addChunk (_stream_readable.js:263:12)
+    at readableAddChunk (_stream_readable.js:246:13)
+    at ReadLineParser.Readable.push (_stream_readable.js:208:10)
+    at ReadLineParser.Transform.push (_stream_transform.js:147:32)
+    at ReadLineParser._transform (/home/pi/twitterbot/node_modules/serialport/lib/parsers/delimiter.js:39:12)
+    at ReadLineParser.Transform._read (_stream_transform.js:186:10)
+    at ReadLineParser.Transform._write (_stream_transform.js:174:12)
+    at doWrite (_stream_writable.js:397:12)
+    at writeOrBuffer (_stream_writable.js:383:5)
+    at ReadLineParser.Writable.write (_stream_writable.js:290:11)
+    at SerialPort.ondata (_stream_readable.js:639:20)
+SyntaxError: Unexpected token , in JSON at position 3
+    at JSON.parse (<anonymous>)
+    at PlantMonService.onSerialData (/home/pi/twitterbot/services/plantMonService.js:21:37)
+    at ArduinoBoard.onData (/home/pi/twitterbot/modules/ArduinoBoard.js:42:18)
+    at emitOne (events.js:116:13)
+    at ReadLineParser.emit (events.js:211:7)
+    at addChunk (_stream_readable.js:263:12)
+    at readableAddChunk (_stream_readable.js:246:13)
+    at ReadLineParser.Readable.push (_stream_readable.js:208:10)
+    at ReadLineParser.Transform.push (_stream_transform.js:147:32)
+    at ReadLineParser._transform (/home/pi/twitterbot/node_modules/serialport/lib/parsers/delimiter.js:39:12)
+    at ReadLineParser.Transform._read (_stream_transform.js:186:10)
+    at ReadLineParser.Transform._write (_stream_transform.js:174:12)
+    at doWrite (_stream_writable.js:397:12)
+    at writeOrBuffer (_stream_writable.js:383:5)
+    at ReadLineParser.Writable.write (_stream_writable.js:290:11)
+    at SerialPort.ondata (_stream_readable.js:639:20)
+socket open
+[main] Loading libraries ...
+[main] Libraries loaded
+[main] constructed
+[main] Start
+[swim] open socket to swim service
+[BaseService] constructed
+[TwitterBot] constructed
+[PlantBot] constructor
+[main] initialize and started 1 bots
+[main] start
+[PlantMonService] start baud9600
+[TwitterBot] start
+[httpServer] express server listening on 8080
+Arduino connection opened. undefined
+SyntaxError: Unexpected token , in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at PlantMonService.onSerialData (/home/pi/twitterbot/services/plantMonService.js:21:37)
+    at ArduinoBoard.onData (/home/pi/twitterbot/modules/ArduinoBoard.js:42:18)
+    at emitOne (events.js:116:13)
+    at ReadLineParser.emit (events.js:211:7)
+    at addChunk (_stream_readable.js:263:12)
+    at readableAddChunk (_stream_readable.js:246:13)
+    at ReadLineParser.Readable.push (_stream_readable.js:208:10)
+    at ReadLineParser.Transform.push (_stream_transform.js:147:32)
+    at ReadLineParser._transform (/home/pi/twitterbot/node_modules/serialport/lib/parsers/delimiter.js:39:12)
+    at ReadLineParser.Transform._read (_stream_transform.js:186:10)
+    at ReadLineParser.Transform._write (_stream_transform.js:174:12)
+    at doWrite (_stream_writable.js:397:12)
+    at writeOrBuffer (_stream_writable.js:383:5)
+    at ReadLineParser.Writable.write (_stream_writable.js:290:11)
+    at SerialPort.ondata (_stream_readable.js:639:20)
+SyntaxError: Unexpected token , in JSON at position 3
+    at JSON.parse (<anonymous>)
+    at PlantMonService.onSerialData (/home/pi/twitterbot/services/plantMonService.js:21:37)
+    at ArduinoBoard.onData (/home/pi/twitterbot/modules/ArduinoBoard.js:42:18)
+    at emitOne (events.js:116:13)
+    at ReadLineParser.emit (events.js:211:7)
+    at addChunk (_stream_readable.js:263:12)
+    at readableAddChunk (_stream_readable.js:246:13)
+    at ReadLineParser.Readable.push (_stream_readable.js:208:10)
+    at ReadLineParser.Transform.push (_stream_transform.js:147:32)
+    at ReadLineParser._transform (/home/pi/twitterbot/node_modules/serialport/lib/parsers/delimiter.js:39:12)
+    at ReadLineParser.Transform._read (_stream_transform.js:186:10)
+    at ReadLineParser.Transform._write (_stream_transform.js:174:12)
+    at doWrite (_stream_writable.js:397:12)
+    at writeOrBuffer (_stream_writable.js:383:5)
+    at ReadLineParser.Writable.write (_stream_writable.js:290:11)
+    at SerialPort.ondata (_stream_readable.js:639:20)
+SyntaxError: Unexpected token , in JSON at position 3
+    at JSON.parse (<anonymous>)
+    at PlantMonService.onSerialData (/home/pi/twitterbot/services/plantMonService.js:21:37)
+    at ArduinoBoard.onData (/home/pi/twitterbot/modules/ArduinoBoard.js:42:18)
+    at emitOne (events.js:116:13)
+    at ReadLineParser.emit (events.js:211:7)
+    at addChunk (_stream_readable.js:263:12)
+    at readableAddChunk (_stream_readable.js:246:13)
+    at ReadLineParser.Readable.push (_stream_readable.js:208:10)
+    at ReadLineParser.Transform.push (_stream_transform.js:147:32)
+    at ReadLineParser._transform (/home/pi/twitterbot/node_modules/serialport/lib/parsers/delimiter.js:39:12)
+    at ReadLineParser.Transform._read (_stream_transform.js:186:10)
+    at ReadLineParser.Transform._write (_stream_transform.js:174:12)
+    at doWrite (_stream_writable.js:397:12)
+    at writeOrBuffer (_stream_writable.js:383:5)
+    at ReadLineParser.Writable.write (_stream_writable.js:290:11)
+    at SerialPort.ondata (_stream_readable.js:639:20)
+socket open

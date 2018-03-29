@@ -22,16 +22,18 @@ class PlantMonService extends BaseService {
             // console.info('[PlantMonService]', sensorData.temperature, sensorData.tmp36, ((sensorData.temperature + sensorData.tmp36) / 2));
             const updateData = {
                 plantId: 'plant1',
-                moisture: sensorData.moisture,
+                moisture: sensorData.flex,
                 light: sensorData.light,
-                pressure: sensorData.pressure,
-                temperature: Math.round((sensorData.temperature + sensorData.tmp36ch0 + sensorData.tmp36ch1) / 3),
+                temperature: sensorData.temp,
                 timestamp: new Date()
             };
-            this.db.plants.insert(updateData);
+            // console.info(updateData);
+            if (this.db) {
+                this.db.plants.insert(updateData);
+            }
             this.server.sendSocketMessage('plantUpdate', updateData);
         } catch (err) {
-            // console.info(err, newData);
+            console.info(err);
         }
 
     }

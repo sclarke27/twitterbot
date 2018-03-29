@@ -1,8 +1,240 @@
-<script type="text/javascript" src="/js/homePage.js"></script>
+<script src="/assets/swim-app.js" swim-app></script>
 
-<div id="main"></div>
+<script type="text/recon">
+@quilt {
+    @block {
+        @card {
+            title: 'Current Light Level'
+            body: @gauge {
+                
+                # data link information
+                host: 'ws://192.168.206.106:5620'
+                node: '/sensor/light'
+                lane: 'latest'
+                linkData: @link(host: $host, node: $node, lane: $lane, type: value)
 
-<script>
-    const homePage = new HomePage(document.getElementById('main'), '{{routeName}}', '{{botName}}');
-    homePage.start();
+                # Gauge Values
+                meter: $round($linkData#0)/100
+                value: @text([{ $round($eager($linkData#0)) || 0}%])
+
+                # Gauge Style
+                id: gauge
+                transition: @transition(400, linear)
+                innerRadius: 90 @pct
+                dialCornerRadius: 50 @pct
+                dialColor: '#56d7ba'
+                faceColor: '#eaecf4'
+                valueColor: '#56d7ba'
+                valueWeight: 400
+                valueSize: 40 @pct
+            }
+        }
+        {{!-- @card {
+            title: 'Light Level History'
+            body: @chart {
+
+                # data link information
+                host: 'ws://192.168.206.106:5620'
+                lane: 'history'
+                linkData: @link(host: $host, node: $node, lane: $lane, type: value)
+
+                # chart plot 1
+                @plot(type: area) {
+                    history0: @link(host: $host, node: '/sensor/light', lane: $lane, type: map)
+                    areaFill: 'rgba(255,0,0,0.4)'
+                    @each(t: $history0.*:) {
+                    key: $t
+                    @plotPoint {
+                        v: @let($history0.($t))
+                        x: $t
+                        y: $eager($v)
+                        dy: 0
+                    }
+                    }
+                }
+
+                # style information
+                id: chart
+                primaryHue: $interpolate('#6f7286', '#babcca')
+                transition: @transition(300, linear)
+                top: {
+                    gutter: '0px'
+                }
+                right: {
+                    gutter: '40px'
+                }
+                bottom: @axis(type: time) {
+                    gutter: '30px'
+                }
+                left: @axis(type: linear) {
+                    gutter: '40pxpx'
+                }
+
+                domainBoundLeft: true
+                domainBoundRight: true
+
+                domainPaddingTop: 1
+                domainPaddingBottom: 1
+            }
+        } --}}
+    }
+    @block {
+        @card {
+            title: 'Current Soil Moisture Level'
+            body: @gauge {
+                
+                # data link information
+                host: 'ws://192.168.206.106:5620'
+                node: '/sensor/soil'
+                lane: 'latest'
+                linkData: @link(host: $host, node: $node, lane: $lane, type: value)
+
+                # Gauge Values
+                meter: $round($linkData#0)/100
+                value: @text([{ $round($eager($linkData#0)) || 0}%])
+
+                # Gauge Style
+                id: gauge
+                transition: @transition(400, linear)
+                innerRadius: 90 @pct
+                dialCornerRadius: 50 @pct
+                dialColor: '#56d7ba'
+                faceColor: '#eaecf4'
+                valueColor: '#56d7ba'
+                valueWeight: 400
+                valueSize: 40 @pct
+            }
+        }   
+        {{!-- @card {
+            title: 'Soil Moisture History'
+            body: @chart {
+
+                # data link information
+                host: 'ws://192.168.206.106:5620'
+                lane: 'history'
+                linkData: @link(host: $host, node: $node, lane: $lane, type: value)
+
+                # chart plot 1
+                @plot(type: area) {
+                    history0: @link(host: $host, node: '/sensor/soil', lane: $lane, type: map)
+                    areaFill: 'rgba(255,0,0,0.4)'
+                    @each(t: $history0.*:) {
+                    key: $t
+                    @plotPoint {
+                        v: @let($history0.($t))
+                        x: $t
+                        y: $eager($v)
+                        dy: 0
+                    }
+                    }
+                }
+
+                # style information
+                id: chart
+                primaryHue: $interpolate('#6f7286', '#babcca')
+                transition: @transition(300, linear)
+                top: {
+                    gutter: '0px'
+                }
+                right: {
+                    gutter: '40px'
+                }
+                bottom: @axis(type: time) {
+                    gutter: '30px'
+                }
+                left: @axis(type: linear) {
+                    gutter: '40pxpx'
+                }
+
+                domainBoundLeft: true
+                domainBoundRight: true
+
+                domainPaddingTop: 1
+                domainPaddingBottom: 1
+            }
+        }              --}}
+    }
+    @block {
+        @card {
+            title: 'Current Temperature (F)'
+            body: @gauge {
+                
+                # data link information
+                host: 'ws://192.168.206.106:5620'
+                node: '/sensor/temperature'
+                lane: 'latest'
+                linkData: @link(host: $host, node: $node, lane: $lane, type: value)
+
+                # Gauge Values
+                meter: $round($linkData#0)/100
+                value: @text([{ $round($eager($linkData#0)) || 0} deg])
+
+                # Gauge Style
+                id: gauge
+                transition: @transition(400, linear)
+                innerRadius: 90 @pct
+                dialCornerRadius: 50 @pct
+                dialColor: '#56d7ba'
+                faceColor: '#eaecf4'
+                valueColor: '#56d7ba'
+                valueWeight: 400
+                valueSize: 40 @pct
+            }
+        }      
+        {{!-- @card {
+            title: 'Soil Temperature History'
+            body: @chart {
+
+                # data link information
+                host: 'ws://192.168.206.106:5620'
+                lane: 'history'
+                linkData: @link(host: $host, node: $node, lane: $lane, type: value)
+
+                # chart plot 1
+                @plot(type: area) {
+                    history0: @link(host: $host, node: '/sensor/temperature', lane: $lane, type: map)
+                    areaFill: 'rgba(255,0,0,0.4)'
+                    @each(t: $history0.*:) {
+                    key: $t
+                    @plotPoint {
+                        v: @let($history0.($t))
+                        x: $t
+                        y: $eager($v)
+                        dy: 0
+                    }
+                    }
+                }
+
+                # style information
+                id: chart
+                primaryHue: $interpolate('#6f7286', '#babcca')
+                transition: @transition(300, linear)
+                top: {
+                    gutter: '0px'
+                }
+                right: {
+                    gutter: '40px'
+                }
+                bottom: @axis(type: time) {
+                    gutter: '30px'
+                }
+                left: @axis(type: linear) {
+                    gutter: '40pxpx'
+                }
+
+                domainBoundLeft: true
+                domainBoundRight: true
+
+                domainPaddingTop: 1
+                domainPaddingBottom: 1
+            }
+        }             --}}
+    }    
+}
+
+
+</script>
+
+<script type="text/recon">
+
 </script>

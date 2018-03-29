@@ -1,5 +1,5 @@
 const DbConfig = {
-    enabled: true,
+    enabled: false,
     dbName: 'twitterBot',
     collections: [
         'tweets',

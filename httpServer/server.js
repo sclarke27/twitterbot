@@ -4,8 +4,8 @@ const path = require('path');
 const expressHandlebars = require('express-handlebars');
 const mongojs = require('mongojs');
 const dbConfig = require('./config/dbConfig');
-const startingQuoteDb = require('./config/startingQuoteDb');
-const WikiQuote = require('../modules/wikiQuote');
+const net = require('net');
+const WebSocket = require('ws');
 
 // expressHandlebars.prototype.handlebars.registerHelper('if_eq', function (a, b, opts) {
 //     if (a == b) {
@@ -36,8 +36,6 @@ class HttpServer {
      */
     setUpEngine() {
 
-        this.wikiQuote = new WikiQuote(this.config.wikiApiUrl, this.config.authorList, this.showDebug);
-
         this.webApp = express();
         this.webApp.engine('.hbs', expressHandlebars({
             defaultLayout: 'main',
@@ -59,21 +57,33 @@ class HttpServer {
                 console.info('[httpServer] user socket connected');
             }
 
-            // client.on('phoneMag', (data) => {
-            //     // console.log(data);
-            //     if (this._sensors) {
-            //         this._sensors.setDataValue('phoneMagX', data.x);
-            //         this._sensors.setDataValue('phoneMagY', data.y);
-            //         this._sensors.setDataValue('phoneMagZ', data.z);
-            //     }
-            // });
-
             client.on('disconnect', () => {
                 if (this.showDebug) {
                     console.info('[httpServer] user socket disconnected');
                 }
             });
         })
+
+        console.info('[swim] open socket to swim service');
+        try {
+            // this.socketClient = new net.Socket();
+            // this.socketClient.connect(5620, '127.0.0.1', () => {
+            //     console.info('[swim] socket connected');
+            //     this.socketClient.write("@command(node:'/sensor/light',lane:'register_self'){uri:'/sensor/light'}", 'UTF-8', () => {
+            //         console.info('[swim] register_self sent');
+            //     });                
+            // })
+            this.socketClient = new WebSocket('ws://127.0.0.1:5620');
+            this.socketClient.on('open', () => {
+                console.info('socket open');
+                this.socketClient.send("@command(node:'/sensor/light',lane:'register_self'){uri:'/sensor/light'}");
+            });
+
+        } catch (err) {
+            console.error(err);
+        }
+
+
 
         this.hbsHelpers = {
             'if_eq': (a, b, opts) => {
@@ -92,11 +102,13 @@ class HttpServer {
             },
         };
 
-        this.db.bots.find().sort({
-            botName: -1
-        }).toArray((err, docs) => {
-            this.botList = docs;
-        });
+        if (this.db) {
+            this.db.bots.find().sort({
+                botName: -1
+            }).toArray((err, docs) => {
+                this.botList = docs;
+            });
+        }
 
 
     }
@@ -105,7 +117,29 @@ class HttpServer {
      * 
      */
     sendSocketMessage(messageKey, messageData) {
-        this.io.emit(messageKey, messageData);
+        if (this.socketClient && this.socketClient.send) {
+
+            try {
+                // console.info('[swim] send socket message');
+                // console.info(messageData);
+                this.socketClient.send("@command(node:'/sensor/light',lane:'addLatest'){" + messageData.light + "}", () => {
+                    // console.info(data);
+                });
+                this.socketClient.send("@command(node:'/sensor/temperature',lane:'addLatest'){" + messageData.temperature + "}", () => {
+                    // console.info(data);
+                });
+                this.socketClient.send("@command(node:'/sensor/soil',lane:'addLatest'){" + messageData.moisture + "}", () => {
+                    // console.info(data);
+                });
+                
+            } catch (err) {
+                console.info('[swim] socket error');
+                console.info(err);
+            }
+        } else {
+            // console.error('[swim] socket not connected');
+        }
+        // this.io.emit(messageKey, messageData);
     }
 
     /**
@@ -127,15 +161,13 @@ class HttpServer {
      */
     createHomeRoute() {
         this.webApp.get('/', (request, response) => {
-            this.db.bots.find().sort({
-                botName: -1
-            }).toArray((err, docs) => {
-                response.render('homePage', {
-                    routeName: 'home',
-                    botList: docs,
-                    helpers: this.hbsHelpers
-                })
-            })
+            
+            response.render('homePage', {
+                routeName: 'home',
+                botList: [],
+                helpers: this.hbsHelpers
+            })                
+        
         })
 
     }

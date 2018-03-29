@@ -1,9 +1,5 @@
-console.info('Loading libraries ...');
+console.info('[main] Loading libraries ...');
 
-const CatBotConfig = require('./config/catConfig');
-const DogBotConfig = require('./config/dogConfig');
-const QuoteBotConfig = require('./config/quoteConfig');
-const Sclarke27Config = require('./config/sclarke27Config');
 const httpConfig = require('./httpServer/config/httpConfig');
 const dbConfig = require('./httpServer/config/dbConfig');
 const plantBotConfig = require('./config/plantBotConfig');
@@ -18,22 +14,21 @@ const PlantMonService = require('./services/plantMonService');
 
 // bot classes
 const TwitterBot = require('./bots/twitterBot');
-const CatBot = require('./bots/catBot');
-const DogBot = require('./bots/dogBot');
-const QuoteBot = require('./bots/quoteBot');
 const PlantBot = require('./bots/plantBot');
+const swim = require('swim-client-js');
+// const swimClient = swim.Client();
 
 
-console.info('Libraries loaded');
+console.info('[main] Libraries loaded');
 
 class Main {
     constructor(showDebug = true) {
         this.showDebug = showDebug;
-        this.wikiQuote = null;
         this.botList = [];
         this.servicesList = [];
         this.db = null;
         this.httpServer = null;
+        this.swimHost = null;
 
         if (this.showDebug) {
             if (this.showDebug) {
@@ -105,6 +100,11 @@ class Main {
                 })
             }
         }
+
+        // connect to swim services
+        // if (swimClient) {
+        //     swimHost = swimClient.host()
+        // }
 
         if (this.showDebug) {
             console.info(`[main] initialize and started ${this.botList.length} bots`);
@@ -190,18 +190,13 @@ class Main {
 const showDebug = true;
 const main = new Main(true);
 
-console.info('Main constructed');
 const botList = [
-    [CatBot, CatBotConfig],
-    [TwitterBot, DogBotConfig],
-    [QuoteBot, QuoteBotConfig],
-    [TwitterBot, Sclarke27Config],
     [PlantBot, plantBotConfig]
 ]
 
 const servicesList = [
     [PlantMonService, plantServiceConfig]
 ];
-console.info('Start');
+console.info('[main] Start');
 main.initialize(botList, servicesList);
 main.start();
