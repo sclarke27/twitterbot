@@ -22,7 +22,7 @@ class PlantMonService extends BaseService {
             // console.info('[PlantMonService]', sensorData.temperature, sensorData.tmp36, ((sensorData.temperature + sensorData.tmp36) / 2));
             const updateData = {
                 plantId: 'plant1',
-                moisture: sensorData.flex,
+                soil: sensorData.soil,
                 light: sensorData.light,
                 temperature: sensorData.temp,
                 timestamp: new Date()

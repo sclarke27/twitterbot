@@ -113,3 +113,1850 @@ SyntaxError: Unexpected token , in JSON at position 3
     at ReadLineParser.Writable.write (_stream_writable.js:290:11)
     at SerialPort.ondata (_stream_readable.js:639:20)
 socket open
+[main] Loading libraries ...
+[main] Libraries loaded
+[main] constructed
+[main] Start
+[swim] open socket to swim service
+[BaseService] constructed
+[TwitterBot] constructed
+[PlantBot] constructor
+[main] initialize and started 1 bots
+[main] start
+[PlantMonService] start baud115200
+[TwitterBot] start
+[httpServer] express server listening on 8080
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+Arduino connection opened. undefined
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+SyntaxError: Unexpected token  in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at PlantMonService.onSerialData (/home/pi/twitterbot/services/plantMonService.js:21:37)
+    at ArduinoBoard.onData (/home/pi/twitterbot/modules/ArduinoBoard.js:42:18)
+    at emitOne (events.js:116:13)
+    at ReadLineParser.emit (events.js:211:7)
+    at addChunk (_stream_readable.js:263:12)
+    at readableAddChunk (_stream_readable.js:246:13)
+    at ReadLineParser.Readable.push (_stream_readable.js:208:10)
+    at ReadLineParser.Transform.push (_stream_transform.js:147:32)
+    at ReadLineParser._transform (/home/pi/twitterbot/node_modules/serialport/lib/parsers/delimiter.js:39:12)
+    at ReadLineParser.Transform._read (_stream_transform.js:186:10)
+    at ReadLineParser.Transform._write (_stream_transform.js:174:12)
+    at doWrite (_stream_writable.js:397:12)
+    at writeOrBuffer (_stream_writable.js:383:5)
+    at ReadLineParser.Writable.write (_stream_writable.js:290:11)
+    at SerialPort.ondata (_stream_readable.js:639:20)
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+ready state not 1
+0
+socket open
+undefined
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[main] Loading libraries ...
+[main] Libraries loaded
+[main] constructed
+[main] Start
+[swim] open socket to swim service
+[BaseService] constructed
+[TwitterBot] constructed
+[PlantBot] constructor
+[main] initialize and started 1 bots
+[main] start
+[PlantMonService] start baud115200
+[TwitterBot] start
+[httpServer] express server listening on 8080
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+Arduino connection opened. undefined
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+SyntaxError: Unexpected token ˳ in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at PlantMonService.onSerialData (/home/pi/twitterbot/services/plantMonService.js:21:37)
+    at ArduinoBoard.onData (/home/pi/twitterbot/modules/ArduinoBoard.js:42:18)
+    at emitOne (events.js:116:13)
+    at ReadLineParser.emit (events.js:211:7)
+    at addChunk (_stream_readable.js:263:12)
+    at readableAddChunk (_stream_readable.js:246:13)
+    at ReadLineParser.Readable.push (_stream_readable.js:208:10)
+    at ReadLineParser.Transform.push (_stream_transform.js:147:32)
+    at ReadLineParser._transform (/home/pi/twitterbot/node_modules/serialport/lib/parsers/delimiter.js:39:12)
+    at ReadLineParser.Transform._read (_stream_transform.js:186:10)
+    at ReadLineParser.Transform._write (_stream_transform.js:174:12)
+    at doWrite (_stream_writable.js:397:12)
+    at writeOrBuffer (_stream_writable.js:383:5)
+    at ReadLineParser.Writable.write (_stream_writable.js:290:11)
+    at SerialPort.ondata (_stream_readable.js:639:20)
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+socket error
+{ Error: connect ECONNREFUSED 127.0.0.1:5620
+    at Object._errnoException (util.js:1022:11)
+    at _exceptionWithHostPort (util.js:1044:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1198:14)
+  code: 'ECONNREFUSED',
+  errno: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 5620 }
+socket closed: 1006
+[swim] open socket to swim service
+ready state not 1
+0
+socket open
+undefined

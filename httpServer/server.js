@@ -7,14 +7,6 @@ const dbConfig = require('./config/dbConfig');
 const net = require('net');
 const WebSocket = require('ws');
 
-// expressHandlebars.prototype.handlebars.registerHelper('if_eq', function (a, b, opts) {
-//     if (a == b) {
-//         return opts.fn(this);
-//     } else {
-//         return opts.inverse(this);
-//     }
-// });
-
 class HttpServer {
     constructor(httpConfig, db, showDebug = false) {
         this.config = httpConfig;
@@ -30,6 +22,31 @@ class HttpServer {
 
         this.botList = [];
     }
+
+    openSwimSocket() {
+
+        console.info('[swim] open socket to swim service');
+        try {
+            this.socketClient = new WebSocket('ws://127.0.0.1:5620');
+            this.socketClient.on('close', (closed) => {
+                console.info('socket closed: ' + closed);
+                setTimeout(() => { this.openSwimSocket() }, 1000);
+            });
+            this.socketClient.on('error', (err) => {
+                console.info('socket error');
+                console.info(err);
+            });
+            this.socketClient.on('open', () => {
+                console.info('socket open');
+                this.socketClient.send("@command(node:'/sensor/light',lane:'register_self'){uri:'/sensor/light'}", (err) => {
+                    console.error(err);
+                });
+            });
+        } catch (err) {
+            console.error(err);
+        }
+        
+    }    
 
     /**
      * start up http server and setup express
@@ -64,26 +81,7 @@ class HttpServer {
             });
         })
 
-        console.info('[swim] open socket to swim service');
-        try {
-            // this.socketClient = new net.Socket();
-            // this.socketClient.connect(5620, '127.0.0.1', () => {
-            //     console.info('[swim] socket connected');
-            //     this.socketClient.write("@command(node:'/sensor/light',lane:'register_self'){uri:'/sensor/light'}", 'UTF-8', () => {
-            //         console.info('[swim] register_self sent');
-            //     });                
-            // })
-            this.socketClient = new WebSocket('ws://127.0.0.1:5620');
-            this.socketClient.on('open', () => {
-                console.info('socket open');
-                this.socketClient.send("@command(node:'/sensor/light',lane:'register_self'){uri:'/sensor/light'}");
-            });
-
-        } catch (err) {
-            console.error(err);
-        }
-
-
+        this.openSwimSocket();
 
         this.hbsHelpers = {
             'if_eq': (a, b, opts) => {
@@ -121,16 +119,21 @@ class HttpServer {
 
             try {
                 // console.info('[swim] send socket message');
-                // console.info(messageData);
-                this.socketClient.send("@command(node:'/sensor/light',lane:'addLatest'){" + messageData.light + "}", () => {
-                    // console.info(data);
-                });
-                this.socketClient.send("@command(node:'/sensor/temperature',lane:'addLatest'){" + messageData.temperature + "}", () => {
-                    // console.info(data);
-                });
-                this.socketClient.send("@command(node:'/sensor/soil',lane:'addLatest'){" + messageData.moisture + "}", () => {
-                    // console.info(data);
-                });
+                // console.info(this.socketClient);
+                if(this.socketClient.readyState) {
+                    this.socketClient.send("@command(node:'/sensor/light',lane:'addLatest'){" + messageData.light + "}", () => {
+                        // console.info(data);
+                    });
+                    this.socketClient.send("@command(node:'/sensor/temperature',lane:'addLatest'){" + messageData.temperature + "}", () => {
+                        // console.info(data);
+                    });
+                    this.socketClient.send("@command(node:'/sensor/soil',lane:'addLatest'){" + messageData.soil + "}", () => {
+                        // console.info(data);
+                    });
+                } else {
+                    console.info('ready state not 1')
+                    console.info(this.socketClient.readyState);
+                }
                 
             } catch (err) {
                 console.info('[swim] socket error');
@@ -175,213 +178,6 @@ class HttpServer {
     /**
      * Route to handle list of tweets
      */
-    createListBotRoute() {
-        this.webApp.get('/bot/:botName', (request, response) => {
-            const reqParams = request.params;
-            const selectedBotName = reqParams.botName;
-            this.db.bots.find().sort({
-                botName: -1
-            }).toArray((err, docs) => {
-
-                response.render('botPage', {
-                    routeName: 'bot',
-                    botName: selectedBotName,
-                    botList: docs,
-                    helpers: this.hbsHelpers
-                })
-
-            });
-        })
-        this.webApp.route('/listBots')
-            .post((request, response) => {
-                this.db.bots.find().sort({
-                    botName: -1
-                }).toArray((err, docs) => {
-                    response.json({
-                        data: docs,
-                        dbErrors: err
-                    })
-                });
-            })
-
-        this.webApp.route('/toggleBot/:botName/:enableBot')
-            .post((request, response) => {
-                const reqParams = request.params;
-                const selectedBotName = reqParams.botName;
-                const newBotState = reqParams.enableBot == 'false';
-
-                this.db.bots.update({
-                    name: selectedBotName
-                }, {
-                    $set: {
-                        startupTimestamp: new Date(),
-                        isEnabled: newBotState,
-                    }
-                }, (err, doc, lastErr) => {
-                    // console.info(err, doc, lastErr);
-                    if (err) {
-                        console.error('[main]', err);
-                    } else {
-                        if (newBotState) {
-                            this.main.startBot(selectedBotName);
-                            console.info(`start ${selectedBotName}`);
-                        } else {
-                            this.main.stopBot(selectedBotName);
-                            console.info(`stop ${selectedBotName}`);
-                        }
-
-
-                    }
-                    response.json({
-                        data: doc,
-                        dbErrors: err
-                    })
-                })
-
-            })
-
-
-    }
-
-    /**
-     * Route to handle list of tweets
-     */
-    createListFollowersRoute() {
-        this.webApp.route('/followers')
-            .post((request, response) => {
-                this.db.retweets.find().limit(25).sort({
-                    followerCount: -1
-                }).toArray((err, docs) => {
-                    response.json({
-                        data: docs,
-                        dbErrors: err
-                    })
-                });
-            })
-
-        this.webApp.route('/followers/:botName')
-            .post((request, response) => {
-                const reqParams = request.params;
-                const selectedBotName = reqParams.botName;
-
-                this.db.followers.find({
-                    botName: selectedBotName
-                }).sort({
-                    followerCount: -1
-                }).toArray((err, docs) => {
-                    response.json({
-                        data: docs,
-                        dbErrors: err
-                    })
-                });
-            })
-
-    }
-
-    /**
-     * Route to handle list of tweets
-     */
-    createListTweetRoute() {
-        this.webApp.route('/listTweets/:botName')
-            .post((request, response) => {
-                const reqParams = request.params;
-                const selectedBotName = reqParams.botName;
-
-                this.db.tweets.find({
-                    botName: selectedBotName
-                }).sort({
-                    timestamp: -1
-                }).toArray((err, docs) => {
-                    response.json({
-                        data: docs,
-                        dbErrors: err
-                    })
-                });
-            })
-        this.webApp.route('/listTweets')
-            .post((request, response) => {
-                this.db.tweets.find().limit(25).sort({
-                    timestamp: -1
-                }).toArray((err, docs) => {
-                    response.json({
-                        data: docs,
-                        dbErrors: err
-                    })
-                });
-            })
-    }
-
-    /**
-     * Route to handle list of tweets
-     */
-    createListRetweetRoute() {
-        this.webApp.route('/listRetweets/:botName')
-            .post((request, response) => {
-                const reqParams = request.params;
-                const selectedBotName = reqParams.botName;
-
-                this.db.retweets.find({
-                    botName: selectedBotName
-                }).sort({
-                    timestamp: -1
-                }).toArray((err, docs) => {
-                    response.json({
-                        data: docs,
-                        dbErrors: err
-                    })
-                });
-            })
-
-        this.webApp.route('/listRetweets')
-            .post((request, response) => {
-                this.db.retweets.find().limit(25).sort({
-                    timestamp: -1
-                }).toArray((err, docs) => {
-                    response.json({
-                        data: docs,
-                        dbErrors: err
-                    })
-                });
-            })
-    }
-
-    /**
-     * Route to handle list of tweets
-     */
-    createListFavoritesRoute() {
-
-        this.webApp.route('/listFavorites/:botName')
-            .post((request, response) => {
-                const reqParams = request.params;
-                const selectedBotName = reqParams.botName;
-
-                this.db.favorites.find({
-                    botName: selectedBotName
-                }).sort({
-                    timestamp: -1
-                }).toArray((err, docs) => {
-                    response.json({
-                        data: docs,
-                        dbErrors: err
-                    })
-                });
-            })
-        this.webApp.route('/listFavorites')
-            .post((request, response) => {
-                this.db.favorites.find().limit(25).sort({
-                    timestamp: -1
-                }).toArray((err, docs) => {
-                    response.json({
-                        data: docs,
-                        dbErrors: err
-                    })
-                });
-            })
-    }
-
-    /**
-     * Route to handle list of tweets
-     */
     createPlantsRoute() {
 
         this.webApp.route('/plants/history/:plantId')
@@ -420,162 +216,12 @@ class HttpServer {
                 // })
             })
     }
-
-    createQuotesRoute() {
-        this.webApp.route('/quotes')
-            .get((request, response) => {
-                this.db.bots.find().sort({
-                    _id: -1
-                }).toArray((err, docs) => {
-
-                    response.render('quotesPage', {
-                        routeName: 'quotesList',
-                        botList: docs,
-                        helpers: this.hbsHelpers
-                    })
-                })
-            })
-            .post((request, response) => {
-                this.db.quotes.find().sort({
-                    author: 1
-                }).toArray((err, docs) => {
-                    response.json({
-                        data: docs,
-                        dbErrors: err
-                    })
-                })
-            })
-
-        this.webApp.route('/quotes/used')
-            .post((request, response) => {
-                this.db.quotes.find({
-                    canUse: false
-                }).sort({
-                    lastUsed: -1
-                }).toArray((err, docs) => {
-                    response.json({
-                        data: docs,
-                        dbErrors: err
-                    })
-                })
-            })
-
-        this.webApp.route('/quote/:quoteId')
-            .post((request, response) => {
-                const reqParams = request.params;
-                const quoteId = reqParams.quoteId;
-                this.db.quotes.find({
-                    '_id': mongojs.ObjectId(quoteId)
-                }).toArray((err, docs) => {
-                    response.json({
-                        quoteData: docs,
-                        error: err
-                    })
-                })
-            })
-
-        this.webApp.route('/quote/delete/:quoteId')
-            .post((request, response) => {
-                const reqParams = request.params;
-                const reqQuery = request.query;
-                const quoteId = reqParams.quoteId;
-                this.db.quotes.remove({
-                    '_id': mongojs.ObjectId(quoteId)
-                }, (err, doc, lastErr) => {
-                    if (err) {
-                        console.error('[main]', err);
-                    }
-                })
-            })
-
-        this.webApp.route('/quote/update/:quoteId')
-            .post((request, response) => {
-                const reqParams = request.params;
-                const reqQuery = request.query;
-                const quoteId = reqParams.quoteId;
-                console.info(quoteId, reqQuery);
-                if (quoteId == 0) {
-                    const newDataObj = {
-                        author: (reqQuery.author == "") ? "Anonymous" : reqQuery.author,
-                        content: reqQuery.content,
-                        canUse: (reqQuery.canUse) ? true : false,
-                        lastUsed: null
-                    }
-                    this.db.quotes.insert(newDataObj);
-                } else {
-                    this.db.quotes.findAndModify({
-                        query: {
-                            '_id': mongojs.ObjectId(quoteId)
-                        },
-                        update: {
-                            author: reqQuery.author,
-                            content: reqQuery.content,
-                            canUse: Boolean(reqQuery.canUse === "true")
-                        },
-                        new: true
-                    }, (err, doc, lastErr) => {
-                        if (err) {
-                            console.error('[main]', err);
-                        }
-                    })
-                }
-            })
-
-
-        this.webApp.route('/quotes/reset')
-            .get((request, response) => {
-                if (this.db.quotes) {
-                    this.db.quotes.drop();
-                }
-                for (const quoteIndex in startingQuoteDb) {
-                    const quote = startingQuoteDb[quoteIndex];
-                    const newDataObj = {
-                        author: (quote.quoteAuthor == "") ? "Anonymous" : quote.quoteAuthor,
-                        content: quote.quoteText,
-                        canUse: true,
-                        lastUsed: null
-                    }
-                    this.db.quotes.insert(newDataObj);
-                }
-                response.json({
-                    data: startingQuoteDb
-                })
-
-            })
-
-        this.webApp.route('/quotes/randomWikiQuote')
-            .post((request, response) => {
-                this.wikiQuote.getRandomQuote()
-                    .then((result) => {
-                        if (result) {
-                            console.info(`[QuoteBot] use : ${result}`);
-                            response.json({
-                                data: result
-                            })
-
-                        } else {
-                            response.json({
-                                data: null
-                            })
-                        }
-
-                    })
-            })
-    }
-
     /**
      * startup http server
      */
     startHttpServer(mainThread) {
         this.main = mainThread;
         this.setUpEngine();
-        this.createListTweetRoute();
-        this.createListRetweetRoute();
-        this.createListFavoritesRoute();
-        this.createListFollowersRoute();
-        this.createListBotRoute();
-        this.createQuotesRoute();
-        this.createPlantsRoute();
         this.createHomeRoute();
 
         this.server.listen(this.port, this.onServerStarted.bind(this));

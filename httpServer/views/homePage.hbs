@@ -2,13 +2,15 @@
 
 <script type="text/recon">
 @quilt {
+	blockAspectRatio: 1
+	minBlockWidth: 100
     @block {
         @card {
             title: 'Current Light Level'
             body: @gauge {
                 
                 # data link information
-                host: 'ws://192.168.206.106:5620'
+                host: 'ws://raspi4:5620'
                 node: '/sensor/light'
                 lane: 'latest'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
@@ -34,7 +36,7 @@
             body: @chart {
 
                 # data link information
-                host: 'ws://192.168.206.106:5620'
+                host: 'ws://raspi4:5620'
                 lane: 'history'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
 
@@ -84,7 +86,7 @@
             body: @gauge {
                 
                 # data link information
-                host: 'ws://192.168.206.106:5620'
+                host: 'ws://raspi4:5620'
                 node: '/sensor/soil'
                 lane: 'latest'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
@@ -110,7 +112,7 @@
             body: @chart {
 
                 # data link information
-                host: 'ws://192.168.206.106:5620'
+                host: 'ws://raspi4:5620'
                 lane: 'history'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
 
@@ -160,7 +162,7 @@
             body: @gauge {
                 
                 # data link information
-                host: 'ws://192.168.206.106:5620'
+                host: 'ws://raspi4:5620'
                 node: '/sensor/temperature'
                 lane: 'latest'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
@@ -186,7 +188,7 @@
             body: @chart {
 
                 # data link information
-                host: 'ws://192.168.206.106:5620'
+                host: 'ws://raspi4:5620'
                 lane: 'history'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
 
