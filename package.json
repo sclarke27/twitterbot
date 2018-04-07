@@ -2,21 +2,24 @@
   "name": "twitterBot",
   "version": "0.0.1",
   "main": "main.js",
+  "description": "",
   "scripts": {
+    "start": "node main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "twit": "^2.2.9",
-    "node-fetch": "^1.7.3",
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.10",
-    "socket.io": "^2.0.3",
     "mongodb": "^2.2.31",
-    "mongojs": "^2.4.1"
-
-  },
-  "description": ""
+    "mongojs": "^2.4.1",
+    "node-fetch": "^1.7.3",
+    "node-sense-hat": "0.0.2",
+    "socket.io": "^2.0.3",
+    "swim-client-js": "^0.6.0",
+    "twit": "^2.2.9",
+    "ws": "^5.1.1"
+  }
 }

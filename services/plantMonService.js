@@ -17,6 +17,7 @@ class PlantMonService extends BaseService {
     }
 
     onSerialData(newData) {
+        // console.info(newData);
         try {
             const sensorData = JSON.parse(newData);
             // console.info('[PlantMonService]', sensorData.temperature, sensorData.tmp36, ((sensorData.temperature + sensorData.tmp36) / 2));
@@ -25,10 +26,12 @@ class PlantMonService extends BaseService {
                 moisture: sensorData.moisture,
                 light: sensorData.light,
                 pressure: sensorData.pressure,
-                temperature: Math.round((sensorData.temperature + sensorData.tmp36ch0 + sensorData.tmp36ch1) / 3),
+                temperature0: sensorData.temperature,
+                temperature1: sensorData.tmp36ch1,
+                temperature2: sensorData.tmp36ch2,
                 timestamp: new Date()
             };
-            this.db.plants.insert(updateData);
+            // this.db.plants.insert(updateData);
             this.server.sendSocketMessage('plantUpdate', updateData);
         } catch (err) {
             // console.info(err, newData);

@@ -16,7 +16,7 @@ class ArduinoBoard {
         }
     }
 
-    startPort(baud = 9600) {
+    startPort(baud = 115200) {
         if (!this._softwareDebug) {
             try {
                 this._port = new this._serialPort('/dev/ttyACM0', {

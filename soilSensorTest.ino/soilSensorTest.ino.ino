@@ -30,14 +30,14 @@ int lastTmp36Average = 0;
 Adafruit_BMP085_Unified bmp = Adafruit_BMP085_Unified(10085);
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   if (!bmp.begin()) {
     Serial.println("Error starting BMP085");
   }
 }
 
 float handleTmp36Value(int rawValue) {
-  float voltage = rawValue * 4.8;
+  float voltage = rawValue * 5;
   voltage /= 1024.0;
   float tempC = (voltage - 0.5) * 100;
 
@@ -49,8 +49,13 @@ void loop() {
   lightSensor1Value = analogRead(lightSensor1Pin);
   tmpSensor1Value = handleTmp36Value(analogRead(tmpSensor1Pin));
   tmpSensor2Value = handleTmp36Value(analogRead(tmpSensor2Pin));
-  tmp36ValueAverage = (tmpSensor1Value + tmpSensor2Value) / 2;
 
+  if(tmpSensor1Value > 200) {
+    tmpSensor1Value = 0;
+  }
+  if(tmpSensor2Value > 200) {
+    tmpSensor2Value = 0;
+  }
   sensors_event_t event;
   bmp.getEvent(&event);
   if (event.pressure)
@@ -64,20 +69,20 @@ void loop() {
 
   }
 
-  int lightDeltaBuffer = 15;
-  int soilDeltaBuffer = 10;
-  int pressureDeltaBuffer = 3;
-  int tempDeltaBuffer = 3;
-  if (lastSoilBufferValue != soilSensor1Value || lastLightBufferValue != lightSensor1Value || lastPressureValue != pressureValue || lastTmp36Average != tmp36ValueAverage) {
-    int soilDelta = lastSoilBufferValue - soilSensor1Value;
-    int lightDelta = lastLightBufferValue - lightSensor1Value;
-    int pressureDelta = lastPressureValue - pressureValue;
-    int tempDelta = lastPressureValue - pressureValue;
-    int temp2Delta = lastTmp36Average - tmp36ValueAverage;
-    if ((lightDelta >= lightDeltaBuffer || lightDelta <= (lightDeltaBuffer * -1))
-        || (soilDelta >= soilDeltaBuffer || soilDelta <= (soilDeltaBuffer * -1))
-        || (pressureDelta >= pressureDeltaBuffer || pressureDelta <= (pressureDeltaBuffer * -1))
-        || (tempDelta >= tempDeltaBuffer || temp2Delta >= tempDeltaBuffer || tempDelta <= (tempDeltaBuffer * -1)  || temp2Delta <= (tempDeltaBuffer * -1)) ) {
+  //int lightDeltaBuffer = 15;
+  //int soilDeltaBuffer = 10;
+  //int pressureDeltaBuffer = 3;
+  //int tempDeltaBuffer = 3;
+  //if (lastSoilBufferValue != soilSensor1Value || lastLightBufferValue != lightSensor1Value || lastPressureValue != pressureValue || lastTmp36Average != tmp36ValueAverage) {
+    //int soilDelta = lastSoilBufferValue - soilSensor1Value;
+    //int lightDelta = lastLightBufferValue - lightSensor1Value;
+    //int pressureDelta = lastPressureValue - pressureValue;
+    //int tempDelta = lastPressureValue - pressureValue;
+    //int temp2Delta = lastTmp36Average - tmp36ValueAverage;
+    //if ((lightDelta >= lightDeltaBuffer || lightDelta <= (lightDeltaBuffer * -1))
+    //    || (soilDelta >= soilDeltaBuffer || soilDelta <= (soilDeltaBuffer * -1))
+    //    || (pressureDelta >= pressureDeltaBuffer || pressureDelta <= (pressureDeltaBuffer * -1))
+    //    || (tempDelta >= tempDeltaBuffer || temp2Delta >= tempDeltaBuffer || tempDelta <= (tempDeltaBuffer * -1)  || temp2Delta <= (tempDeltaBuffer * -1)) ) {
       String returnString = "{\"moisture\": ";
       returnString += soilSensor1Value;
       returnString += ",\"light\": ";
@@ -86,20 +91,18 @@ void loop() {
       returnString += pressureValue;
       returnString += ",\"temperature\": ";
       returnString += tempuratureValue;
-      returnString += ",\"tmp36\": ";
-      returnString += tmpSensor2Value;
-      returnString += ",\"tmp36ch0\": ";
-      returnString += tmpSensor2Value;
       returnString += ",\"tmp36ch1\": ";
+      returnString += tmpSensor1Value;
+      returnString += ",\"tmp36ch2\": ";
       returnString += tmpSensor2Value;
       returnString += "}";
       Serial.println(returnString);
-      lastSoilBufferValue = soilSensor1Value;
-      lastLightBufferValue = lightSensor1Value;
-      lastPressureValue = pressureValue;
-      lastTempuratureValue = tempuratureValue;
-      lastTmp36Average = tmp36ValueAverage;
-    }
-  }
-  delay(300);
+      //lastSoilBufferValue = soilSensor1Value;
+      //lastLightBufferValue = lightSensor1Value;
+      //lastPressureValue = pressureValue;
+      //lastTempuratureValue = tempuratureValue;
+      //lastTmp36Average = tmp36ValueAverage;
+    //}
+  //}
+  delay(100);
 }
