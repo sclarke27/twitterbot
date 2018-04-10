@@ -2,63 +2,96 @@
 
 <script type="text/recon">
 @quilt {
-	blockAspectRatio: 1
-	minBlockWidth: 100
+	blockAspectRatio: 1.42
+	minBlockWidth: 10
+    host: 'ws://raspi5:5620'
+    temperature: @link(node: '/sensor/temperature', lane: 'latest', type: value)
+    pressure: @link(node: '/sensor/pressure', lane: 'latest', type: value)
+    humidity: @link(node: '/sensor/humidity', lane: 'latest', type: value)
+    accelerationX: @link(node: '/sensor/accelerationX', lane: 'latest', type: value)
+    accelerationY: @link(node: '/sensor/accelerationY', lane: 'latest', type: value)
+    accelerationZ: @link(node: '/sensor/accelerationZ', lane: 'latest', type: value)
+    compassX: @link(node: '/sensor/compassX', lane: 'latest', type: value)
+    compassY: @link(node: '/sensor/compassY', lane: 'latest', type: value)
+    compassZ: @link(node: '/sensor/compassZ', lane: 'latest', type: value)
+    gyroX: @link(node: '/sensor/gyroX', lane: 'latest', type: value)
+    gyroY: @link(node: '/sensor/gyroY', lane: 'latest', type: value)
+    gyroZ: @link(node: '/sensor/gyroZ', lane: 'latest', type: value)
+    joystickState: @link(node: '/sensor/joystickState', lane: 'latest', type: value)
+    transition: @transition(150, linear)
+
     @block {
         @card {
-            title: 'Current Light Level'
-            body: @gauge {
-                
+            title: @text([Temperature: { $round($eager($temperature#0)) || 0}°C])
+            body: @chart {
+
                 # data link information
-                host: 'ws://raspi4:5620'
-                node: '/sensor/light'
-                lane: 'latest'
+                node: '/sensor/temperature'
+                lane: 'history'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
 
-                # Gauge Values
-                meter: $round($linkData#0)/100
-                value: @text([{ $round($eager($linkData#0)) || 0}%])
+                # chart plot 1
+                @plot(type: line) {
+                    history0: @link(node: $node, lane: $lane, type: map)
+                    lineColor: '#ff0000'
+                    @each(t: $history0.*:) {
+                        key: $t
+                        @plotPoint {
+                        v: @let($history0.($t))
+                        x: $t
+                        y: $v
+                        }
+                    }
+                }
 
-                # Gauge Style
-                id: gauge
-                transition: @transition(400, linear)
-                innerRadius: 90 @pct
-                dialCornerRadius: 50 @pct
-                dialColor: '#56d7ba'
-                faceColor: '#eaecf4'
-                valueColor: '#56d7ba'
-                valueWeight: 400
-                valueSize: 40 @pct
+                # style information
+                id: tempChart
+                
+                top: {
+                    gutter: '0px'
+                }
+                right: {
+                    gutter: '40px'
+                }
+                bottom: @axis(type: time) {
+                    gutter: '30px'
+                }
+                left: @axis(type: linear) {
+                    gutter: '40px'
+                    domain: {0, 100}
+                }
+
+                domainBoundLeft: true
+                domainBoundBottom: false
+
             }
         }
-        {{!-- @card {
-            title: 'Light Level History'
+        @card {
+            title: @text([Pressure: { $round($eager($pressure#0)) || 0}mb])
             body: @chart {
 
                 # data link information
-                host: 'ws://raspi4:5620'
+                node: '/sensor/pressure'
                 lane: 'history'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
 
                 # chart plot 1
-                @plot(type: area) {
-                    history0: @link(host: $host, node: '/sensor/light', lane: $lane, type: map)
-                    areaFill: 'rgba(255,0,0,0.4)'
+                @plot(type: line) {
+                    history0: @link(node: $node, lane: $lane, type: map)
+                    lineColor: '#ff0000'
                     @each(t: $history0.*:) {
-                    key: $t
-                    @plotPoint {
+                        key: $t
+                        @plotPoint {
                         v: @let($history0.($t))
                         x: $t
-                        y: $eager($v)
-                        dy: 0
-                    }
+                        y: $v
+                        }
                     }
                 }
 
                 # style information
-                id: chart
-                primaryHue: $interpolate('#6f7286', '#babcca')
-                transition: @transition(300, linear)
+                id: tempChart
+                
                 top: {
                     gutter: '0px'
                 }
@@ -69,148 +102,182 @@
                     gutter: '30px'
                 }
                 left: @axis(type: linear) {
-                    gutter: '40pxpx'
+                    gutter: '40px'
+                    domain: {0, 100}
                 }
 
                 domainBoundLeft: true
-                domainBoundRight: true
+                domainBoundBottom: false
 
-                domainPaddingTop: 1
-                domainPaddingBottom: 1
             }
-        } --}}
+        }    
+        @card {
+            title: @text([Humidity: { $round($eager($humidity#0)) || 0}%])
+            body: @chart {
+
+                # data link information
+                node: '/sensor/humidity'
+                lane: 'history'
+                linkData: @link(host: $host, node: $node, lane: $lane, type: value)
+
+                # chart plot 1
+                @plot(type: line) {
+                    history0: @link(node: $node, lane: $lane, type: map)
+                    lineColor: '#ff0000'
+                    @each(t: $history0.*:) {
+                        key: $t
+                        @plotPoint {
+                        v: @let($history0.($t))
+                        x: $t
+                        y: $v
+                        }
+                    }
+                }
+
+                # style information
+                id: tempChart
+                
+                top: {
+                    gutter: '0px'
+                }
+                right: {
+                    gutter: '40px'
+                }
+                bottom: @axis(type: time) {
+                    gutter: '30px'
+                }
+                left: @axis(type: linear) {
+                    gutter: '40px'
+                    domain: {0, 100}
+                }
+
+                domainBoundLeft: true
+                domainBoundBottom: false
+
+            }
+        }             
+
     }
     @block {
         @card {
-            title: 'Current Soil Moisture Level'
-            body: @gauge {
+            title: 'Compass'
+            body: @pie {
                 
-                # data link information
-                host: 'ws://raspi4:5620'
-                node: '/sensor/soil'
-                lane: 'latest'
-                linkData: @link(host: $host, node: $node, lane: $lane, type: value)
 
-                # Gauge Values
-                meter: $round($linkData#0)/100
-                value: @text([{ $round($eager($linkData#0)) || 0}%])
-
-                # Gauge Style
-                id: gauge
-                transition: @transition(400, linear)
-                innerRadius: 90 @pct
-                dialCornerRadius: 50 @pct
-                dialColor: '#56d7ba'
-                faceColor: '#eaecf4'
-                valueColor: '#56d7ba'
-                valueWeight: 400
-                valueSize: 40 @pct
+                @wedge {
+                    arcColor: '#ff0000'
+                    value: $compassX#0
+                }
+                @wedge {
+                    arcColor: '#00ff00'
+                    value: $compassY#0
+                }
+                @wedge {
+                    arcColor: '#0000ff'
+                    value: $compassZ#0
+                }
             }
+        }
+        @card {
+            title: @text([Gyro X: {$round($eager($gyroX#0)) || 0} Y: {$round($eager($gyroY#0)) || 0} Z: {$round($eager($gyroZ#0)) || 0}])
+            body: @div {
+                style: {
+                    display: flex
+                    flex-direction: row
+                    flex-grow: 1
+                }
+                @div {
+                    @gauge {
+                        width: 100
+                        mainValue: $gyroX#0
+                        # Gauge Values
+                        meter: $mainValue/300
+                        value: @text([{ $round($eager($mainValue/300 * 100)) || 0}%])
+
+                        # Gauge Style
+                        id: gauge
+                        transition: @transition(400, linear)
+                        innerRadius: 70 @pct
+                        dialCornerRadius: 50 @pct
+                        dialColor: '#56d7ba'
+                        faceColor: '#eaecf4'
+                        valueColor: '#56d7ba'
+                        valueWeight: 400
+                        valueSize: 40 @pct
+                    }
+                }
+                @div {
+                    @gauge {
+                        width: 100
+                        mainValue: $gyroY#0
+                        # Gauge Values
+                        meter: $mainValue/300
+                        value: @text([{ $round($eager($mainValue/300 * 100)) || 0}%])
+
+                        # Gauge Style
+                        id: gauge
+                        transition: @transition(400, linear)
+                        innerRadius: 70 @pct
+                        dialCornerRadius: 50 @pct
+                        dialColor: '#56d7ba'
+                        faceColor: '#eaecf4'
+                        valueColor: '#56d7ba'
+                        valueWeight: 400
+                        valueSize: 40 @pct
+                    }
+                }      
+                @div {
+                    @gauge {
+                        width: 100
+                        mainValue: $gyroZ#0
+                        # Gauge Values
+                        meter: $mainValue/300
+                        value: @text([{ $round($eager($mainValue/300 * 100)) || 0}%])
+
+                        # Gauge Style
+                        id: gauge
+                        transition: @transition(400, linear)
+                        innerRadius: 70 @pct
+                        dialCornerRadius: 50 @pct
+                        dialColor: '#56d7ba'
+                        faceColor: '#eaecf4'
+                        valueColor: '#56d7ba'
+                        valueWeight: 400
+                        valueSize: 40 @pct
+                    }
+                }                          
+            }
+
         }   
-        {{!-- @card {
-            title: 'Soil Moisture History'
-            body: @chart {
-
-                # data link information
-                host: 'ws://raspi4:5620'
-                lane: 'history'
-                linkData: @link(host: $host, node: $node, lane: $lane, type: value)
-
-                # chart plot 1
-                @plot(type: area) {
-                    history0: @link(host: $host, node: '/sensor/soil', lane: $lane, type: map)
-                    areaFill: 'rgba(255,0,0,0.4)'
-                    @each(t: $history0.*:) {
-                    key: $t
-                    @plotPoint {
-                        v: @let($history0.($t))
-                        x: $t
-                        y: $eager($v)
-                        dy: 0
-                    }
-                    }
-                }
-
-                # style information
-                id: chart
-                primaryHue: $interpolate('#6f7286', '#babcca')
-                transition: @transition(300, linear)
-                top: {
-                    gutter: '0px'
-                }
-                right: {
-                    gutter: '40px'
-                }
-                bottom: @axis(type: time) {
-                    gutter: '30px'
-                }
-                left: @axis(type: linear) {
-                    gutter: '40pxpx'
-                }
-
-                domainBoundLeft: true
-                domainBoundRight: true
-
-                domainPaddingTop: 1
-                domainPaddingBottom: 1
-            }
-        }              --}}
+        
     }
     @block {
         @card {
-            title: 'Current Temperature (F)'
-            body: @gauge {
-                
-                # data link information
-                host: 'ws://raspi4:5620'
-                node: '/sensor/temperature'
-                lane: 'latest'
-                linkData: @link(host: $host, node: $node, lane: $lane, type: value)
-
-                # Gauge Values
-                meter: $round($linkData#0)/100
-                value: @text([{ $round($eager($linkData#0)) || 0} deg])
-
-                # Gauge Style
-                id: gauge
-                transition: @transition(400, linear)
-                innerRadius: 90 @pct
-                dialCornerRadius: 50 @pct
-                dialColor: '#56d7ba'
-                faceColor: '#eaecf4'
-                valueColor: '#56d7ba'
-                valueWeight: 400
-                valueSize: 40 @pct
-            }
-        }      
-        {{!-- @card {
-            title: 'Soil Temperature History'
+            title: @text([Acceleration X: { $round($eager($accelerationX#0)) || 0}])
             body: @chart {
 
                 # data link information
-                host: 'ws://raspi4:5620'
+                node: '/sensor/accelerationX'
                 lane: 'history'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
 
                 # chart plot 1
-                @plot(type: area) {
-                    history0: @link(host: $host, node: '/sensor/temperature', lane: $lane, type: map)
-                    areaFill: 'rgba(255,0,0,0.4)'
+                @plot(type: line) {
+                    history0: @link(node: $node, lane: $lane, type: map)
+                    lineColor: '#0000ff'
                     @each(t: $history0.*:) {
-                    key: $t
-                    @plotPoint {
+                        key: $t
+                        @plotPoint {
                         v: @let($history0.($t))
                         x: $t
-                        y: $eager($v)
-                        dy: 0
-                    }
+                        y: $v
+                        }
                     }
                 }
 
                 # style information
-                id: chart
-                primaryHue: $interpolate('#6f7286', '#babcca')
-                transition: @transition(300, linear)
+                id: tempChart
+                
                 top: {
                     gutter: '0px'
                 }
@@ -221,7 +288,7 @@
                     gutter: '30px'
                 }
                 left: @axis(type: linear) {
-                    gutter: '40pxpx'
+                    gutter: '40px'
                 }
 
                 domainBoundLeft: true
@@ -230,8 +297,102 @@
                 domainPaddingTop: 1
                 domainPaddingBottom: 1
             }
-        }             --}}
+        }
+        @card {
+            title: @text([Acceleration Y: { $round($eager($accelerationY#0)) || 0}])
+            body: @chart {
+
+                # data link information
+                node: '/sensor/accelerationY'
+                lane: 'history'
+                linkData: @link(host: $host, node: $node, lane: $lane, type: value)
+
+                # chart plot 1
+                @plot(type: line) {
+                    history0: @link(node: $node, lane: $lane, type: map)
+                    lineColor: '#0000ff'
+                    @each(t: $history0.*:) {
+                        key: $t
+                        @plotPoint {
+                        v: @let($history0.($t))
+                        x: $t
+                        y: $v
+                        }
+                    }
+                }
+
+                # style information
+                id: tempChart
+                
+                top: {
+                    gutter: '0px'
+                }
+                right: {
+                    gutter: '40px'
+                }
+                bottom: @axis(type: time) {
+                    gutter: '30px'
+                }
+                left: @axis(type: linear) {
+                    gutter: '40px'
+                }
+
+                domainBoundLeft: true
+                domainBoundRight: true
+
+                domainPaddingTop: 1
+                domainPaddingBottom: 1
+            }
+        }
+        @card {
+            title: @text([Acceleration Z: { $round($eager($accelerationZ#0)) || 0}])
+            body: @chart {
+
+                # data link information
+                node: '/sensor/accelerationZ'
+                lane: 'history'
+                linkData: @link(host: $host, node: $node, lane: $lane, type: value)
+
+                # chart plot 1
+                @plot(type: line) {
+                    history0: @link(node: $node, lane: $lane, type: map)
+                    lineColor: '#0000ff'
+                    @each(t: $history0.*:) {
+                        key: $t
+                        @plotPoint {
+                        v: @let($history0.($t))
+                        x: $t
+                        y: $v
+                        }
+                    }
+                }
+
+                # style information
+                id: tempChart
+                
+                top: {
+                    gutter: '0px'
+                }
+                right: {
+                    gutter: '40px'
+                }
+                bottom: @axis(type: time) {
+                    gutter: '30px'
+                }
+                left: @axis(type: linear) {
+                    gutter: '40px'
+                    domain: {0,120}
+                }
+
+                domainBoundLeft: true
+                domainBoundRight: true
+
+                domainPaddingTop: 1
+                domainPaddingBottom: 1
+            }
+        }             
     }    
+    
 }
 
 
