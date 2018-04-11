@@ -227,7 +227,7 @@ class PlantMonService extends BaseService {
             if(Object.keys(updateData).length > 0) {
                 // console.info('---------');
                 // console.info(updateData);
-                // this.server.sendSocketMessage('plantUpdate', updateData);
+                this.server.sendSocketMessage('plantUpdate', updateData);
             }
         }
 
