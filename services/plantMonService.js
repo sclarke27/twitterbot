@@ -19,9 +19,10 @@ class PlantMonService extends BaseService {
         this.redDark = [50, 0, 0];
         this.green = [0,200,0];
         this.greenDark = [0,50,0];
-        this.blue = [0,0,200];
+        this.blue = [0,0,172];
         this.blueDark = [0,0,50];
         this.black = [0, 0, 0];
+        this.white = [255,255,255];
         this.scanRight = true;
         this.lastColumnScanned = 0;
         this.joystickState = 'none';
@@ -35,7 +36,31 @@ class PlantMonService extends BaseService {
             down: 4,
             click: 5
         }
-    
+        this.logoColIndex = 0;
+        this.swimLogo = [
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,1,1,1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,0,0,0,0,0,0,0],
+            [0,1,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0],
+            [0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0],
+            [0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0],
+            [0,1,1,1,0,1,1,1,1,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        ]
+        this.swimLogoLarge = [
+            [0,1,1,1,1,1,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0],
+            [0,1,1,0,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,0,0,0,0],
+            [0,1,1,0,0,0,0,0,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,0,0,0,0],
+            [0,1,1,1,1,1,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,0,0,0,0],
+            [0,1,1,1,1,1,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,0,0,0,0],
+            [0,0,0,0,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,0,0,0,0],
+            [0,1,1,0,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,0,0,0,0],
+            [0,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,0,0,0,0],
+
+
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        ]
+        this.activeLogo = this.swimLogoLarge;
             
     }
 
@@ -49,15 +74,22 @@ class PlantMonService extends BaseService {
         
         // examples using (x, y, pixel)
         
+        // sense.clear();
+        // for(let i = 0; i<=7; i=i+1) {
+        //     sense.setPixel(i, 0, this.black);
+        //     sense.setPixel(i, 1, this.blueDark);
+        //     sense.setPixel(i, 2, this.blue);
+        //     sense.setPixel(i, 5, this.blue);
+        //     sense.setPixel(i, 6, this.blueDark);
+        //     sense.setPixel(i, 7, this.black);
+        // }
         sense.clear();
-        for(let i = 0; i<=7; i=i+1) {
-            sense.setPixel(i, 0, this.black);
-            sense.setPixel(i, 1, this.blueDark);
-            sense.setPixel(i, 2, this.blue);
-            sense.setPixel(i, 5, this.blue);
-            sense.setPixel(i, 6, this.blueDark);
-            sense.setPixel(i, 7, this.black);
+        for(let y = 0; y <= 7; y=y+1) {
+            for(let x = 0; x <=7; x=x+1) {
+                sense.setPixel(x, y, (this.activeLogo[y][x+this.logoColIndex] === 0 ? this.blue : this.white));
+            }
         }
+        
 
         senseJoystick.getJoystick()
         .then((joystick) => {
@@ -123,22 +155,38 @@ class PlantMonService extends BaseService {
 
         }
         // sense.clear();
-        for(let i = 0; i<=7; i=i+1) {
-            sense.setPixel(i, 0, this.black);
-            sense.setPixel(i, 1, this.blueDark);
-            sense.setPixel(i, 2, this.blue);
-            sense.setPixel(i, 3, this.black);
-            sense.setPixel(i, 4, this.black);
-            sense.setPixel(i, 5, this.blue);
-            sense.setPixel(i, 6, this.blueDark);
-            sense.setPixel(i, 7, this.black);
-        }        
-        sense.setPixel(this.lastColumnScanned, this.pixelRowIndex+1, (this.joystickState === 'none') ? this.greenDark : this.redDark);
-        sense.setPixel(this.lastColumnScanned, this.pixelRowIndex+2, (this.joystickState === 'none') ? this.greenDark : this.redDark);
-        sense.setPixel(this.pixelColumnIndex, this.pixelRowIndex+1, (this.joystickState === 'none') ? this.green : this.red);
-        sense.setPixel(this.pixelColumnIndex, this.pixelRowIndex+2, (this.joystickState === 'none') ? this.green : this.red);
+        // for(let i = 0; i<=7; i=i+1) {
+        //     sense.setPixel(i, 0, this.black);
+        //     sense.setPixel(i, 1, this.blueDark);
+        //     sense.setPixel(i, 2, this.blue);
+        //     sense.setPixel(i, 3, this.black);
+        //     sense.setPixel(i, 4, this.black);
+        //     sense.setPixel(i, 5, this.blue);
+        //     sense.setPixel(i, 6, this.blueDark);
+        //     sense.setPixel(i, 7, this.black);
+        // }        
+        // sense.setPixel(this.lastColumnScanned, this.pixelRowIndex+1, (this.joystickState === 'none') ? this.greenDark : this.redDark);
+        // sense.setPixel(this.lastColumnScanned, this.pixelRowIndex+2, (this.joystickState === 'none') ? this.greenDark : this.redDark);
+        // sense.setPixel(this.pixelColumnIndex, this.pixelRowIndex+1, (this.joystickState === 'none') ? this.green : this.red);
+        // sense.setPixel(this.pixelColumnIndex, this.pixelRowIndex+2, (this.joystickState === 'none') ? this.green : this.red);
 
-        this.lastColumnScanned = this.pixelColumnIndex;
+        // this.lastColumnScanned = this.pixelColumnIndex;
+
+        this.logoColIndex = this.logoColIndex + 1;
+        for(let y = 0; y <= 7; y=y+1) {
+            for(let x = 0; x <=7; x=x+1) {
+                let newX = x + this.logoColIndex;
+                if(newX >= this.activeLogo[y].length) {
+                    newX = newX - this.activeLogo[y].length
+                }
+                sense.setPixel(x, y, (this.activeLogo[y][newX] === 0 ? this.blue : this.white));
+            }
+        }
+        if(this.logoColIndex >= this.activeLogo[0].length) {
+            this.logoColIndex = 0;
+        }
+
+        
         var tic = new Date(); 
         var data = IMU.getValueSync();
         var toc = new Date();
@@ -164,7 +212,7 @@ class PlantMonService extends BaseService {
         };        
 
         for(const dataItem in incomingData) {
-            let sendUpdate = false;
+            let sendUpdate = true;
             if(!this.dataValueCache[dataItem]) {
                 sendUpdate = true;
             } else {
@@ -179,7 +227,7 @@ class PlantMonService extends BaseService {
             if(Object.keys(updateData).length > 0) {
                 // console.info('---------');
                 // console.info(updateData);
-                this.server.sendSocketMessage('plantUpdate', updateData);
+                // this.server.sendSocketMessage('plantUpdate', updateData);
             }
         }
 

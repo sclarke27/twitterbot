@@ -6,7 +6,7 @@ const PlantServiceConfig = {
     baud: 115200,
     polling: {
         enabled: true,
-        interval: 50
+        interval: 100
     }
 }
 
