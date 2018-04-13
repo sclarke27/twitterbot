@@ -38,7 +38,7 @@ class BaseService {
         // setup next polling interval
         if (this.config.polling && this.config.polling.enabled && this.config.polling.enabled === true) {
             if (this.showDebug) {
-                console.info(`[BaseService] create service polling interval ${this.config.polling.interval}`);
+                console.info(`[BaseService] set next interval in ${this.config.polling.interval}ms`);
             }
             this.pollingTimeout = setTimeout(this.update.bind(this), this.config.polling.interval);
         }

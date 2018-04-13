@@ -1,20 +1,25 @@
 console.info('[main] Loading libraries ...');
 
+//configs
+const plantServiceConfig = require('./config/plantServiceConfig');
+const senseHatServiceConfig = require('./config/senseHatServiceConfig');
 const httpConfig = require('./httpServer/config/httpConfig');
 const dbConfig = require('./httpServer/config/dbConfig');
 const plantBotConfig = require('./config/plantBotConfig');
-const plantServiceConfig = require('./config/plantServiceConfig');
 
 // servers
 const httpServer = require('./httpServer/server');
-const mongojs = require('mongojs');
+const mongojs = ((dbConfig.enabled) ? require('mongojs') : {});
+
+// bots
+const TwitterBot = require('./bots/twitterBot');
+const PlantBot = require('./bots/plantBot');
 
 // services
 const PlantMonService = require('./services/plantMonService');
+const SenseHatService = require('./services/senseHatService');
 
-// bot classes
-const TwitterBot = require('./bots/twitterBot');
-const PlantBot = require('./bots/plantBot');
+// other libs
 const swim = require('swim-client-js');
 // const swimClient = swim.Client();
 
@@ -31,9 +36,7 @@ class Main {
         this.swimHost = null;
 
         if (this.showDebug) {
-            if (this.showDebug) {
-                console.info('[main] constructed');
-            }
+            console.info('[main] constructed');
         }
     }
 
@@ -100,11 +103,6 @@ class Main {
                 })
             }
         }
-
-        // connect to swim services
-        // if (swimClient) {
-        //     swimHost = swimClient.host()
-        // }
 
         if (this.showDebug) {
             console.info(`[main] initialize and started ${this.botList.length} bots`);
@@ -187,16 +185,18 @@ class Main {
     }
 }
 
-const showDebug = true;
-const main = new Main(true);
+const showDebug = false;
+const main = new Main(showDebug);
 
 const botList = [
     [PlantBot, plantBotConfig]
 ]
 
 const servicesList = [
-    [PlantMonService, plantServiceConfig]
+    [PlantMonService, plantServiceConfig],
+    [SenseHatService, senseHatServiceConfig]
 ];
+
 console.info('[main] Start');
 main.initialize(botList, servicesList);
 main.start();
