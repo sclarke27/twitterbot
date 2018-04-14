@@ -4,4 +4,4 @@ captures/*
 .gphoto/*
 config/*
 *.ini
-nohup.out
+nohup.*

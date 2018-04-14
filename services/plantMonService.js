@@ -38,7 +38,7 @@ class PlantMonService extends BaseService {
             };
 
             for(const dataItem in incomingData) {
-                let sendUpdate = true;
+                let sendUpdate = false;
                 if(!this.dataValueCache[dataItem]) {
                     sendUpdate = true;
                 } else {
