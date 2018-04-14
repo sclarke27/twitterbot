@@ -1,16 +1,26 @@
 <script src="/assets/swim-app.js" swim-app></script>
-
+<style>
+	body {
+		background-color: #000000;
+	}
+	.refreshButton {
+		position: absolute;
+		bottom: 0px;
+		color: #020202;
+	}
+</style>
+<div class='refreshButton' onclick='window.location.reload()'>refresh</div>
 <script type="text/recon">
 @quilt {
-	blockAspectRatio: 1
+	blockAspectRatio: 1.5
 	minBlockWidth: 100
+	host: '{{fullSwimUrl}}'
     @block {
         @card {
             title: 'Current Light Level'
             body: @gauge {
                 
                 # data link information
-                host: 'ws://192.168.0.150:5620'
                 node: '/sensor/light'
                 lane: 'latest'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
@@ -33,7 +43,6 @@
             title: 'Light Level History'
             body: @chart {
                 # data link information
-                host: 'ws://192.168.0.150:5620'
                 lane: 'history'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
                 # chart plot 1
@@ -79,7 +88,6 @@
             body: @gauge {
                 
                 # data link information
-                host: 'ws://192.168.0.150:5620'
                 node: '/sensor/soil'
                 lane: 'latest'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
@@ -102,7 +110,6 @@
             title: 'Soil Moisture History'
             body: @chart {
                 # data link information
-                host: 'ws://192.168.0.150:5620'
                 lane: 'history'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
                 # chart plot 1
@@ -148,7 +155,6 @@
             body: @gauge {
                 
                 # data link information
-                host: 'ws://192.168.0.150:5620'
                 node: '/sensor/temperature'
                 lane: 'latest'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
@@ -168,10 +174,9 @@
             }
         }      
         @card {
-            title: 'Soil Temperature History'
+            title: 'Temperature History'
             body: @chart {
                 # data link information
-                host: 'ws://192.168.0.150:5620'
                 lane: 'history'
                 linkData: @link(host: $host, node: $node, lane: $lane, type: value)
                 # chart plot 1

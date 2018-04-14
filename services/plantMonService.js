@@ -1,13 +1,7 @@
 const BaseService = require('./baseService');
 const ArduinoBoard = require('../modules/ArduinoBoard');
-const sense = require("sense-hat-led");
-const util = require('util') 
-const nodeimu  = require('nodeimu'); 
-const IMU = new nodeimu.IMU(); 
-const senseJoystick = require('sense-joystick');
 
 class PlantMonService extends BaseService {
-
 
     constructor(serviceConfig, db, httpServer, showDebug = false) {
         super(serviceConfig, db, httpServer, showDebug);
@@ -18,11 +12,14 @@ class PlantMonService extends BaseService {
     }
 
     start() {
-        super.start();
+        // super.start();
         if (this.showDebug) {
-            console.info(`[PlantMonService] start baud: ${this.config.baud}`);
+            console.info(`[PlantMonService] start baud${this.config.baud}`);
         }
+        this.arduino.setDataHandler(this.onSerialData.bind(this));
+        this.arduino.startPort(this.config.baud);
     }
+
 
     onSerialData(newData) {
         try {
@@ -57,7 +54,9 @@ class PlantMonService extends BaseService {
             if (this.db) {
                 this.db.plants.insert(updateData);
             }
-            this.server.sendSocketMessage('plantUpdate', updateData);
+			if(Object.keys(updateData).length > 0) {
+				this.server.sendSocketMessage('plantUpdate', updateData);
+			}
         } catch (err) {
             console.info(err);
         }

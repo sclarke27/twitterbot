@@ -17,7 +17,9 @@ const PlantBot = require('./bots/plantBot');
 
 // services
 const PlantMonService = require('./services/plantMonService');
-const SenseHatService = require('./services/senseHatService');
+if(senseHatServiceConfig.enabled) {
+	const SenseHatService = require('./services/senseHatService');
+}
 
 // other libs
 const swim = require('swim-client-js');
@@ -192,10 +194,16 @@ const botList = [
     [PlantBot, plantBotConfig]
 ]
 
-const servicesList = [
-    [PlantMonService, plantServiceConfig],
-    [SenseHatService, senseHatServiceConfig]
-];
+const servicesList = [];
+
+if(plantServiceConfig.enabled) {
+	servicesList.push([PlantMonService, plantServiceConfig]);
+}
+
+if(senseHatServiceConfig.enabled) {
+	servicesList.push([SenseHatService, senseHatServiceConfig]);
+}
+
 
 console.info('[main] Start');
 main.initialize(botList, servicesList);

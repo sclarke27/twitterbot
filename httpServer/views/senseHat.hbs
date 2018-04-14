@@ -4,7 +4,7 @@
 @quilt {
 	blockAspectRatio: 1.42
 	minBlockWidth: 10
-    host: 'ws://192.168.1.95:5620'
+    host: '{{fullSwimUrl}}'
     temperature: @link(node: '/sensor/temperature', lane: 'latest', type: value)
     pressure: @link(node: '/sensor/pressure', lane: 'latest', type: value)
     humidity: @link(node: '/sensor/humidity', lane: 'latest', type: value)

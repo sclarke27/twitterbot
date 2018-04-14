@@ -1,6 +1,8 @@
 const HttpConfig = {
     enabled: true,
-    port: 8080
+	hostUrl: '192.168.1.92',
+	hostPort: 8080,
+	swimPort: 5620,
 
 }
 

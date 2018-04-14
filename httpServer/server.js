@@ -9,8 +9,9 @@ const WebSocket = require('ws');
 
 class HttpServer {
     constructor(httpConfig, db, showDebug = false) {
+		console.info(httpConfig);
         this.config = httpConfig;
-        this.port = this.config.port;
+        this.port = this.config.hostPort;
         this.server = null;
         this.webApp = null;
         this.io = null;
@@ -20,7 +21,11 @@ class HttpServer {
         this.wikiQuote = null;
         this.main = null;
         this.useSwim = true;
-
+		this.hostUrl = this.config.hostUrl;
+		this.swimPort = this.config.swimPort;
+		this.fullHostUrl = 'http://' + this.hostUrl + ((this.port !== 80) ? (':' + this.port) : '');
+		this.fullSwimUrl = 'ws://' + this.hostUrl + ':' + this.swimPort;
+		console.info('create http server @' + this.fullHostUrl);
         this.botList = [];
     }
 
@@ -32,7 +37,7 @@ class HttpServer {
                 this.socketClient = new WebSocket('ws://127.0.0.1:5620');
                 this.socketClient.on('close', (closed) => {
                     console.info('socket closed: ' + closed);
-                    setTimeout(() => { this.openSwimSocket() }, 1000);
+                    setTimeout(() => { this.openSwimSocket() }, 5000);
                 });
                 this.socketClient.on('error', (err) => {
                     console.info('socket error');
@@ -129,8 +134,8 @@ class HttpServer {
                         });
                     }
                 } else {
-                    console.info('ready state not 1')
-                    console.info(this.socketClient.readyState);
+                    //console.info('ready state not 1')
+                    //console.info(this.socketClient.readyState);
                 }
                 
             } catch (err) {
@@ -165,6 +170,8 @@ class HttpServer {
             
             response.render('homePage', {
                 routeName: 'home',
+				fullHostUrl: this.fullHostUrl,
+				fullSwimUrl: this.fullSwimUrl,
                 botList: [],
                 helpers: this.hbsHelpers
             })                
@@ -173,28 +180,9 @@ class HttpServer {
 
     }
 
-    /**
-     * Route to handle list of tweets
-     */
-    createPlantsRoute() {
+    createPageRoutes() {
 
-        this.webApp.route('/plants/history/:plantId')
-            .post((request, response) => {
-                const reqParams = request.params;
-                const plantId = reqParams.plantId;
-
-                this.db.plants.find({
-                    plantId: plantId
-                }).limit(5000).sort({
-                    timestamp: -1
-                }).toArray((err, docs) => {
-                    response.json({
-                        data: docs,
-                        dbErrors: err
-                    })
-                });
-            })
-        this.webApp.route('/plants/:plantId')
+        this.webApp.route('/plantMon')
             .get((request, response) => {
                 const reqParams = request.params;
                 const plantId = reqParams.plantId;
@@ -204,11 +192,30 @@ class HttpServer {
                 // }).sort({
                 //     timestamp: -1
                 // }).toArray((err, docs) => {
-                response.render('plantsPage', {
+                response.render('plantMon', {
                     routeName: 'plant',
                     plantId: plantId,
-                    // plantHistory: docs,
-                    botList: this.botList,
+					fullHostUrl: this.fullHostUrl,
+					fullSwimUrl: this.fullSwimUrl,
+                    helpers: this.hbsHelpers
+                })
+                // })
+            })
+        this.webApp.route('/senseHat')
+            .get((request, response) => {
+                const reqParams = request.params;
+                const plantId = reqParams.plantId;
+
+                // this.db.plants.find({
+                //     plantId: plantId
+                // }).sort({
+                //     timestamp: -1
+                // }).toArray((err, docs) => {
+                response.render('senseHat', {
+                    routeName: 'senseHat',
+                    plantId: plantId,
+					fullHostUrl: this.fullHostUrl,
+					fullSwimUrl: this.fullSwimUrl,
                     helpers: this.hbsHelpers
                 })
                 // })
@@ -221,6 +228,7 @@ class HttpServer {
         this.main = mainThread;
         this.setUpEngine();
         this.createHomeRoute();
+		this.createPageRoutes();
 
         this.server.listen(this.port, this.onServerStarted.bind(this));
 

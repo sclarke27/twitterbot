@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo 'killing chrome processes'
+sudo killall chromium-browser
+
 echo 'killing all java processes'
 sudo killall java
 
