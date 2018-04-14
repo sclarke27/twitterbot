@@ -16,10 +16,7 @@ const TwitterBot = require('./bots/twitterBot');
 const PlantBot = require('./bots/plantBot');
 
 // services
-const PlantMonService = require('./services/plantMonService');
-if(senseHatServiceConfig.enabled) {
-	const SenseHatService = require('./services/senseHatService');
-}
+
 
 // other libs
 const swim = require('swim-client-js');
@@ -197,10 +194,12 @@ const botList = [
 const servicesList = [];
 
 if(plantServiceConfig.enabled) {
+    const PlantMonService = require('./services/plantMonService');
 	servicesList.push([PlantMonService, plantServiceConfig]);
 }
 
 if(senseHatServiceConfig.enabled) {
+    const SenseHatService = require('./services/senseHatService');
 	servicesList.push([SenseHatService, senseHatServiceConfig]);
 }
 

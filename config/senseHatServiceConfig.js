@@ -1,9 +1,9 @@
 const SenseHatServiceConfig = {
-    enabled: false,
-    name: 'SensorHat Monitoring Service',
+    enabled: true,
+    name: 'Plant Sensor Monitoring Service',
     polling: {
         enabled: true,
-        interval: 200
+        interval: 100
     }
 }
 
