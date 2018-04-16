@@ -220,6 +220,25 @@ class HttpServer {
                 })
                 // })
             })
+        this.webApp.route('/aggregate')
+            .get((request, response) => {
+                const reqParams = request.params;
+                const plantId = reqParams.plantId;
+
+                // this.db.plants.find({
+                //     plantId: plantId
+                // }).sort({
+                //     timestamp: -1
+                // }).toArray((err, docs) => {
+                response.render('aggregatePage', {
+                    routeName: 'aggregate',
+                    plantId: plantId,
+					fullHostUrl: this.fullHostUrl,
+					fullSwimUrl: this.fullSwimUrl,
+                    helpers: this.hbsHelpers
+                })
+                // })
+            })
     }
     /**
      * startup http server

@@ -9,7 +9,7 @@ const plantBotConfig = require('./config/plantBotConfig');
 
 // servers
 const httpServer = require('./httpServer/server');
-const mongojs = ((dbConfig.enabled) ? require('mongojs') : {});
+// const mongojs = ((dbConfig.enabled) ? require('mongojs') : {});
 
 // bots
 const TwitterBot = require('./bots/twitterBot');

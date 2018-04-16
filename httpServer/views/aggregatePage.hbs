@@ -1,0 +1,21 @@
+<script src="/assets/swim-app.js" swim-app></script>
+<br><br>
+<script type="text/recon">
+    @div {
+        host: '{{fullSwimUrl}}'
+        node: '/aggregate'
+        lane: 'latestFull'
+        data: @link(host: $host, node: $node, lane: $lane, type: map)
+        @ul {
+            @each(t: $data.*:) {
+                @li {
+                    @text($t)
+                    [ and ]
+                    @text($eager($data.($t)))
+                }
+            }
+        }
+
+
+    }
+</script>

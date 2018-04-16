@@ -200,11 +200,10 @@ class SenseHatService extends BaseService {
                 this.dataValueCache[dataItem] = incomingData[dataItem];
                 updateData[dataItem] = this.dataValueCache[dataItem];
             }
-            if(Object.keys(updateData).length > 0) {
-                this.server.sendSocketMessage('plantUpdate', updateData);
-            }
         }
-
+        if(Object.keys(updateData).length > 0) {
+            this.server.sendSocketMessage('plantUpdate', updateData);
+        }
 
         if (this.showDebug) {
             console.info(`[PlantMonService] update`);
