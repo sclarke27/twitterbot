@@ -24,7 +24,12 @@ class HttpServer {
 		this.hostUrl = this.config.hostUrl;
 		this.swimPort = this.config.swimPort;
 		this.fullHostUrl = 'http://' + this.hostUrl + ((this.port !== 80) ? (':' + this.port) : '');
-		this.fullSwimUrl = 'ws://' + this.hostUrl + ':' + this.swimPort;
+        this.fullSwimUrl = 'ws://' + this.hostUrl + ':' + this.swimPort;
+        this.fullAggUrl = 'http://' + this.config.aggregateHost + ((this.port !== 80) ? (':' + this.port) : '');
+        this.isPlantMon = this.config.isPlantMon;
+        this.isSenseHat = this.config.isSenseHat;
+        this.isAggregator = this.config.isAggregator;
+
 		console.info('create http server @' + this.fullHostUrl);
         this.botList = [];
     }
@@ -171,8 +176,11 @@ class HttpServer {
             response.render('homePage', {
                 routeName: 'home',
 				fullHostUrl: this.fullHostUrl,
-				fullSwimUrl: this.fullSwimUrl,
-                botList: [],
+                fullSwimUrl: this.fullSwimUrl,
+                aggregateHostUrl: this.fullAggUrl,
+                isAggregator: this.isAggregator,
+                isPlantMon: this.isPlantMon,
+                isSenseHat: this.isSenseHat,
                 helpers: this.hbsHelpers
             })                
         
@@ -197,6 +205,10 @@ class HttpServer {
                     plantId: plantId,
 					fullHostUrl: this.fullHostUrl,
 					fullSwimUrl: this.fullSwimUrl,
+                    aggregateHostUrl: this.fullAggUrl,
+                    isAggregator: this.isAggregator,
+                    isPlantMon: this.isPlantMon,
+                    isSenseHat: this.isSenseHat,
                     helpers: this.hbsHelpers
                 })
                 // })
@@ -215,7 +227,11 @@ class HttpServer {
                     routeName: 'senseHat',
                     plantId: plantId,
 					fullHostUrl: this.fullHostUrl,
-					fullSwimUrl: this.fullSwimUrl,
+                    fullSwimUrl: this.fullSwimUrl,
+                    aggregateHostUrl: this.fullAggUrl,
+                    isAggregator: this.isAggregator,
+                    isPlantMon: this.isPlantMon,
+                    isSenseHat: this.isSenseHat,
                     helpers: this.hbsHelpers
                 })
                 // })
@@ -231,10 +247,14 @@ class HttpServer {
                 //     timestamp: -1
                 // }).toArray((err, docs) => {
                 response.render('aggregatePage', {
-                    routeName: 'aggregate',
+                    routeName: 'aggregator',
                     plantId: plantId,
 					fullHostUrl: this.fullHostUrl,
-					fullSwimUrl: this.fullSwimUrl,
+                    fullSwimUrl: this.fullSwimUrl,
+                    aggregateHostUrl: this.fullAggUrl,
+                    isAggregator: this.isAggregator,
+                    isPlantMon: this.isPlantMon,
+                    isSenseHat: this.isSenseHat,
                     helpers: this.hbsHelpers
                 })
                 // })

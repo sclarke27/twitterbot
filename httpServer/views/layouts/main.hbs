@@ -44,33 +44,19 @@
                         <h1>{{routeName}} {{#if botName}}: {{botName}}{{/if}}</h1>
                     </div>
                 </div>
-                <div class="botsMenu menu">
-                    <div class="headerLabel">Bots</div>
-                    <div class="headerDropdownMenu dropDown">
-                        {{#each botList}}
-                        <div onclick="window.location.href='/bot/{{this.name}}'">{{this.name}}</div>
-                        {{/each}}
-                    </div>
+                <div class="plantsMenu menu" onclick="window.location.href='{{{aggregateHostUrl}}}/aggregate'">
+                    <div class="headerLabel">Aggregator</div>
                 </div>
-                {{#if_eq routeName 'quotesList'}}
-                <div class="quotesMenu menu" id="addWikiQuoteHeaderButton" onclick="page.newFromWikiQuote()">
-                    <div class="headerLabel">
-                        <div class="addQuoteButton"></div>New From WikiQuote
-                    </div>
+                {{#if isPlantMon}}
+                <div class="plantsMenu menu" onclick="window.location.href='/plantMon'">
+                    <div class="headerLabel">Plant Monitor</div>
                 </div>
-                <div class="quotesMenu menu" id="addQuoteHeaderButton" onclick="page.showForm()">
-                    <div class="headerLabel">
-                        <div class="addQuoteButton"></div>New Quote
-                    </div>
+                {{/if}}
+                {{#if isSenseHat}}
+                <div class="plantsMenu menu" onclick="window.location.href='/SenseHat'">
+                    <div class="headerLabel">SenseHat</div>
                 </div>
-                {{else}}
-                <div class="quotesMenu menu" onclick="window.location.href='/quotes'">
-                    <div class="headerLabel">Quotes</div>
-                </div>
-                {{/if_eq}}
-                <div class="plantsMenu menu" onclick="window.location.href='/plants/plant1'">
-                    <div class="headerLabel">Plant</div>
-                </div>
+                {{/if}}
             </div>
 
         </div>
