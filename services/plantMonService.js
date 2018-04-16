@@ -47,9 +47,6 @@ class PlantMonService extends BaseService {
                     this.dataValueCache[dataItem] = incomingData[dataItem];
                     updateData[dataItem] = this.dataValueCache[dataItem];
                 }
-                if(Object.keys(updateData).length > 0) {
-                    this.server.sendSocketMessage('plantUpdate', updateData);
-                }
             }            
             if (this.db) {
                 this.db.plants.insert(updateData);

@@ -1,5 +1,5 @@
 const PlantServiceConfig = {
-    enabled: false,
+    enabled: true,
     name: 'Plant Sensor Monitoring Service',
     arduinoAddress: '/dev/ttyACM0',
     serialPort: 0,
