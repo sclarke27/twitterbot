@@ -27,7 +27,7 @@ const PlantBot = require('./bots/plantBot');
 console.info('Libraries loaded');
 
 class Main {
-    constructor(showDebug = true) {
+    constructor(showDebug = false) {
         this.showDebug = showDebug;
         this.wikiQuote = null;
         this.botList = [];
@@ -187,8 +187,8 @@ class Main {
     }
 }
 
-const showDebug = true;
-const main = new Main(true);
+const showDebug = false;
+const main = new Main(showDebug);
 
 console.info('Main constructed');
 const botList = [

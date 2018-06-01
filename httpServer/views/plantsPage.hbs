@@ -55,8 +55,8 @@
                     linkData: @link(host: $host, node: $node, lane: $lane, type: value)
 
                     # Gauge Values
-                    meter: $round($linkData#0)/100
-                    value: @text([{ $round($eager($linkData#0)) || 0}%])
+                    meter: $round($linkData#0)/1000
+                    value: @text([{ $round($eager($linkData#0/10)) || 0}%])
 
                     # Gauge Style
                     id: soilGauge
@@ -91,35 +91,13 @@
 
                 }
             }
-            @tile {
-                body: @gauge {
-                    node: '/sensor/pressure'
-                    lane: 'latest'
-                    linkData: @link(host: $host, node: $node, lane: $lane, type: value)
-
-                    # Gauge Values
-                    meter: $round($linkData#0)/1100
-                    value: @text([{ $round($eager($linkData#0)) || 0}mb])
-
-                    # Gauge Style
-                    id: pressureGauge
-                    innerRadius: $gaugeInnerRadius
-                    dialCornerRadius: $gaugeDialCornerRadius
-                    dialColor: 'rgba(0,174,240,1)'
-                    faceColor: $gaugeFaceColor
-                    valueColor: 'rgba(0,174,240,1)'
-                    valueWeight: $gaugeValueWeight
-                    valueSize: $gaugeValueSize
-
-                }
-            }            
         }
         right: @totem {
             desiredWidth: '300px'
             minVisibleWidth: '0px'
             @tile {
                 body: @gauge {
-                    node: '/sensor/temperature0'
+                    node: '/sensor/temperatureCh1'
                     lane: 'latest'
                     linkData: @link(host: $host, node: $node, lane: $lane, type: value)
 
@@ -140,7 +118,7 @@
             }
             @tile {
                 body: @gauge {
-                    node: '/sensor/temperature2'
+                    node: '/sensor/temperatureCh2'
                     lane: 'latest'
                     linkData: @link(host: $host, node: $node, lane: $lane, type: value)
 
@@ -150,28 +128,6 @@
 
                     # Gauge Style
                     id: tempGauge1
-                    innerRadius: $gaugeInnerRadius
-                    dialCornerRadius: $gaugeDialCornerRadius
-                    dialColor: $gaugeDialColor
-                    faceColor: $gaugeFaceColor
-                    valueColor: $gaugeValueColor
-                    valueWeight: $gaugeValueWeight
-                    valueSize: $gaugeValueSize
-
-                }
-            }   
-            @tile {
-                body: @gauge {
-                    node: '/sensor/temperature1'
-                    lane: 'latest'
-                    linkData: @link(host: $host, node: $node, lane: $lane, type: value)
-
-                    # Gauge Values
-                    meter: $round($linkData#0)/100
-                    value: @text([{ $round($eager($linkData#0)) || 0}°F])
-
-                    # Gauge Style
-                    id: tempGauge2
                     innerRadius: $gaugeInnerRadius
                     dialCornerRadius: $gaugeDialCornerRadius
                     dialColor: $gaugeDialColor

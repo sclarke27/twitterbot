@@ -28,31 +28,34 @@ class HttpServer {
         this.hbsHelpers = null;
         this.wikiQuote = null;
         this.main = null;
+        this.useSwim = true;
 
         this.botList = [];
     }
 
     openSwimSocket() {
 
-        console.info('[swim] open socket to swim service');
-        try {
-            this.socketClient = new WebSocket('ws://127.0.0.1:5620');
-            this.socketClient.on('close', (closed) => {
-                console.info('socket closed: ' + closed);
-                setTimeout(() => { this.openSwimSocket() }, 1000);
-            });
-            this.socketClient.on('error', (err) => {
-                console.info('socket error');
-                console.info(err);
-            });
-            this.socketClient.on('open', () => {
-                console.info('socket open');
-                // this.socketClient.send("@command(node:'/sensor/light',lane:'register_self'){uri:'/sensor/light'}", (err) => {
-                //     console.error(err);
-                // });
-            });
-        } catch (err) {
-            console.error(err);
+        if(this.useSwim) {
+            console.info('[swim] open socket to swim service');
+            try {
+                this.socketClient = new WebSocket('ws://75.50.82.129:5620');
+                this.socketClient.on('close', (closed) => {
+                    console.info('socket closed: ' + closed);
+                    setTimeout(() => { this.openSwimSocket() }, 1000);
+                });
+                this.socketClient.on('error', (err) => {
+                    console.info('socket error');
+                    console.info(err);
+                });
+                this.socketClient.on('open', () => {
+                    console.info('socket open');
+                    // this.socketClient.send("@command(node:'/sensor/light',lane:'register_self'){uri:'/sensor/light'}", (err) => {
+                    //     console.error(err);
+                    // });
+                });
+            } catch (err) {
+                console.error(err);
+            }
         }
         
     }      
@@ -101,7 +104,9 @@ class HttpServer {
             });
         })
 
-        this.openSwimSocket();
+        if(this.useSwim) {
+            this.openSwimSocket();
+        }
 
         this.hbsHelpers = {
             'if_eq': (a, b, opts) => {
@@ -120,12 +125,15 @@ class HttpServer {
             },
         };
 
-        this.db.bots.find().sort({
-            botName: -1
-        }).toArray((err, docs) => {
-            this.botList = docs;
-        });
-
+        if(this.db) {
+            this.db.bots.find().sort({
+                botName: -1
+            }).toArray((err, docs) => {
+                this.botList = docs;
+            });
+        } else {
+            this.botList = []
+        }
 
     }
 
@@ -133,34 +141,22 @@ class HttpServer {
      * 
      */
     sendSocketMessage(messageKey, messageData) {
-        //this.io.emit(messageKey, messageData);
-        if (this.socketClient && this.socketClient.send) {
+        if (this.useSwim && this.socketClient && this.socketClient.send) {
 
             try {
                 // console.info('[swim] send socket message');
-                // console.info(this.socketClient);
+                // console.info(JSON.stringify(messageData));
                 if(this.socketClient.readyState) {
-                    this.socketClient.send("@command(node:'/sensor/light',lane:'addLatest'){" + messageData.light + "}", () => {
-                        // console.info(data);
-                    });
-                    this.socketClient.send("@command(node:'/sensor/temperature0',lane:'addLatest'){" + messageData.temperature0 + "}", () => {
-                        // console.info(data);
-                    });
-                    this.socketClient.send("@command(node:'/sensor/temperature1',lane:'addLatest'){" + messageData.temperature1 + "}", () => {
-                        // console.info(data);
-                    });
-                    this.socketClient.send("@command(node:'/sensor/temperature2',lane:'addLatest'){" + messageData.temperature2 + "}", () => {
-                        // console.info(data);
-                    });
-                    this.socketClient.send("@command(node:'/sensor/soil',lane:'addLatest'){" + messageData.moisture + "}", () => {
-                        // console.info(data);
-                    });
-                    this.socketClient.send("@command(node:'/sensor/pressure',lane:'addLatest'){" + messageData.pressure + "}", () => {
-                        // console.info(data);
-                    });
+                
+                    for(const dataKey in messageData) {
+                        // console.log(dataKey, messageData[dataKey]);
+                        this.socketClient.send("@command(node:'/sensor/" + dataKey + "',lane:'addLatest'){" + messageData[dataKey] + "}", () => {
+                            // console.info(data);
+                        });
+                    }
                 } else {
-                    console.info('ready state not 1')
-                    console.info(this.socketClient.readyState);
+                    //console.info('ready state not 1')
+                    //console.info(this.socketClient.readyState);
                 }
                 
             } catch (err) {
@@ -169,7 +165,8 @@ class HttpServer {
             }
         } else {
             // console.error('[swim] socket not connected');
-        }        
+        }
+        // this.io.emit(messageKey, messageData);
     }
 
     /**
