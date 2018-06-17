@@ -1,0 +1,566 @@
+<main class="main senseHat container-fluid">
+    <script type="text/recon">
+        @div(class: 'backdrop') {
+            host: '{{fullSwimUrl}}'
+            {{!-- host: 'ws://192.168.0.205:5620' --}}
+            plantName: @link(node: '/bot/{{botName}}', lane: 'plantName', type: value)
+            waterPlant: $plantName#0
+
+            waterHeaderClass: $waterPlant? 'subnav container-fluid watering' : 'subnav container-fluid'
+
+            @div(class: $waterHeaderClass ) {
+                @div(class: 'row') {
+                    @div(class: 'col col-6 title') {
+                        @a(class: 'btn-back', href: '{{aggregateHostUrl}}/aggregate') {
+                            @picture {
+                                @img(src: '/assets/icons/back-arrow-black.svg', alt: 'Icon back arrow')
+                            }
+                        }
+                        @picture(class: 'icon') {
+                            statusBotIcon: $waterPlant? '/assets/icons/bot-blue.svg' : '/assets/icons/bot-green.svg'
+                            @img(src: $statusBotIcon, alt: 'Icon Bot')
+                        }
+                        @h2 '{{{botName}}}'
+                    }
+                    @div(class: 'col col-6 status') {
+                        @picture {
+                            statusIcon: $waterPlant? '/assets/icons/plant-alert-soil.svg' : '/assets/icons/status-ok.svg'
+                            @img(src: $statusIcon, alt: 'Icon Status', width: '23px', height: '27px')
+                        }
+                        @span {
+                            statusText: $waterPlant? $waterPlant : "Idle"
+                            @text([{$eager($statusText)}])
+                        }
+                    }
+                }
+            }
+
+            @quilt {
+                id: 'quilt-1'
+                quiltClass: $waterPlant? 'wrapper wrapper-watering' : 'wrapper'
+                blockAspectRatio: 0.35
+                minBlockWidth: 350
+
+                @block {
+                    @card {
+                        body: @div(class: $quiltClass) {
+                                @div(class: 'bubbles')
+                                @kpi {
+                                node: '/sensor/temperature'
+                                temperature: @link(lane: 'latest', type: value)
+
+                                title: 'Temp'
+                                titleSize: 20 @px
+                                titleWeight: 400
+                                titleColor: '#fff'
+                                subtitle: '{{{botName}}}'
+                                subtitleSize: 14 @px
+                                subtitleWeight: 400
+                                subtitleColor: 'rgba(255, 255, 255, 0.5)'
+
+                                value: @text([{ $round($eager($temperature#0)) || 0}°C])
+                                valueSize: 48 @px
+                                valueColor: '#fff'
+
+                                @chart {
+                                    @plot(type: line) {
+                                        history0: @link(lane: 'history', type: map)
+                                        lineColor: '#fff'
+                                        @each(t: $history0.*:) {
+                                            key: $t
+                                            @plotPoint {
+                                            v: @let($history0.($t))
+                                            x: $t
+                                            y: $v
+                                            }
+                                        }
+                                    }
+
+                                    top: {
+                                        gutter: '0px'
+                                    }
+                                    right: {
+                                        gutter: '15px'
+                                    }
+                                    bottom: @axis(type: time) {
+                                        gutter: '15px'
+                                        hidden: true
+                                    }
+                                    left: @axis(type: linear) {
+                                        gutter: '15px'
+                                        hidden: true
+                                    }
+
+                                    domainBoundLeft: true
+                                    domainBoundBottom: true
+                                }
+                            }
+
+                        }
+                    }
+                }
+                @block {
+                    @card {
+                        body: @div(class: $quiltClass) {
+                            @div(class: 'bubbles')
+                            @kpi {
+                                node: '/sensor/pressure'
+                                pressure: @link(lane: 'latest', type: value)
+
+                                title: 'Pres'
+                                titleSize: 20 @px
+                                titleWeight: 400
+                                titleColor: '#fff'
+                                subtitle: '{{{botName}}}'
+                                subtitleSize: 14 @px
+                                subtitleWeight: 400
+                                subtitleColor: 'rgba(255, 255, 255, 0.5)'
+
+                                value: @text([{ $round($eager($pressure#0)) || 0}mb])
+                                valueSize: 48 @px
+                                valueColor: '#fff'
+
+                                @chart {
+                                    # chart plot 1
+                                    @plot(type: line) {
+                                        history0: @link(lane: 'history', type: map)
+                                        lineColor: '#fff'
+                                        @each(t: $history0.*:) {
+                                            key: $t
+                                            @plotPoint {
+                                            v: @let($history0.($t))
+                                            x: $t
+                                            y: $v
+                                            }
+                                        }
+                                    }
+
+                                    top: {
+                                        gutter: '0px'
+                                    }
+                                    right: {
+                                        gutter: '15px'
+                                    }
+                                    bottom: @axis(type: time) {
+                                        gutter: '15px'
+                                        hidden: true
+                                    }
+                                    left: @axis(type: linear) {
+                                        gutter: '15px'
+                                        hidden: true
+                                    }
+
+                                    domainBoundLeft: true
+                                    domainBoundBottom: true
+                                }
+                            }
+                        }
+                    }
+                }
+                @block {
+                    @card {
+                        body: @div(class: $quiltClass) {
+                            @div(class: 'bubbles')
+                            @kpi {
+                                node: '/sensor/humidity'
+                                humidity: @link(lane: 'latest', type: value)
+
+                                title: 'RH'
+                                titleSize: 20 @px
+                                titleWeight: 400
+                                titleColor: '#fff'
+                                subtitle: '{{{botName}}}'
+                                subtitleSize: 14 @px
+                                subtitleWeight: 400
+                                subtitleColor: 'rgba(255, 255, 255, 0.5)'
+
+                                value: @text([{ $round($eager($humidity#0)) || 0}%])
+                                valueSize: 48 @px
+                                valueColor: '#fff'
+
+                                @chart {
+
+                                    @plot(type: line) {
+                                        history0: @link(lane: 'history', type: map)
+                                        lineColor: '#fff'
+                                        @each(t: $history0.*:) {
+                                            key: $t
+                                            @plotPoint {
+                                            v: @let($history0.($t))
+                                            x: $t
+                                            y: $v
+                                            }
+                                        }
+                                    }
+
+                                    top: {
+                                        gutter: '0px'
+                                    }
+                                    right: {
+                                        gutter: '15px'
+                                    }
+                                    bottom: @axis(type: time) {
+                                        gutter: '15pxpx'
+                                        hidden: true
+                                    }
+                                    left: @axis(type: linear) {
+                                        gutter: '15px'
+                                        hidden: true
+                                    }
+
+                                    domainBoundLeft: true
+                                    domainBoundBottom: true
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            @quilt {
+                id: 'quilt-2'
+                waterClass: $waterPlant? 'box watering' : 'box'
+                color1: $waterPlant? '#4bc8ff' : '#00df59'
+                color2: $waterPlant? '#43a6d2' : '#1db158'
+                color3: $waterPlant? '#3381a3' : '#2b8e52'
+
+                blockAspectRatio: 1
+                minBlockWidth: 350
+                @block {
+                    @card {
+                        backgroundColor: 'rgba(74, 74, 74, 0.6)'
+                        body: @div(class: $waterClass) {
+                            @div(class: 'header') {
+                                @div(class: 'title') 'Compass'
+                                @div(class: 'subtitle') {
+                                    lane: 'latest'
+                                    compassX: @link(node: '/sensor/compassX', type: value)
+                                    compassY: @link(node: '/sensor/compassY', type: value)
+                                    compassZ: @link(node: '/sensor/compassZ', type: value)
+                                    @ul {
+                                        @li '{{{botName}}}'
+                                        @li {
+                                            @style {
+                                                color: $color1
+                                            }
+                                            @text([X: {$round($eager($compassX#0)) || 0} ])
+                                        }
+                                        @li {
+                                            @style {
+                                                color: $color2
+                                            }
+                                            @text([Y: {$round($eager($compassY#0)) || 0} ])
+                                        }
+                                        @li {
+                                            @style {
+                                                color: $color3
+                                            }
+                                            @text([Z: {$round($eager($compassZ#0)) || 0} ])
+                                        }
+                                    }
+                                }
+
+                            }
+                            @div(class: 'chart-wrap') {
+                                @div(clasS: 'graphic') {
+                                    @chart {
+                                        id: 'chart-soil'
+                                        lane: 'shortHistory'
+
+                                        # chart plot 1
+                                        @plot(type: line) {
+                                            history0: @link(node: '/sensor/compassX', lane: $lane, type: map)
+                                            lineColor: $color1
+                                            @each(t: $history0.*:) {
+                                                key: $t
+                                                @plotPoint {
+                                                v: @let($history0.($t))
+                                                x: $t
+                                                y: $v
+                                                }
+                                            }
+                                        }
+
+                                        # chart plot 2
+                                        @plot(type: line) {
+                                            history0: @link(node: '/sensor/compassY', lane: $lane, type: map)
+                                            lineColor: $color2
+                                            @each(t: $history0.*:) {
+                                                key: $t
+                                                @plotPoint {
+                                                v: @let($history0.($t))
+                                                x: $t
+                                                y: $v
+                                                }
+                                            }
+                                        }
+
+                                        # chart plot 3
+                                        @plot(type: line) {
+                                            history0: @link(node: '/sensor/compassZ', lane: $lane, type: map)
+                                            lineColor: $color3
+                                            @each(t: $history0.*:) {
+                                                key: $t
+                                                @plotPoint {
+                                                v: @let($history0.($t))
+                                                x: $t
+                                                y: $v
+                                                }
+                                            }
+                                        }
+
+                                        top: {
+                                            gutter: '50px'
+                                        }
+                                        right: {
+                                            gutter: '0px'
+                                        }
+                                        bottom: @axis(type: time) {
+                                            gutter: '0px'
+                                            hidden: true
+                                        }
+                                        left: @axis(type: linear) {
+                                            gutter: '0px'
+                                            hidden: true
+                                        }
+
+                                        domainBoundLeft: true
+                                        domainBoundRight: true
+                                        domainPaddingTop: 1
+                                        domainPaddingBottom: 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                @block {
+                    @card {
+                        backgroundColor: 'rgba(74, 74, 74, 0.6)'
+                        body: @div(class: $waterClass) {
+                            @div(class: 'header') {
+                                @div(class: 'title') 'Gyro'
+                                @div(class: 'subtitle') {
+                                    @ul {
+                                        gyroX: @link(node: '/sensor/gyroX', lane: 'latest', type: value)
+                                        gyroY: @link(node: '/sensor/gyroY', lane: 'latest', type: value)
+                                        gyroZ: @link(node: '/sensor/gyroZ', lane: 'latest', type: value)
+
+                                        @li '{{{botName}}}'
+                                        @li {
+                                            @style {
+                                                color: $color1
+                                            }
+                                            @text([X: {$round($eager($gyroX#0)) || 0}])
+                                        }
+                                        @li {
+                                            @style {
+                                                color: $color2
+                                            }
+                                            @text([Y: {$round($eager($gyroY#0)) || 0}])
+                                        }
+                                        @li {
+                                            @style {
+                                                color: $color3
+                                            }
+                                            @text([Z: {$round($eager($gyroZ#0)) || 0}])
+                                        }
+                                    }
+                                }
+
+                            }
+                            @div(class: 'chart-wrap') {
+                                @div(clasS: 'graphic') {
+                                    @chart {
+                                        lane: 'shortHistory'
+
+                                        # chart plot 1
+                                        @plot(type: line) {
+                                            history0: @link(node: '/sensor/gyroX', lane: $lane, type: map)
+                                            lineColor: $color1
+                                            @each(t: $history0.*:) {
+                                                key: $t
+                                                @plotPoint {
+                                                v: @let($history0.($t))
+                                                x: $t
+                                                y: $v
+                                                }
+                                            }
+                                        }
+
+                                        # chart plot 2
+                                        @plot(type: line) {
+                                            history0: @link(node: '/sensor/gyroY', lane: $lane, type: map)
+                                            lineColor: $color2
+                                            @each(t: $history0.*:) {
+                                                key: $t
+                                                @plotPoint {
+                                                v: @let($history0.($t))
+                                                x: $t
+                                                y: $v
+                                                }
+                                            }
+                                        }
+
+                                        # chart plot 3
+                                        @plot(type: line) {
+                                            history0: @link(node: '/sensor/gyroZ', lane: $lane, type: map)
+                                            lineColor: $color3
+                                            @each(t: $history0.*:) {
+                                                key: $t
+                                                @plotPoint {
+                                                v: @let($history0.($t))
+                                                x: $t
+                                                y: $v
+                                                }
+                                            }
+                                        }
+
+                                        top: {
+                                            gutter: '50px'
+                                        }
+                                        right: {
+                                            gutter: '0px'
+                                        }
+                                        bottom: @axis(type: time) {
+                                            gutter: '0px'
+                                            hidden: true
+                                        }
+                                        left: @axis(type: linear) {
+                                            gutter: '0px'
+                                            hidden: true
+                                        }
+
+                                        domainBoundLeft: true
+                                        domainBoundRight: true
+                                        domainPaddingTop: 1
+                                        domainPaddingBottom: 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                @block {
+                    @card {
+                        backgroundColor: 'rgba(74, 74, 74, 0.6)'
+                        body: @div(class: $waterClass) {
+                            @div(class: 'header') {
+                                @div(class: 'title') 'Acceleration'
+                                @div(class: 'subtitle') {
+                                    @ul {
+                                        @li '{{{botName}}}'
+                                        @li {
+                                            @style {
+                                                color: $color1
+                                            }
+                                            @text([X: { $round($eager($accelerationX#0)) || 0}])
+                                        }
+                                        @li {
+                                            @style {
+                                                color: $color2
+                                            }
+                                            @text([Y: { $round($eager($accelerationY#0)) || 0}])
+                                        }
+                                        @li {
+                                            @style {
+                                                color: $color3
+                                            }
+                                            @text([Z: { $round($eager($accelerationZ#0)) || 0}])
+                                        }
+                                    }
+                                }
+
+                            }
+                            @div(class: 'chart-wrap') {
+                                @div(clasS: 'graphic') {
+                                    @chart {
+                                        lane: 'shortHistory'
+
+                                        # chart plot 1
+                                        @plot(type: line) {
+                                            history0: @link(node: '/sensor/accelerationX', lane: $lane, type: map)
+                                            lineColor: $color1
+                                            @each(t: $history0.*:) {
+                                                key: $t
+                                                @plotPoint {
+                                                v: @let($history0.($t))
+                                                x: $t
+                                                y: $v
+                                                }
+                                            }
+                                        }
+
+                                        # chart plot 2
+                                        @plot(type: line) {
+                                            history0: @link(node: '/sensor/accelerationY', lane: $lane, type: map)
+                                            lineColor: $color2
+                                            @each(t: $history0.*:) {
+                                                key: $t
+                                                @plotPoint {
+                                                v: @let($history0.($t))
+                                                x: $t
+                                                y: $v
+                                                }
+                                            }
+                                        }
+
+                                        # chart plot 3
+                                        @plot(type: line) {
+                                            history0: @link(node: '/sensor/accelerationZ', lane: $lane, type: map)
+                                            lineColor: $color3
+                                            @each(t: $history0.*:) {
+                                                key: $t
+                                                @plotPoint {
+                                                v: @let($history0.($t))
+                                                x: $t
+                                                y: $v
+                                                }
+                                            }
+                                        }
+
+                                        top: {
+                                            gutter: '50px'
+                                        }
+                                        right: {
+                                            gutter: '0px'
+                                        }
+                                        bottom: @axis(type: time) {
+                                            gutter: '0px'
+                                            hidden: true
+                                        }
+                                        left: @axis(type: linear) {
+                                            gutter: '0px'
+                                            hidden: true
+                                        }
+
+                                        domainBoundLeft: true
+                                        domainBoundRight: true
+                                        domainPaddingTop: 1
+                                        domainPaddingBottom: 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</main>
+
+<!-- Javascript: Loading class and initialize when page load-->
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function(){
+        // const page = new AggregatePage(document.getElementById('main'), '{{routeName}}');
+        const page = new BasePage(document.querySelector('#main') , '{{routeName}}');
+        // const page = new BasePage(document.querySelector('#main') , 'ws://192.168.0.205:5620');
+        page.start('{{aggregateSwimUrl}}');
+        // page.start('ws://192.168.0.210:5620');
+        setInterval(() => {
+            page.refreshData();
+        }, 500)
+
+    }, false);
+</script>

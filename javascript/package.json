@@ -1,0 +1,23 @@
+{
+  "name": "SwimSensorMonitor",
+  "version": "2.0.1",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.10",
+    "node-fetch": "^1.7.3",
+    "serialport": "^6.1.1",
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.4",
+    "swim-client-js": "^0.6.0",
+    "twit": "^2.2.9",
+    "ws": "^5.1.1"
+  },
+  "description": ""
+}

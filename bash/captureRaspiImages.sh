@@ -4,17 +4,23 @@ HOME=/home/pi/twitterbot
 
 echo "Image capture started"
 while [ true ]; do
-	#capture image from webcam
-	raspistill -o /home/pi/twitterbot/captures/plant/image.jpg -w 1280 -h 1024 -n -a 12
-	
-	
-	DATE=`date +%s`
+	# \javascript\httpServer\views\assets\images\plantMon\RaspiPlant2.jpg
 	HOME_DIR=/home/pi/twitterbot
-	CAP_DIR=$HOME_DIR/captures/plant
+	PIC_DIR=$HOME_DIR/javascript/httpServer/views/assets/images/plantMon
+	FILE_NAME=RaspiPlant2
+	FILE_TYPE=jpg
 
-	cp $CAP_DIR/image.jpg $CAP_DIR/plant1Latest.jpg 
-	mv $CAP_DIR/image.jpg $CAP_DIR/$DATE.jpg
-	mv $CAP_DIR/plant1Latest.jpg $HOME_DIR/httpServer/views/assets/plant1Latest.jpg
+	#capture image from webcam
+	raspistill -o $PIC_DIR/$FILE_NAME.$FILE_TYPE -w 1280 -h 1024 -n -a 12
+	cp $PIC_DIR/$FILE_NAME.$FILE_TYPE $PIC_DIR/$FILE_NAME-card.$FILE_TYPE
+	
+	# DATE=`date +%s`
+	# HOME_DIR=/home/pi/twitterbot
+	# CAP_DIR=$HOME_DIR/captures/plant
 
-	sleep 30
+	# cp $CAP_DIR/image.jpg $CAP_DIR/plant1Latest.jpg 
+	# mv $CAP_DIR/image.jpg $CAP_DIR/$DATE.jpg
+	# mv $CAP_DIR/plant1Latest.jpg $HOME_DIR/httpServer/views/assets/plant1Latest.jpg
+	
+	sleep 60
 done

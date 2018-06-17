@@ -1,0 +1,276 @@
+<!-- Floating Icon menu -->
+<a class="btn-fixed" href="{{aggregateHostUrl}}/aggregate">
+    <picture><img src="/assets/icons/ic-view-collection-white.svg" alt="Icon View Collection" width="30px" height="30px"></picture>
+</a>
+
+<main class="main monitor">
+<script type="text/recon">
+@quilt {
+    blockAspectRatio: 1
+
+    host: '{{fullSwimUrl}}'
+    {{!-- host: 'ws://192.168.0.160:5620' --}}
+    node: '/aggregate'
+
+    @block {
+        @card {
+            body: @div(class: 'box box-light') {
+                @div(class: 'header') {
+                    @div(class: 'title') 'Light (lx)'
+                    @div(class: 'subtitle') 'ALL PLANTS'
+                }
+                @div(class: 'chart-wrap') {
+                    @div(clasS: 'graphic') {
+                        @chart {
+                            id: 'chart-light'
+
+                            @plot(type: area) {
+                                avgLight: @link(lane: 'avg/light', type: map)
+                                areaFill: 'rgba(254, 229, 78, 0.75)'
+                                @each(t: $avgLight.*:) {
+                                    key: $t
+                                    @plotPoint {
+                                        v: @let($avgLight.($t))
+                                        x: $t
+                                        y: $round($eager($v/10))
+                                        dy: 0
+                                    }
+                                }
+                            }
+
+                            top: {
+                                gutter: '50px'
+                            }
+                            right: {
+                                gutter: '0px'
+                            }
+                            bottom: @axis(type: time) {
+                                gutter: '0px'
+                                hidden: true
+                            }
+                            left: @axis(type: linear) {
+                                gutter: '0px'
+                                hidden: true
+                            }
+
+                            domainBoundLeft: true
+                            domainBoundRight: true
+                            domainPaddingTop: 1
+                            domainPaddingBottom: 1
+                        }
+                    }
+                }
+            }
+        }
+        @card {
+            body: @div(class: 'box box-soil') {
+                @div(class: 'header') {
+                    @div(class: 'title') 'Moisture (%)'
+                    @div(class: 'subtitle') 'ALL PLANTS'
+                }
+                @div(class: 'chart-wrap') {
+                    @div(clasS: 'graphic') {
+                        @chart {
+                            id: 'chart-soil'
+
+                            @plot(type: area) {
+                                avgSoil: @link(lane: 'avg/soil', type: map)
+                                areaFill: 'rgba(75, 200, 255, 0.75)'
+                                @each(t: $avgSoil.*:) {
+                                    key: $t
+                                    @plotPoint {
+                                        v: @let($avgSoil.($t))
+                                        x: $t
+                                        y: $round($eager($v/10))
+                                        dy: 0
+                                    }
+                                }
+                            }
+
+                            top: {
+                                gutter: '50px'
+                            }
+                            right: {
+                                gutter: '0px'
+                            }
+                            bottom: @axis(type: time) {
+                                gutter: '0px'
+                                hidden: true
+                            }
+                            left: @axis(type: linear) {
+                                gutter: '0px'
+                                hidden: true
+                            }
+
+                            domainBoundLeft: true
+                            domainBoundRight: true
+                            domainPaddingTop: 1
+                            domainPaddingBottom: 1
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @block {
+        @card {
+            body: @div(class: 'box box-temp') {
+                @div(class: 'header') {
+                    @div(class: 'title') 'Temp (°)'
+                    @div(class: 'subtitle') 'ALL PLANTS'
+                }
+                @div(class: 'chart-wrap') {
+                    @div(clasS: 'graphic') {
+                        @chart {
+                            id: 'chart-temp'
+
+                            @plot(type: area) {
+                                avgTemp: @link(lane: 'avg/temp', type: map)
+                                areaFill: 'rgba(255, 144, 78, 0.75)'
+                                @each(t: $avgTemp.*:) {
+                                    key: $t
+                                    @plotPoint {
+                                        v: @let($avgTemp.($t))
+                                        x: $t
+                                        y: $round($eager($v/10))
+                                        dy: 0
+                                    }
+                                }
+                            }
+
+                            top: {
+                                gutter: '50px'
+                            }
+                            right: {
+                                gutter: '0px'
+                            }
+                            bottom: @axis(type: time) {
+                                gutter: '0px'
+                                hidden: true
+                            }
+                            left: @axis(type: linear) {
+                                gutter: '0px'
+                                hidden: true
+                            }
+
+                            domainBoundLeft: true
+                            domainBoundRight: true
+                            domainPaddingTop: 1
+                            domainPaddingBottom: 1
+                        }
+                    }
+                }
+            }
+        }
+
+        @card {
+            proportion: square
+            body: @kpi {
+
+                # Global Value
+                linkStats: @link(node: 'swim:meta:mesh', lane: 'linkStats', type: value)
+                transition: @transition(150, linear)
+
+                # Kpi Value
+                id: kpi
+                title: 'Message'
+                titleWeight: 400
+                titleSize: 20 @px
+                titleColor: '#2b8e52'
+                subtitle: 'ALL PLANTS'
+                subtitleColor: '#2b8e52'
+                subtitleWeight: 400
+                subtitleSize: 14 @px
+
+                value: @text([{$round($eager($max(0.1, $rate($linkStats.downMessageCount))))}])
+                valueSize: 48 @px
+                valueColor: '#2b8e52'
+
+                cylinderHeight: 10 @pct
+                cylinderColor: 'rgba(0, 0, 0, 0)'
+                padding: 8 @px
+                borderRadius: 8 @px
+                backgroundColor: 'rgba(0, 0, 0, 0)'
+            }
+        }
+
+        @card {
+            id: 'kpi-alert'
+            proportion: square
+            body: @kpi {
+
+                # Global Value
+                totalAlert: @link(node: '/aggregate', lane: 'totalAlert', type: value)
+                alertHistory: @link(node: '/aggregate', lane: 'alert/history', type: map)
+                transition: @transition(150, linear)
+
+                # Kpi Value
+                title: 'Alert'
+                titleWeight: 400
+                titleSize: 20 @px
+                titleColor: '#2b8e52'
+                subtitle: 'ALL PLANTS'
+                subtitleColor: '#2b8e52'
+                subtitleWeight: 400
+                subtitleSize: 14 @px
+
+                value: @text([{$eager($totalAlert#0)}])
+                valueSize: 48 @px
+                valueColor: '#2b8e52'
+
+                # Chart component
+                @chart {
+                    id: chart
+
+                    @plot(type: line) {
+                    lineColor: '#fff'
+                    @each(t: $alertHistory.*:) {
+                        key: $t
+                        @plotPoint {
+                        v: @let($alertHistory.($t))
+                        x: $t
+                        y: $v
+                        dy: 0
+                        }
+                    }
+                    }
+
+                    top: {
+                    gutter: '15px'
+                    }
+                    right: {
+                    gutter: '15px'
+                    }
+                    bottom: @axis(type: time) {
+                    gutter: '15px'
+                    hidden: true
+                    }
+                    left: @axis(type: linear) {
+                    gutter: '15px'
+                    hidden: true
+                    }
+
+                    domainBoundLeft: true
+                    domainBoundRight: true
+
+                    domainPaddingTop: 1
+                }
+            }
+        }
+    }
+}
+</script>
+</main>
+
+<!-- Javascript: Loading class and initialize when page load-->
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function(){
+        // const page = new AggregatePage(document.getElementById('main'), '{{routeName}}');
+        const page = new BasePage(document.querySelector('#main') , '{{routeName}}');
+        page.start('{{fullSwimUrl}}');
+        setInterval(() => {
+            page.refreshData();
+        }, 500)
+    }, false);
+</script>

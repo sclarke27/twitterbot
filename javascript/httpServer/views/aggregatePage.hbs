@@ -1,0 +1,47 @@
+<!-- Floating Icon menu -->
+<a class="btn-fixed" href="{{fullHostUrl}}/monitor">
+    <picture><img src="/assets/icons/ic-view-quilt-white.svg" alt="Icon View Collection" width="30px" height="30px"></picture>
+</a>
+
+<div id="main" class="container"></div>
+
+<!-- Dynamic recon : Loading data with input fields -->
+<script type="text/recon">
+    @div {
+        style: {
+            display: 'none'
+        }
+        host: '{{fullSwimUrl}}'
+        {{!-- host: 'ws://192.168.0.210:5620' --}}
+        node: '/aggregate'
+        aggregateData: @link(host: $host, node: $node, lane: 'join/latest', type: map)
+        alertData: @link(host: $host, node: $node, lane: 'join/alert', type: map)
+        @each(k: $aggregateData.*:) {
+            key: $k
+            @form(id: $k) {
+                rowData: @let($eager($aggregateData.($k)))
+                alertRow: @let($eager($alertData.($k)))
+                @input(type: hidden, name: device, value: $k)
+                @each(rowK: $rowData.*:) {
+                    key: $rowK
+                    hasAlert: @let($alertData.($k))
+                    @input(type: hidden, name: $rowK, value: $rowData.($rowK), data-has-alert: $alertRow.($rowK))
+                }
+             }
+        }
+    }
+</script>
+
+<!-- Javascript: Loading class and initialize when page load-->
+<script type="text/javascript" src="/js/aggregatePage.js"></script>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function(){
+        const page = new AggregatePage(document.querySelector('#main') , '{{routeName}}');
+        {{#if_eq routeName 'aggregator'}}
+            page.start('{{fullSwimUrl}}');
+        {{/if_eq}}
+        {{#if_not_eq routeName 'aggregator'}}
+            page.start('{{aggregateSwimUrl}}');
+        {{/if_not_eq}}
+    }, false);
+</script>

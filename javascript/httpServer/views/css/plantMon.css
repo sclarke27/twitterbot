@@ -1,0 +1,432 @@
+.refreshButton {
+  position: absolute;
+  z-index: 10;
+  bottom: 0px;
+  color: #020202;
+}
+
+.main-footer .copyright {
+  color: #1db158;
+  opacity: 0.6;
+}
+
+.bg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #4a4a4a;
+  opacity: 0.1;
+}
+
+.plantMon .col {
+  height: calc(100vh - 64px - 35px);
+  min-height: calc(480px - 64px - 35px);
+  max-height: 800px;
+  padding-top: 15px;
+  display: flex;
+}
+.plantMon .box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.plantMon img {
+  width: 100%;
+  height: 100%;
+}
+.plantMon .gauge-wrap {
+  position: relative;
+  display: flex;
+  height: 70%;
+  padding: 15px;
+}
+.plantMon .graphic {
+  width: 100%;
+  height: 100%;
+}
+.plantMon .icon-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 54px;
+  height: 54px;
+}
+.plantMon .icon-arrow {
+  position: absolute;
+  top: 12px;
+  right: 2px;
+  width: 33px;
+  height: 31px;
+}
+.plantMon .alert-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 11px;
+  font-size: 18px;
+  display: flex;
+}
+.plantMon .alert-wrap svg {
+  width: 29px;
+  height: 29px;
+}
+.plantMon .alert-wrap .text {
+  padding-top: 6px;
+  margin-bottom: 0;
+}
+.plantMon .chart-wrap {
+  display: flex;
+  position: relative;
+  height: 300px;
+}
+.plantMon .chart-wrap .graphic {
+  position: absolute;
+}
+
+/* ============================
+ * Range input
+ * ========================= */
+.plantMon .range-wrap {
+  position: absolute;
+  bottom: 42px;
+  left: 10px;
+  width: 30px;
+  height: calc(100% - 120px);
+  display: none;
+}
+.plantMon .range-wrap .meter {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  height: 50%;
+  transform: translate(-50%, 0);
+  border-radius: 2px;
+}
+.plantMon .range-wrap .backdrop-meter {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  transform: translate(-50%, 0);
+  border-radius: 2px;
+  background: #827c7c;
+}
+.plantMon [type=range] {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 240px;
+  height: 8px;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  background: transparent;
+}
+.plantMon [type=range], .plantMon [type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  outline: none;
+}
+.plantMon [type=range]::-webkit-slider-runnable-track {
+  height: 0.25em;
+  background: transparent;
+}
+.plantMon [type=range]::-moz-range-track {
+  height: 0.25em;
+  background: transparent;
+}
+.plantMon [type=range]::-ms-track {
+  height: 0.25em;
+  background: transparent;
+}
+.plantMon [type=range]::-webkit-slider-thumb {
+  margin-top: -0.625em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+}
+.plantMon [type=range]::-moz-range-thumb {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+}
+.plantMon [type=range]::-ms-thumb {
+  margin-top: 0;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+}
+.plantMon [type=range]::-ms-tooltip {
+  display: none;
+}
+
+/* ============================
+ * Alert light
+ * ========================= */
+.plantMon .box-light .icon-arrow svg path,
+.plantMon .box-light .alert-wrap svg path:nth-child(2) {
+  fill: #fee54e;
+}
+.plantMon .box-light .alert-wrap {
+  color: #fee54e;
+  opacity: 0.5;
+}
+.plantMon .box-light .range-wrap .meter {
+  background: #fee54e;
+}
+.plantMon .box-light [type=range]::-webkit-slider-thumb {
+  background: #fee54e;
+}
+.plantMon .box-light [type=range]::-moz-range-thumb {
+  background: #fee54e;
+}
+.plantMon .box-light [type=range]::-ms-thumb {
+  background: #fee54e;
+}
+
+/* ============================
+ * Alert soil
+ * ========================= */
+.plantMon .box-soil .icon-arrow svg path,
+.plantMon .box-soil .alert-wrap svg path:nth-child(2) {
+  fill: #4bc8ff;
+}
+.plantMon .box-soil .alert-wrap {
+  color: #4bc8ff;
+  opacity: 0.5;
+}
+.plantMon .box-soil .range-wrap .meter {
+  background: #4bc8ff;
+}
+.plantMon .box-soil [type=range]::-webkit-slider-thumb {
+  background: #4bc8ff;
+}
+.plantMon .box-soil [type=range]::-moz-range-thumb {
+  background: #4bc8ff;
+}
+.plantMon .box-soil [type=range]::-ms-thumb {
+  background: #4bc8ff;
+}
+
+.plantMon .box-soil .icon-wrap .ok {
+  display: inline;
+}
+.plantMon .box-soil .icon-wrap .plus {
+  display: none;
+}
+
+.plantMon.alert-box-soil .box-soil .icon-wrap .ok {
+  display: none;
+}
+.plantMon.alert-box-soil .box-soil .icon-wrap .plus {
+  display: inline;
+}
+
+/* ============================
+ * Alert temperatureCh1
+ * ========================= */
+.plantMon .box-temperatureCh1 .icon-arrow svg path,
+.plantMon .box-temperatureCh1 .alert-wrap svg path:nth-child(2) {
+  fill: #ff904e;
+}
+.plantMon .box-temperatureCh1 .alert-wrap {
+  color: #ff904e;
+  opacity: 0.5;
+}
+.plantMon .box-temperatureCh1 .range-wrap .meter {
+  background: #ff904e;
+}
+.plantMon .box-temperatureCh1 [type=range]::-webkit-slider-thumb {
+  background: #ff904e;
+}
+.plantMon .box-temperatureCh1 [type=range]::-moz-range-thumb {
+  background: #ff904e;
+}
+.plantMon .box-temperatureCh1 [type=range]::-ms-thumb {
+  background: #ff904e;
+}
+
+/* ============================
+ * Global alert state
+ * ========================= */
+.plantMon .opacityExtend, .plantMon .icon-wrap, .plantMon .gauge-wrap .graphic, .plantMon .alert-wrap, .plantMon .chart-wrap, .plantMon.alert-box-light .icon-wrap,
+.plantMon.alert-box-soil .icon-wrap,
+.plantMon.alert-box-temperatureCh1 .icon-wrap, .plantMon.alert-box-light .gauge-wrap .graphic,
+.plantMon.alert-box-soil .gauge-wrap .graphic,
+.plantMon.alert-box-temperatureCh1 .gauge-wrap .graphic, .plantMon.alert-box-light .alert-wrap,
+.plantMon.alert-box-soil .alert-wrap,
+.plantMon.alert-box-temperatureCh1 .alert-wrap, .plantMon.alert-box-light .chart-wrap,
+.plantMon.alert-box-soil .chart-wrap,
+.plantMon.alert-box-temperatureCh1 .chart-wrap, .plantMon.alert-box-light .box-light .icon-wrap,
+.plantMon.alert-box-soil .box-soil .icon-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .icon-wrap, .plantMon.alert-box-light .box-light .gauge-wrap .graphic,
+.plantMon.alert-box-soil .box-soil .gauge-wrap .graphic,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .gauge-wrap .graphic, .plantMon.alert-box-light .box-light .alert-wrap,
+.plantMon.alert-box-soil .box-soil .alert-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .alert-wrap, .plantMon.alert-box-light .box-light .chart-wrap,
+.plantMon.alert-box-soil .box-soil .chart-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .chart-wrap, .plantMon.alert-box-light .box-light .icon-arrow,
+.plantMon.alert-box-soil .box-soil .icon-arrow,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .icon-arrow {
+  opacity: 1;
+  transition: opacity 150ms ease-in-out;
+}
+.plantMon .icon-arrow {
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+.plantMon.alert-box-light .opacityExtend, .plantMon.alert-box-light .icon-wrap, .plantMon.alert-box-light .gauge-wrap .graphic,
+.plantMon.alert-box-soil .gauge-wrap .plantMon.alert-box-light .graphic,
+.plantMon.alert-box-temperatureCh1 .gauge-wrap .plantMon.alert-box-light .graphic, .plantMon.alert-box-light .alert-wrap, .plantMon.alert-box-light .chart-wrap, .plantMon.alert-box-light .box-light .icon-wrap,
+.plantMon.alert-box-light .plantMon.alert-box-soil .box-soil .icon-wrap,
+.plantMon.alert-box-soil .box-soil .plantMon.alert-box-light .icon-wrap,
+.plantMon.alert-box-light .plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .icon-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .plantMon.alert-box-light .icon-wrap, .plantMon.alert-box-light .box-light .gauge-wrap .graphic,
+.plantMon.alert-box-light .plantMon.alert-box-soil .box-soil .gauge-wrap .graphic,
+.plantMon.alert-box-light .plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .gauge-wrap .graphic, .plantMon.alert-box-light .box-light .alert-wrap,
+.plantMon.alert-box-light .plantMon.alert-box-soil .box-soil .alert-wrap,
+.plantMon.alert-box-soil .box-soil .plantMon.alert-box-light .alert-wrap,
+.plantMon.alert-box-light .plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .alert-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .plantMon.alert-box-light .alert-wrap, .plantMon.alert-box-light .box-light .chart-wrap,
+.plantMon.alert-box-light .plantMon.alert-box-soil .box-soil .chart-wrap,
+.plantMon.alert-box-soil .box-soil .plantMon.alert-box-light .chart-wrap,
+.plantMon.alert-box-light .plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .chart-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .plantMon.alert-box-light .chart-wrap, .plantMon.alert-box-light .box-light .icon-arrow,
+.plantMon.alert-box-light .plantMon.alert-box-soil .box-soil .icon-arrow,
+.plantMon.alert-box-soil .box-soil .plantMon.alert-box-light .icon-arrow,
+.plantMon.alert-box-light .plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .icon-arrow,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .plantMon.alert-box-light .icon-arrow,
+.plantMon.alert-box-soil .opacityExtend,
+.plantMon.alert-box-soil .icon-wrap,
+.plantMon.alert-box-light .gauge-wrap .plantMon.alert-box-soil .graphic,
+.plantMon.alert-box-soil .gauge-wrap .graphic,
+.plantMon.alert-box-temperatureCh1 .gauge-wrap .plantMon.alert-box-soil .graphic,
+.plantMon.alert-box-soil .alert-wrap,
+.plantMon.alert-box-soil .chart-wrap,
+.plantMon.alert-box-soil .plantMon.alert-box-light .box-light .icon-wrap,
+.plantMon.alert-box-light .box-light .plantMon.alert-box-soil .icon-wrap,
+.plantMon.alert-box-soil .box-soil .icon-wrap,
+.plantMon.alert-box-soil .plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .icon-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .plantMon.alert-box-soil .icon-wrap,
+.plantMon.alert-box-soil .plantMon.alert-box-light .box-light .gauge-wrap .graphic,
+.plantMon.alert-box-soil .box-soil .gauge-wrap .graphic,
+.plantMon.alert-box-soil .plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .gauge-wrap .graphic,
+.plantMon.alert-box-soil .plantMon.alert-box-light .box-light .alert-wrap,
+.plantMon.alert-box-light .box-light .plantMon.alert-box-soil .alert-wrap,
+.plantMon.alert-box-soil .box-soil .alert-wrap,
+.plantMon.alert-box-soil .plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .alert-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .plantMon.alert-box-soil .alert-wrap,
+.plantMon.alert-box-soil .plantMon.alert-box-light .box-light .chart-wrap,
+.plantMon.alert-box-light .box-light .plantMon.alert-box-soil .chart-wrap,
+.plantMon.alert-box-soil .box-soil .chart-wrap,
+.plantMon.alert-box-soil .plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .chart-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .plantMon.alert-box-soil .chart-wrap,
+.plantMon.alert-box-soil .plantMon.alert-box-light .box-light .icon-arrow,
+.plantMon.alert-box-light .box-light .plantMon.alert-box-soil .icon-arrow,
+.plantMon.alert-box-soil .box-soil .icon-arrow,
+.plantMon.alert-box-soil .plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .icon-arrow,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .plantMon.alert-box-soil .icon-arrow,
+.plantMon.alert-box-temperatureCh1 .opacityExtend,
+.plantMon.alert-box-temperatureCh1 .icon-wrap,
+.plantMon.alert-box-light .gauge-wrap .plantMon.alert-box-temperatureCh1 .graphic,
+.plantMon.alert-box-soil .gauge-wrap .plantMon.alert-box-temperatureCh1 .graphic,
+.plantMon.alert-box-temperatureCh1 .gauge-wrap .graphic,
+.plantMon.alert-box-temperatureCh1 .alert-wrap,
+.plantMon.alert-box-temperatureCh1 .chart-wrap,
+.plantMon.alert-box-temperatureCh1 .plantMon.alert-box-light .box-light .icon-wrap,
+.plantMon.alert-box-light .box-light .plantMon.alert-box-temperatureCh1 .icon-wrap,
+.plantMon.alert-box-temperatureCh1 .plantMon.alert-box-soil .box-soil .icon-wrap,
+.plantMon.alert-box-soil .box-soil .plantMon.alert-box-temperatureCh1 .icon-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .icon-wrap,
+.plantMon.alert-box-temperatureCh1 .plantMon.alert-box-light .box-light .gauge-wrap .graphic,
+.plantMon.alert-box-temperatureCh1 .plantMon.alert-box-soil .box-soil .gauge-wrap .graphic,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .gauge-wrap .graphic,
+.plantMon.alert-box-temperatureCh1 .plantMon.alert-box-light .box-light .alert-wrap,
+.plantMon.alert-box-light .box-light .plantMon.alert-box-temperatureCh1 .alert-wrap,
+.plantMon.alert-box-temperatureCh1 .plantMon.alert-box-soil .box-soil .alert-wrap,
+.plantMon.alert-box-soil .box-soil .plantMon.alert-box-temperatureCh1 .alert-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .alert-wrap,
+.plantMon.alert-box-temperatureCh1 .plantMon.alert-box-light .box-light .chart-wrap,
+.plantMon.alert-box-light .box-light .plantMon.alert-box-temperatureCh1 .chart-wrap,
+.plantMon.alert-box-temperatureCh1 .plantMon.alert-box-soil .box-soil .chart-wrap,
+.plantMon.alert-box-soil .box-soil .plantMon.alert-box-temperatureCh1 .chart-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .chart-wrap,
+.plantMon.alert-box-temperatureCh1 .plantMon.alert-box-light .box-light .icon-arrow,
+.plantMon.alert-box-light .box-light .plantMon.alert-box-temperatureCh1 .icon-arrow,
+.plantMon.alert-box-temperatureCh1 .plantMon.alert-box-soil .box-soil .icon-arrow,
+.plantMon.alert-box-soil .box-soil .plantMon.alert-box-temperatureCh1 .icon-arrow,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .icon-arrow {
+  opacity: 0.15;
+  transition: opacity 150ms ease-in-out;
+}
+
+.plantMon.alert-box-light .box-light .opacityExtend, .plantMon.alert-box-light .gauge-wrap .box-light .graphic,
+.plantMon.alert-box-soil .gauge-wrap .plantMon.alert-box-light .box-light .graphic,
+.plantMon.alert-box-temperatureCh1 .gauge-wrap .plantMon.alert-box-light .box-light .graphic, .plantMon.alert-box-light .box-light .icon-wrap, .plantMon.alert-box-light .box-light .gauge-wrap .graphic, .plantMon.alert-box-light .box-light .alert-wrap, .plantMon.alert-box-light .box-light .chart-wrap, .plantMon.alert-box-light .box-light .icon-arrow,
+.plantMon.alert-box-soil .box-soil .opacityExtend,
+.plantMon.alert-box-light .gauge-wrap .plantMon.alert-box-soil .box-soil .graphic,
+.plantMon.alert-box-soil .gauge-wrap .box-soil .graphic,
+.plantMon.alert-box-temperatureCh1 .gauge-wrap .plantMon.alert-box-soil .box-soil .graphic,
+.plantMon.alert-box-soil .box-soil .icon-wrap,
+.plantMon.alert-box-soil .box-soil .gauge-wrap .graphic,
+.plantMon.alert-box-soil .box-soil .alert-wrap,
+.plantMon.alert-box-soil .box-soil .chart-wrap,
+.plantMon.alert-box-soil .box-soil .icon-arrow,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .opacityExtend,
+.plantMon.alert-box-light .gauge-wrap .plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .graphic,
+.plantMon.alert-box-soil .gauge-wrap .plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .graphic,
+.plantMon.alert-box-temperatureCh1 .gauge-wrap .box-temperatureCh1 .graphic,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .icon-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .gauge-wrap .graphic,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .alert-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .chart-wrap,
+.plantMon.alert-box-temperatureCh1 .box-temperatureCh1 .icon-arrow {
+  opacity: 1;
+  transition: opacity 150ms ease-in-out;
+}
+
+.plantMon.alert-setting .icon-wrap,
+.plantMon.alert-setting.alert-box-light .box-light .icon-wrap,
+.plantMon.alert-setting.alert-box-soil .box-soil .icon-wrap,
+.plantMon.alert-setting.alert-box-temperatureCh1 .box-temperatureCh1 .icon-wrap {
+  opacity: 1;
+  transition: opacity 150ms ease-in-out;
+}
+.plantMon.alert-setting .gauge-wrap .graphic,
+.plantMon.alert-setting.alert-box-light .box-light .gauge-wrap .graphic,
+.plantMon.alert-setting.alert-box-soil .box-soil .gauge-wrap .graphic,
+.plantMon.alert-setting.alert-box-temperatureCh1 .box-temperatureCh1 .gauge-wrap .graphic {
+  opacity: 0.15;
+  transition: opacity 150ms ease-in-out;
+}
+.plantMon.alert-setting .alert-wrap,
+.plantMon.alert-setting.alert-box-light .box-light .alert-wrap,
+.plantMon.alert-setting.alert-box-soil .box-soil .alert-wrap,
+.plantMon.alert-setting.alert-box-temperatureCh1 .box-temperatureCh1 .alert-wrap {
+  opacity: 1;
+  transition: opacity 150ms ease-in-out;
+}
+.plantMon.alert-setting .chart-wrap,
+.plantMon.alert-setting.alert-box-light .box-light .chart-wrap,
+.plantMon.alert-setting.alert-box-soil .box-soil .chart-wrap,
+.plantMon.alert-setting.alert-box-temperatureCh1 .box-temperatureCh1 .chart-wrap {
+  opacity: 0.15;
+  transition: opacity 150ms ease-in-out;
+}
+.plantMon.alert-setting .icon-arrow,
+.plantMon.alert-setting.alert-box-light .box-light .icon-arrow,
+.plantMon.alert-setting.alert-box-soil .box-soil .icon-arrow,
+.plantMon.alert-setting.alert-box-temperatureCh1 .box-temperatureCh1 .icon-arrow {
+  opacity: 0.15;
+  transition: opacity 150ms ease-in-out;
+}
+
+.plantMon.alert-setting .range-wrap {
+  display: block;
+}
+.plantMon.alert-setting .icon-arrow {
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
